@@ -16,21 +16,22 @@ sdk_version=0
 version_name=0.9.6
 version_number=96
 firebase_config_path=
+arcore=0
 
 [ipa_settings]
-app_icon_path=
-app_name=
-build_number=
+app_icon_path=/Users/Jesse/Downloads/SpaceSwap/media/images/iOS-Icon1024x1024.png
+app_name=Space Swap
+build_number=2
 device_type=0
 facebook_id=
-orientation=0
-output_path=
-prov_profile_path=
+orientation=1
+output_path=/Users/Jesse/Downloads/SpaceSwap/SpaceSwap.ipa
+prov_profile_path=/Users/Jesse/Downloads/Test1.mobileprovision
 splash_1136_path=
 splash_2048_path=
 splash_960_path=
 uses_ads=0
-version_number=
+version_number=1.0.2
 firebase_config_path=
 splash_2436_path=
 

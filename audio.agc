@@ -18,17 +18,17 @@ endfunction
 //------------------------------------------------------------------------------------------------------------
 
 function LoadAllMusic ( )
-	MusicTrack[ 0] = LoadMusicOGG( "\media\music\TitleBGM.lite.ogg" )
+	MusicTrack[ 0] = LoadMusicOGG( "\media\music\TitleBGM.ogg" )
 	MusicTrack[ 1] = LoadMusicOGG( "\media\music\Title2BGM.lite.ogg" )
-	MusicTrack[ 2] = LoadMusicOGG( "\media\music\StoryIntroBGM.lite.ogg" )
+	MusicTrack[ 2] = LoadMusicOGG( "\media\music\StoryIntroBGM.ogg" )
 	MusicTrack[ 3] = LoadMusicOGG( "\media\music\InGameStartBGM.lite.ogg" )
 	MusicTrack[ 4] = LoadMusicOGG( "\media\music\InGameMiddleBGM.lite.ogg" )
 	MusicTrack[ 5] = LoadMusicOGG( "\media\music\InGameEndBGM.lite.ogg" )
 	MusicTrack[ 6] = LoadMusicOGG( "\media\music\TimeAttackBGM.lite.ogg" )
 	MusicTrack[ 7] = LoadMusicOGG( "\media\music\NewHighScoreBGM.lite.ogg" )
-	MusicTrack[ 8] = LoadMusicOGG( "\media\music\TopHighScoreBGM.lite.ogg" )
-	MusicTrack[ 9] = LoadMusicOGG( "\media\music\EndingBGM.lite.ogg" )
-	MusicTrack[10] = LoadMusicOGG( "\media\music\WinTurboBGM.lite.ogg" )
+	MusicTrack[ 8] = LoadMusicOGG( "\media\music\TopHighScoreBGM.ogg" )
+	MusicTrack[ 9] = LoadMusicOGG( "\media\music\EndingBGM.ogg" )
+	MusicTrack[10] = LoadMusicOGG( "\media\music\WinTurboBGM.ogg" )
 endfunction
 
 //------------------------------------------------------------------------------------------------------------

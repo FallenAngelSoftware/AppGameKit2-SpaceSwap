@@ -35,15 +35,24 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Game Built On:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Manjaro KDE 64Bit'' Linux"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.Manjaro.org)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Real Programmers Use Linux!"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
+	if (Platform = Web or Platform = Android)
+		AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
+		AboutTextsBlue[ATindex] = 255
+		inc ATindex, 1
+		AboutTexts    [ATindex] = "(www.Kubuntu.org)"
+		AboutTextsBlue[ATindex] = 255
+		inc ATindex, 1
+		AboutTexts    [ATindex] = "Real Programmers Use Linux!"
+		AboutTextsBlue[ATindex] = 255
+		inc ATindex, 1
+	elseif (Platform = iOS)
+		AboutTexts    [ATindex] = "''Apple® macOS v10.13.5 High Sierra''"
+		AboutTextsBlue[ATindex] = 255
+		inc ATindex, 1
+		AboutTexts    [ATindex] = "(https://www.apple.com/macos/high-sierra/)"
+		AboutTextsBlue[ATindex] = 255
+		inc ATindex, 1
+	endif
 
 	AboutTexts    [ATindex] = "Original Game Idea By:"
 	AboutTextsBlue[ATindex] = 0
@@ -62,7 +71,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "''AppGameKit 2'' 2-D Game Engine:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "The ''Night Rider™'' Engine"
+	AboutTexts    [ATindex] = "The ''NightRider™'' Engine"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "''The Fallen Angel''"
@@ -131,7 +140,10 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "''Oshi Bobo''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.OshiBobo.com)"
+	AboutTexts    [ATindex] = "www.OshiBobo.com"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "(For Hire Graphic Artist)"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
@@ -225,7 +237,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Desktop Code Name: ''BumbleBee''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Manjaro KDE 64Bit'' Linux"
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "ASRock® Q1900-ITX Motherboard"
@@ -256,7 +268,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Desktop Code Name: ''JetFire''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Manjaro KDE 64Bit'' Linux"
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "GigaByte® Mid-Range Motherboard"
@@ -287,7 +299,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Desktop Code Name: ''Optimus Prime''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Manjaro KDE 64Bit'' Linux"
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "ASUS® 990FX SaberTooth r2.0 Motherboard"
@@ -308,7 +320,6 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "850 Watt Power Supply"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-
 
 	AboutTexts    [ATindex] = "Studio Hardware Protected By:"
 	AboutTextsBlue[ATindex] = 0
@@ -352,6 +363,13 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "ASUS® Nexus 7 Tablet"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+
+	AboutTexts    [ATindex] = "iOS Version Tested On:"
+	AboutTextsBlue[ATindex] = 0
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "Apple® iPad Air Gen1 Tablet"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 

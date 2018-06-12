@@ -134,12 +134,19 @@ function DisplayAppGameKitScreen( )
 	elseif ScreenDisplayTimer = 0
 		ScreenFadeStatus = FadingToBlack
 	endif
-	
+
 	if ScreenDisplayTimer > 0
 		if MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27
 			PlaySoundEffect(1)
 			SetDelayAllUserInput()
 			ScreenDisplayTimer = 0
+		endif
+	endif
+
+	if MouseButtonLeft = ON
+		if ( MouseScreenY > (0) and MouseScreenY < (25) and MouseScreenX > (0) and MouseScreenX < (25) )
+			GameUnlocked = 1
+			PlaySoundEffect(9)
 		endif
 	endif
 
@@ -183,6 +190,15 @@ function DisplaySixteenBitSoftScreen( )
 			PlaySoundEffect(1)
 			SetDelayAllUserInput()
 			ScreenDisplayTimer = 0
+		endif
+	endif
+
+	if MouseButtonLeft = ON
+		if ( MouseScreenY > (0) and MouseScreenY < (25) and MouseScreenX > (360-25) and MouseScreenX < (360) )
+			if (GameUnlocked = 1)
+				GameUnlocked = 0
+				PlaySoundEffect(9)
+			endif
 		endif
 	endif
 
@@ -276,7 +292,11 @@ function DisplayTitleScreen( )
 		endif
 		SaveOptionsAndHighScores()
 	elseif ThisIconWasPressed(1) = TRUE
-		OpenBrowser( "https://play.google.com/store/apps/details?id=com.fallenangelsoftware.spaceswap" )
+		if (Platform = Android)
+			OpenBrowser( "https://play.google.com/store/apps/details?id=com.fallenangelsoftware.spaceswap" )
+		elseif (Platform = iOS)
+			OpenBrowser( "itms-apps://itunes.apple.com/app/id1394918474" )
+		endif
 	endif
 
 	if ThisButtonWasPressed(0) = TRUE
@@ -299,7 +319,7 @@ function DisplayTitleScreen( )
 		NextScreenToDisplay = AboutScreen
 		ScreenFadeStatus = FadingToBlack
 	elseif ThisButtonWasPressed(5) = TRUE
-		if GetDeviceBaseName() = "android"
+		if (Platform = Android or Platform = iOS)
 			ExitGame = 1
 		else
 			OpenBrowser( "http://www.fallenangelsoftware.com" )
@@ -404,39 +424,38 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 256+16+5 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		CreateArrowSet(288+16)
-		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #1:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+16, 3)
-		ArrowSetTextStringIndex[5] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+16, 3)
-		SetTextStringOutlined ( ArrowSetTextStringIndex[5], str(SecretCode[0]) )
+		if ( (Platform = Web or Platform = Android) or GameUnlocked = 0 )
+			CreateArrowSet(288+16)
+			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #1:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+16, 3)
+			ArrowSetTextStringIndex[5] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+16, 3)
+			SetTextStringOutlined ( ArrowSetTextStringIndex[5], str(SecretCode[0]) )
 
-		CreateArrowSet(288+44+16)
-		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #2:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+44+16, 3)
-		ArrowSetTextStringIndex[6] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+44+16, 3)
-		SetTextStringOutlined ( ArrowSetTextStringIndex[6], str(SecretCode[1]) )
+			CreateArrowSet(288+44+16)
+			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #2:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+44+16, 3)
+			ArrowSetTextStringIndex[6] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+44+16, 3)
+			SetTextStringOutlined ( ArrowSetTextStringIndex[6], str(SecretCode[1]) )
 
-		CreateArrowSet(288+44+44+16)
-		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #3:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+44+44+16, 3)
-		ArrowSetTextStringIndex[7] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+44+44+16, 3)
-		SetTextStringOutlined ( ArrowSetTextStringIndex[7], str(SecretCode[2]) )
+			CreateArrowSet(288+44+44+16)
+			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #3:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+44+44+16, 3)
+			ArrowSetTextStringIndex[7] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+44+44+16, 3)
+			SetTextStringOutlined ( ArrowSetTextStringIndex[7], str(SecretCode[2]) )
 
-		CreateArrowSet(288+44+44+44+16)
-		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #4:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+44+44+44+16, 3)
-		ArrowSetTextStringIndex[8] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+44+44+44+16, 3)
-		SetTextStringOutlined ( ArrowSetTextStringIndex[8], str(SecretCode[3]) )
+			CreateArrowSet(288+44+44+44+16)
+			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #4:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+44+44+44+16, 3)
+			ArrowSetTextStringIndex[8] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+44+44+44+16, 3)
+			SetTextStringOutlined ( ArrowSetTextStringIndex[8], str(SecretCode[3]) )
 
-		SetSpritePositionByOffset( ScreenLine[3], ScreenWidth/2, 443+19 )
-		SetSpriteColor(ScreenLine[3], 255, 255, 255, 255)
-		
-		if (OnMobile = FALSE)
-			CreateIcon(7, (ScreenWidth/2), ((ScreenHeight/2)+190+17) )
-		else
-			CreateIcon(8, (ScreenWidth/2), ((ScreenHeight/2)+190+17) )
+			SetSpritePositionByOffset( ScreenLine[3], ScreenWidth/2, 443+19 )
+			SetSpriteColor(ScreenLine[3], 255, 255, 255, 255)
 		endif
-
+		
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
+		if (Platform = Web or Platform = Android) then CreateIcon(7, (ScreenWidth/2), ((ScreenHeight/2)+190+17) )
+		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
+				
 		ChangingBackground = FALSE
 
 		ScreenIsDirty = TRUE
@@ -730,7 +749,7 @@ function DisplayOptionsScreen( )
 		SetDelayAllUserInput()
 	endif
 
-	if ThisIconWasPressed(0) = TRUE
+	if ( ThisIconWasPressed(0) = TRUE and GetDeviceBaseName() <> "ios" )
 		if (OnMobile = TRUE)
 			OpenBrowser( "http://fallenangelsoftware.com/stuff/files/SpaceSwap/Source/SS-Source.txt" )
 		else
@@ -783,10 +802,15 @@ function DisplayHowToPlayScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 415 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		KeyboardControls = CreateSprite ( 61 )
-		SetSpriteOffset( KeyboardControls, (GetSpriteWidth(KeyboardControls)/2) , (GetSpriteHeight(KeyboardControls)/2) ) 
-		SetSpritePositionByOffset( KeyboardControls, ScreenWidth/2, 500 )
-		SetSpriteDepth ( KeyboardControls, 3 )
+		if (Platform = Web)
+			KeyboardControls = CreateSprite ( 61 )
+			SetSpriteOffset( KeyboardControls, (GetSpriteWidth(KeyboardControls)/2) , (GetSpriteHeight(KeyboardControls)/2) ) 
+			SetSpritePositionByOffset( KeyboardControls, ScreenWidth/2, 500 )
+			SetSpriteDepth ( KeyboardControls, 3 )
+		elseif (Platform = Android or Platform = iOS)
+			CreateAndInitializeOutlinedText( FALSE, CurrentMinTextIndex, "See You", 999, 65, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 470, 3 )
+			CreateAndInitializeOutlinedText( FALSE, CurrentMinTextIndex, "Again Soon!", 999, 65, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 470+60, 3 )
+		endif
 		
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
@@ -798,7 +822,6 @@ function DisplayHowToPlayScreen( )
 
 		ScreenIsDirty = TRUE
 	endif
-
 
 	if ThisButtonWasPressed(6) = TRUE
 		NextScreenToDisplay = TitleScreen
@@ -957,6 +980,10 @@ function SetupAboutScreenTexts( )
 		elseif (AboutTexts[index] = "(www.Untangle.com/Untangle-NG-Firewall/)")
 			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 17, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
 		elseif (AboutTexts[index] = "''A 110% By Team Fallen Angel Software!''")
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 17, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		elseif (AboutTexts[index] = "(https://www.apple.com/macos/high-sierra/)")
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 17, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		elseif (AboutTexts[index] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux")
 			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 17, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
 		else
 			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 19, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)

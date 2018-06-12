@@ -2,7 +2,7 @@
 
 remstart
 ---------------------------------------------------------------------------------------------------
-                               AppGameKit 2 "Night Rider" Engine
+                               AppGameKit 2 "NightRider" Engine
              _________                             _________                       
             /   _____/__________    ____  ____    /   _____/_  _  _______  ______TM
             \_____  \\____ \__  \ _/ ___\/ __ \   \_____  \\ \/ \/ /\__  \ \____ \ 
@@ -10,11 +10,11 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% v1.0.0
+                                     Retail1 110% v1.0.3
                                         
 ---------------------------------------------------------------------------------------------------     
 
-           Google Android SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
+      Google Android/Apple iOS SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
 
 ---------------------------------------------------------------------------------------------------                       
 
@@ -32,12 +32,12 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.0.0''"
+GameVersion = "''Retail1 110% - Turbo! - v1.0.3''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_0_0k.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_0_3.cfg"
 
-rem #option_explicit
-rem SetErrorMode(2)
+//#option_explicit
+//SetErrorMode(2)
 
 global ScreenWidth = 360
 global ScreenHeight = 640
@@ -57,25 +57,38 @@ SetOrientationAllowed( 1, 0, 0, 0 )
 
 global DEBUG = FALSE
 
+#constant Web		0
+#constant Android	1
+#constant iOS		2
+global Platform as integer
+
 global OnMobile as integer
 global ShowCursor as integer
-if GetDeviceBaseName() = "android"
+if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
+	if ( GetDeviceBaseName() = "android" )
+		Platform = Android
+	elseif ( GetDeviceBaseName() = "ios" )
+		Platform = iOS
+	endif
+
 	SetSyncRate( 30, 0 )
 	SetScissor( 0,0,0,0 )
 	OnMobile = TRUE
 	ShowCursor = FALSE
 else
-//	SetSyncRate( 30, 0 )
-	SetVSync( 1 )
+	Platform = Web
+	SetSyncRate( 30, 1 )
 	SetScissor( 0, 0, ScreenWidth, ScreenHeight )
 	OnMobile = FALSE
-	ShowCursor = TRUE	
+	ShowCursor = TRUE
 endif
 
-//--[Test Mobile On Desktop]-------
-//OnMobile = TRUE
-//ShowCursor = FALSE
-//-------[Test Mobile On Desktop]--
+global GameUnlocked as integer
+GameUnlocked = 2
+
+																			Platform = iOS
+																			OnMobile = TRUE
+																			ShowCursor = FALSE
 
 global PlayingSyncRate as integer
 PlayingSyncRate = 30
@@ -282,7 +295,7 @@ global Icon as integer[100]
 LoadImage ( 300, "\media\images\gui\SpeakerOFF.png" )
 LoadImage ( 301, "\media\images\gui\SpeakerON.png" )
 LoadImage ( 302, "\media\images\logos\GooglePlayLogo.png" )
-LoadImage ( 303, "\media\images\logos\ReviewGooglePlayLogo.png" )
+LoadImage ( 303, "\media\images\logos\ReviewOnAppStoreLogo.png" )
 LoadImage ( 304, "\media\images\gui\Exit.png" )
 LoadImage ( 305, "\media\images\gui\Pause.png" )
 LoadImage ( 306, "\media\images\gui\Play.png" )
@@ -716,7 +729,6 @@ do
 
 	Render2DFront( )
 	Swap ( )
-//	Sync()
 	ScreenIsDirty = TRUE
 
 	if ExitGame = 1
