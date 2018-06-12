@@ -86,9 +86,9 @@ endif
 global GameUnlocked as integer
 GameUnlocked = 2
 
-																			Platform = iOS
-																			OnMobile = TRUE
-																			ShowCursor = FALSE
+//																			Platform = iOS
+//																			OnMobile = TRUE
+//																			ShowCursor = FALSE
 
 global PlayingSyncRate as integer
 PlayingSyncRate = 30
