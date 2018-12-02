@@ -1012,7 +1012,12 @@ function RunGameplayCore()
 //--[KEYBOARD/MOUSE Input]----------------------------------------------------------------------------------------------------------------------------
 			if (PlayerMovementDelay = 0)
 				moveDelay as integer
-				if (roundedFPS = 30)
+				
+				if (roundedFPS > 55)
+					moveDelay = 5
+				elseif (roundedFPS > 40)
+					moveDelay = 4
+				elseif (roundedFPS > 29)
 					moveDelay = 3
 				elseif (roundedFPS < 26)
 					moveDelay = 1

@@ -19,7 +19,7 @@ endfunction
 
 function LoadAllMusic ( )
 	MusicTrack[ 0] = LoadMusicOGG( "\media\music\TitleBGM.ogg" )
-	MusicTrack[ 1] = LoadMusicOGG( "\media\music\Title2BGM.lite.ogg" )
+	MusicTrack[ 1] = LoadMusicOGG( "\media\music\Title2BGM.ogg" )
 	MusicTrack[ 2] = LoadMusicOGG( "\media\music\StoryIntroBGM.ogg" )
 	MusicTrack[ 3] = LoadMusicOGG( "\media\music\InGameStartBGM.lite.ogg" )
 	MusicTrack[ 4] = LoadMusicOGG( "\media\music\InGameMiddleBGM.lite.ogg" )
