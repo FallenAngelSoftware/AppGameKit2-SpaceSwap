@@ -426,7 +426,7 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 256+16+5 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		if ( (Platform = Web or Platform = Android) or GameUnlocked = 0 )
+		if ( (Platform = Web or Platform = Android or Platform = Windows) or GameUnlocked = 0 )
 			CreateArrowSet(288+16)
 			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Secret Code #1:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+16, 3)
 			ArrowSetTextStringIndex[5] = CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+16, 3)

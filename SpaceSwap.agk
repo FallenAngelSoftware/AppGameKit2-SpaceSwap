@@ -58,9 +58,9 @@ FILE_6=logic.agc;-1
 FILE_7=data.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;2135;0
+FILE_NAME_0=0;main.agc;2135;0
 FILE_NAME_1=0;visuals.agc;0;7
-FILE_NAME_2=0;screens.agc;10544;6
+FILE_NAME_2=1;screens.agc;16633;6
 FILE_NAME_3=0;input.agc;0;3
 FILE_NAME_4=0;interface.agc;0;4
 FILE_NAME_5=0;audio.agc;0;1
