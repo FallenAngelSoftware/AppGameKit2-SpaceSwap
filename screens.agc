@@ -292,7 +292,7 @@ function DisplayTitleScreen( )
 		endif
 		SaveOptionsAndHighScores()
 	elseif ThisIconWasPressed(1) = TRUE
-		if (Platform = Android)
+		if (Platform = Android or Platform = Web or Platform = Windows)
 			OpenBrowser( "https://play.google.com/store/apps/details?id=com.fallenangelsoftware.spaceswap" )
 		elseif (Platform = iOS)
 			OpenBrowser( "itms-apps://itunes.apple.com/app/id1394918474" )
@@ -321,8 +321,10 @@ function DisplayTitleScreen( )
 	elseif ThisButtonWasPressed(5) = TRUE
 		if (Platform = Android or Platform = iOS)
 			ExitGame = 1
-		else
+		elseif Platform = Web
 			OpenBrowser( "http://www.fallenangelsoftware.com" )
+		else
+			ExitGame = 1
 	 	endif
 	elseif ThisIconWasPressed(2) = TRUE
 		MusicVolume = 100

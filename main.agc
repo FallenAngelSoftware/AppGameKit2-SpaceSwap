@@ -60,6 +60,7 @@ global DEBUG = FALSE
 #constant Web		0
 #constant Android	1
 #constant iOS		2
+#constant Windows	3
 global Platform as integer
 
 global OnMobile as integer
@@ -82,6 +83,8 @@ else
 	OnMobile = FALSE
 	ShowCursor = TRUE
 endif
+
+if (GetDeviceBaseName() = "windows") then Platform = Windows
 
 global GameUnlocked as integer
 GameUnlocked = 2
