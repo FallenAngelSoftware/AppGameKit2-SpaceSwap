@@ -17,7 +17,7 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "©2018 By Fallen Angel Software"
+	AboutTexts    [ATindex] = "©2019 By Fallen Angel Software"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	
@@ -68,7 +68,7 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "''AppGameKit 2'' 2-D Game Engine:"
+	AboutTexts    [ATindex] = "''AppGameKit'' 2-D Game Engine:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "The ''NightRider™'' Engine"

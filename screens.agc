@@ -263,7 +263,7 @@ function DisplayTitleScreen( )
 		SetSpritePositionByOffset( ScreenLine[3], ScreenWidth/2, ScreenHeight-40+offsetY-15+13 )
 		SetSpriteColor(ScreenLine[3], 255, 255, 255, 255)
 
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2018 By www.FallenAngelSoftware.com", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2019 By www.FallenAngelSoftware.com", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2, 3)
 
 		if (SecretCodeCombined = 5432 or SecretCodeCombined = 5431) then CreateIcon(6, 360-17, 17)
 		
@@ -453,6 +453,8 @@ function DisplayOptionsScreen( )
 		
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
+
+		CreateIcon(8, 180, 527 )
 
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
 				
@@ -750,11 +752,11 @@ function DisplayOptionsScreen( )
 	endif
 
 	if ( ThisIconWasPressed(0) = TRUE and GetDeviceBaseName() <> "ios" )
-		if (OnMobile = TRUE)
-			OpenBrowser( "http://fallenangelsoftware.com/stuff/files/SpaceSwap/Source/SS-Source.txt" )
-		else
-			OpenBrowser( "http://fallenangelsoftware.com/stuff/files/LettersFall/HTML5/index.html" )
-		endif
+//		if (OnMobile = FALSE)
+//			OpenBrowser( "http://fallenangelsoftware.com/stuff/files/SpaceSwap/Source/SS-Source.txt" )
+//		else
+			OpenBrowser( "http://fallenangelsoftware.com/NightRider_Engine.html" )
+//		endif
 	endif
 
 	DrawAllArrowSets()
@@ -802,7 +804,7 @@ function DisplayHowToPlayScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 415 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		if (Platform = Web)
+		if (Platform = Web or Platform = Windows)
 			KeyboardControls = CreateSprite ( 61 )
 			SetSpriteOffset( KeyboardControls, (GetSpriteWidth(KeyboardControls)/2) , (GetSpriteHeight(KeyboardControls)/2) ) 
 			SetSpritePositionByOffset( KeyboardControls, ScreenWidth/2, 500 )
