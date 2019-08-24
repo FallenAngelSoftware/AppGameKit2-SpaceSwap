@@ -323,7 +323,7 @@ function DisplayTitleScreen( )
 			ExitGame = 1
 		else
 			OpenBrowser( "http://www.fallenangelsoftware.com" )
-		endif
+	 	endif
 	elseif ThisIconWasPressed(2) = TRUE
 		MusicVolume = 100
 		EffectsVolume = 100

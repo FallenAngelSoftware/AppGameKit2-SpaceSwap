@@ -14,8 +14,8 @@ package_name=com.fallenangelsoftware.spaceswap
 permission_flags=6
 play_app_id=
 sdk_version=1
-version_name=1.0.6
-version_number=106
+version_name=1.0.7
+version_number=107
 firebase_config_path=
 arcore=0
 url_scheme=
@@ -45,7 +45,7 @@ admob_app_id=
 [html5_settings]
 commands_used=0
 dynamic_memory=0
-output_path=/home/jlp/Desktop/VM-SHARE/SS110-HTML5
+output_path=C:\\Users\\JLP\\Desktop\\HTML5
 
 [projectfiles]
 FILE_0=main.agc;-1
