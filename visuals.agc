@@ -35,7 +35,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Game Built On:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	if (Platform = Web or Platform = Android)
+	if (Platform = Web or Platform = Windows or Platform = Android)
 		AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
 		AboutTextsBlue[ATindex] = 255
 		inc ATindex, 1
