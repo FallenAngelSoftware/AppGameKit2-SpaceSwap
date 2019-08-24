@@ -10,7 +10,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% v1.0.4
+                                     Retail1 110% v1.0.7
                                         
 ---------------------------------------------------------------------------------------------------     
 
@@ -32,9 +32,9 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.0.4''"
+GameVersion = "''Retail1 110% - Turbo! - v1.0.7''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_0_4.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_0_7.cfg"
 
 //#option_explicit
 //SetErrorMode(2)
@@ -86,7 +86,7 @@ endif
 global GameUnlocked as integer
 GameUnlocked = 2
 
-//																			Platform = iOS
+//																			Platform = Android
 //																			OnMobile = TRUE
 //																			ShowCursor = FALSE
 
@@ -295,7 +295,7 @@ global Icon as integer[100]
 LoadImage ( 300, "\media\images\gui\SpeakerOFF.png" )
 LoadImage ( 301, "\media\images\gui\SpeakerON.png" )
 LoadImage ( 302, "\media\images\logos\GooglePlayLogo.png" )
-LoadImage ( 303, "\media\images\logos\ReviewOnAppStoreLogo.png" )
+LoadImage ( 303, "\media\images\logos\ReviewGooglePlayLogo.png" )
 LoadImage ( 304, "\media\images\gui\Exit.png" )
 LoadImage ( 305, "\media\images\gui\Pause.png" )
 LoadImage ( 306, "\media\images\gui\Play.png" )
@@ -735,5 +735,5 @@ do
 		exit
 	endif
 loop
-
+rem                                      [TM]
 rem "A 110% By Team Fallen Angel Software!"

@@ -25,7 +25,7 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "Made With ''AppGameKit 2''"
+	AboutTexts    [ATindex] = "Made With ''AppGameKit Classic''"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "(www.AppGameKit.com)"

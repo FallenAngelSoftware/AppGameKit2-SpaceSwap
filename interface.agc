@@ -640,16 +640,6 @@ endfunction
 
 //------------------------------------------------------------------------------------------------------------
 
-function DeleteCharacterIconTexts ( )
-index as integer
-
-	for index = 8 to 76
-//		DeleteSprite(Icon[index])
-	next index
-endfunction
-
-//------------------------------------------------------------------------------------------------------------
-
 function CreateIcon(spriteIndex as integer, screenX as integer, screenY as integer)
 	IconIndex[NumberOfIconsOnScreen] = NumberOfIconsOnScreen
 	IconSprite[NumberOfIconsOnScreen] = spriteIndex

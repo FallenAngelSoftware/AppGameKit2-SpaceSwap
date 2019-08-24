@@ -452,8 +452,6 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
-		if (Platform = Web or Platform = Android) then CreateIcon(7, (ScreenWidth/2), ((ScreenHeight/2)+190+17) )
-		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
 				
 		ChangingBackground = FALSE
@@ -1365,6 +1363,7 @@ function DisplayPlayingScreen( )
 				SetSpriteDepth ( Icon[1], 1 )
 				SetSpriteDepth ( Icon[4], 1 )
 				SetSpriteDepth ( Icon[5], 1 )
+				PauseMusicOGG(MusicTrack[CurrentlyPlayingMusicIndex]) 
 			elseif (GamePaused = 0)
 				GamePaused = -50
 
@@ -1376,6 +1375,7 @@ function DisplayPlayingScreen( )
 				SetSpriteDepth ( Icon[1], 2 )
 				SetSpriteDepth ( Icon[4], 2 )
 				SetSpriteDepth ( Icon[5], 2 )
+				ResumeMusicOGG(MusicTrack[CurrentlyPlayingMusicIndex])
 			endif		
 		endif
 	endif

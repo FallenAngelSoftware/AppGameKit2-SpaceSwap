@@ -78,6 +78,8 @@ function GetAllUserInput ( )
 					SetSpriteDepth ( Icon[1], 1 )
 					SetSpriteDepth ( Icon[4], 1 )
 					SetSpriteDepth ( Icon[5], 1 )
+					PauseMusicOGG(MusicTrack[CurrentlyPlayingMusicIndex]) 
+
 				elseif (GamePaused = 0)
 					GamePaused = -50
 
@@ -89,6 +91,7 @@ function GetAllUserInput ( )
 					SetSpriteDepth ( Icon[1], 2 )
 					SetSpriteDepth ( Icon[4], 2 )
 					SetSpriteDepth ( Icon[5], 2 )
+					ResumeMusicOGG(MusicTrack[CurrentlyPlayingMusicIndex]) 
 				endif		
 			endif
 		endcase
