@@ -454,8 +454,13 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
-		CreateIcon(8, 180, 527 )
-
+		if (Platform = Windows)
+			CreateIcon(8, 180, 527 )
+		else
+			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
+			CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
+		endif
+		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
 				
 		ChangingBackground = FALSE
