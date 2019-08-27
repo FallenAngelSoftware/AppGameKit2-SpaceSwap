@@ -31,6 +31,11 @@ function ApplyScreenFadeTransition ( )
 		else
 			ScreenFadeTransparency = 0
 			ScreenFadeStatus = FadingIdle
+
+			if (SecretCodeCombined = 2777 and ScreenIsDirty = TRUE and ScreenFadeStatus = FadingIdle)
+				SetSpritePositionByOffset( FadingBlackBG,  -80, -200 )
+				ScreenFadeTransparency = 255
+			endif
 		endif
 		
 		SetSpriteColorAlpha( FadingBlackBG, ScreenFadeTransparency )
@@ -68,12 +73,18 @@ function ApplyScreenFadeTransition ( )
 		
 		SetSpriteColorAlpha( FadingBlackBG, ScreenFadeTransparency )
 	endif
+	
+	if (SecretCodeCombined = 2777 and ScreenIsDirty = TRUE and ScreenFadeStatus = FadingIdle)
+		SetSpriteColorAlpha( FadingBlackBG, 200 )
+	endif
+
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
 
-function DisplayTestDescriptionScreen( )
+function DisplaySteamOverlayScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
+
 		ClearScreenWithColor ( 0, 0, 0 )
 
 		BlackBG = CreateSprite ( 3 )
@@ -81,21 +92,33 @@ function DisplayTestDescriptionScreen( )
 		SetSpriteOffset( BlackBG, (GetSpriteWidth(BlackBG)/2) , (GetSpriteHeight(BlackBG)/2) ) 
 		SetSpritePositionByOffset( BlackBG, ScreenWidth/2, ScreenHeight/2 )
 
-		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "For Hire Game Programmer!", 999, 20, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 15, 3 )
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "TM", 999, 8, 255, 255, 255, 255, 90, 90, 90, 0, 180+110, 23-14, 3 )
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "''Space Swap 110%''", 999, 30, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29, 3 )
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Copyright 2019 By Fallen Angel Software", 999, 18, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29+25, 3 )
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "www.FallenAngelSoftware.com", 999, 18, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29+25+25, 3 )
 
-		ScreenDisplayTimer = 200
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Loading Now!", 999, 30, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, ScreenHeight*.25, 3 )
+
+		LoadPercentText = CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, " ", 999, 150, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, ScreenHeight/2, 3)
+
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Please Wait!", 999, 30, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, ScreenHeight*.75, 3 )
+
+		ScreenDisplayTimer = 275
 		NextScreenToDisplay = AppGameKitScreen
-
-		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "JeZxLee@16BitSoft.com", 999, 30, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, ScreenHeight-22, 3 )
 
 		ScreenIsDirty = TRUE
 	endif
 
-	if (MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27)
-		PlaySoundEffect(1)
-		SetDelayAllUserInput()	
-		NextScreenToDisplay = AppGameKitScreen
+	if ScreenDisplayTimer > 0
+		dec ScreenDisplayTimer, 1
+	elseif ScreenDisplayTimer = 0
 		ScreenFadeStatus = FadingToBlack
+	endif
+
+	if (ScreenDisplayTimer > 0)
+		SetText ( LoadPercentText, str(275/ScreenDisplayTimer)+"%" )
+	elseif (ScreenDisplayTimer = 0)
+		SetText ( LoadPercentText, "100%" )
 	endif
 
 	if ScreenFadeStatus = FadingToBlack and ScreenFadeTransparency = 254
@@ -106,6 +129,8 @@ endfunction
 
 function DisplayAppGameKitScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
+		PlayNewMusic(0, 1)
+		
 		ClearScreenWithColor ( 0, 0, 0 )
 		
 		BlackBG = CreateSprite ( 1 )
@@ -754,6 +779,14 @@ function DisplayOptionsScreen( )
 		SetTextStringOutlined ( ArrowSetTextStringIndex[8], str(SecretCode[3]) )
 		SecretCodeCombined = ( (SecretCode[0]*1000) + (SecretCode[1]*100) + (SecretCode[2]*10) + (SecretCode[3]) )
 		SetDelayAllUserInput()
+	endif
+
+	if (SecretCodeCombined = 2777)
+		SetSpritePositionByOffset( FadingBlackBG,  -80, -200 )
+		SetSpriteColorAlpha( FadingBlackBG, 200 )
+	else
+		SetSpritePositionByOffset( FadingBlackBG,  ScreenWidth/2, ScreenHeight/2 )
+		SetSpriteColorAlpha( FadingBlackBG, 0 )
 	endif
 
 	if ( ThisIconWasPressed(0) = TRUE and GetDeviceBaseName() <> "ios" )

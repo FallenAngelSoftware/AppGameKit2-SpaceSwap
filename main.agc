@@ -18,7 +18,7 @@ remstart
 
 ---------------------------------------------------------------------------------------------------                       
 
-                     (C)opyright 2018, By Team "www.FallenAngelSoftware.com"
+                     (C)opyright 2019, By Team "www.FallenAngelSoftware.com"
 
 ---------------------------------------------------------------------------------------------------
 remend
@@ -89,9 +89,9 @@ if (GetDeviceBaseName() = "windows") then Platform = Windows
 global GameUnlocked as integer
 GameUnlocked = 2
 
-//																			Platform = Android
-//																			OnMobile = TRUE
-//																			ShowCursor = FALSE
+																			Platform = Android
+																			OnMobile = TRUE
+																			ShowCursor = FALSE
 
 global PlayingSyncRate as integer
 PlayingSyncRate = 30
@@ -201,7 +201,7 @@ NewHighScoreNameIndex = 1
 global PauseGame as integer
 PauseGame = FALSE
 
-#constant TestDescriptionScreen						0
+#constant SteamOverlayScreen						0
 #constant AppGameKitScreen							1
 #constant SixteenBitSoftScreen						2
 #constant TitleScreen								3
@@ -215,10 +215,15 @@ PauseGame = FALSE
 #constant NewHighScoreNameInputScreen				11
 #constant NewHighScoreNameInputAndroidScreen		12
 #constant MusicPlayerScreen							13
-global ScreenToDisplay = AppGameKitScreen
+global ScreenToDisplay = 0
 global NextScreenToDisplay = 1
 global ScreenDisplayTimer = 0
 
+if (Platform <> Windows)
+	ScreenToDisplay = 1
+	NextScreenToDisplay = 2
+endif
+	
 global MusicPlayerScreenIndex as integer
 MusicPlayerScreenIndex = 0
 
@@ -616,10 +621,10 @@ SecretCodeCombined = ( (SecretCode[0]*1000) + (SecretCode[1]*100) + (SecretCode[
 
 SetSyncRate( 30, 0 )
 
-PlayNewMusic(0, 1)
-
 global ScreenIsDirty as integer
 ScreenIsDirty = TRUE
+
+global LoadPercentText as integer
 
 do
 	inc FrameCount, 1
@@ -627,8 +632,8 @@ do
 	GetAllUserInput()
 	
 	select ScreenToDisplay
-		case TestDescriptionScreen:
-			DisplayTestDescriptionScreen()
+		case SteamOverlayScreen:
+			DisplaySteamOverlayScreen()
 		endcase
 
 		case AppGameKitScreen:
