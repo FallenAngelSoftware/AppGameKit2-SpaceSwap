@@ -89,6 +89,8 @@ if (GetDeviceBaseName() = "windows") then Platform = Windows
 global GameUnlocked as integer
 GameUnlocked = 2
 
+global LoadPercent as float
+global LoadPercentFixed as integer
 //																			Platform = Android
 //																			OnMobile = TRUE
 //																			ShowCursor = FALSE
@@ -217,7 +219,7 @@ PauseGame = FALSE
 #constant MusicPlayerScreen							13
 global ScreenToDisplay = 0
 global NextScreenToDisplay = 1
-global ScreenDisplayTimer = 0
+global ScreenDisplayTimer as integer
 
 if (Platform <> Windows)
 	ScreenToDisplay = 1

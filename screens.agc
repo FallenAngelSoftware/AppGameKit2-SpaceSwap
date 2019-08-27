@@ -110,16 +110,18 @@ function DisplaySteamOverlayScreen( )
 	endif
 
 	if ScreenDisplayTimer > 0
+		LoadPercent = 275 / ScreenDisplayTimer
+		LoadPercentFixed = LoadPercent
+		if (LoadPercentFixed > 100) then LoadPercentFixed = 100
+		SetText( LoadPercentText, str(LoadPercentFixed)+"%" )
+
 		dec ScreenDisplayTimer, 1
 	elseif ScreenDisplayTimer = 0
 		ScreenFadeStatus = FadingToBlack
+		SetText( LoadPercentText, "100%" )
 	endif
 
-	if (ScreenDisplayTimer > 0)
-		SetText ( LoadPercentText, str(275/ScreenDisplayTimer)+"%" )
-	elseif (ScreenDisplayTimer = 0)
-		SetText ( LoadPercentText, "100%" )
-	endif
+	ScreenIsDirty = TRUE
 
 	if ScreenFadeStatus = FadingToBlack and ScreenFadeTransparency = 254
 	endif
