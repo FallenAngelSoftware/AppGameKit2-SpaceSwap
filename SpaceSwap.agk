@@ -14,8 +14,8 @@ package_name=com.fallenangelsoftware.spaceswap
 permission_flags=6
 play_app_id=
 sdk_version=1
-version_name=1.0.7
-version_number=107
+version_name=1.0.7.1
+version_number=108
 firebase_config_path=
 arcore=0
 url_scheme=
@@ -58,7 +58,7 @@ FILE_6=logic.agc;-1
 FILE_7=data.agc;-1
 
 [files]
-FILE_NAME_0=1;main.agc;0;0
+FILE_NAME_0=1;main.agc;2825;0
 FILE_NAME_1=0;visuals.agc;17814;7
 FILE_NAME_2=0;screens.agc;30071;6
 FILE_NAME_3=0;input.agc;0;3

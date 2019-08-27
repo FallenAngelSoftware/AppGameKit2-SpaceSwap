@@ -89,9 +89,9 @@ if (GetDeviceBaseName() = "windows") then Platform = Windows
 global GameUnlocked as integer
 GameUnlocked = 2
 
-																			Platform = Android
-																			OnMobile = TRUE
-																			ShowCursor = FALSE
+//																			Platform = Android
+//																			OnMobile = TRUE
+//																			ShowCursor = FALSE
 
 global PlayingSyncRate as integer
 PlayingSyncRate = 30
