@@ -17,7 +17,7 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "©2019 By Fallen Angel Software"
+	AboutTexts    [ATindex] = "©2019 By Team Fallen Angel Software"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	
@@ -35,24 +35,15 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Game Built On:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	if (Platform = Web or Platform = Windows or Platform = Android)
-		AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
-		AboutTextsBlue[ATindex] = 255
-		inc ATindex, 1
-		AboutTexts    [ATindex] = "(www.Kubuntu.org)"
-		AboutTextsBlue[ATindex] = 255
-		inc ATindex, 1
-		AboutTexts    [ATindex] = "Real Programmers Use Linux!"
-		AboutTextsBlue[ATindex] = 255
-		inc ATindex, 1
-	elseif (Platform = iOS)
-		AboutTexts    [ATindex] = "''Apple® macOS v10.13.5 High Sierra''"
-		AboutTextsBlue[ATindex] = 255
-		inc ATindex, 1
-		AboutTexts    [ATindex] = "(https://www.apple.com/macos/high-sierra/)"
-		AboutTextsBlue[ATindex] = 255
-		inc ATindex, 1
-	endif
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "(www.Kubuntu.org)"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "Real Programmers Use Linux!"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
 
 	AboutTexts    [ATindex] = "Original Game Idea By:"
 	AboutTextsBlue[ATindex] = 0
@@ -71,7 +62,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "''AppGameKit'' 2-D Game Engine:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "The ''NightRider™'' Engine"
+	AboutTexts    [ATindex] = "The ''Night Rider'' Engine"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "''The Fallen Angel''"
@@ -99,6 +90,13 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
+	AboutTexts    [ATindex] = "Support Game Tester:"
+	AboutTextsBlue[ATindex] = 0
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "''Mike Quatro''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+
 	AboutTexts    [ATindex] = "Game Engine TurboCharger By:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
@@ -112,11 +110,37 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "''Markus''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
+	AboutTexts    [ATindex] = "''Qugurun''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
 
 	AboutTexts    [ATindex] = "Support Game Engine Optimization By:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "''The Fallen Angel''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+
+	AboutTexts    [ATindex] = "Text Drawing Optimizations By:"
+	AboutTextsBlue[ATindex] = 0
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "''SFSW''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "''PSY''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "''TomToad''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+
+	AboutTexts    [ATindex] = "Optimizations Tested Using:"
+	AboutTextsBlue[ATindex] = 0
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "''BES – Battle Encoder Shirase'''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "(http://mion.faireal.net/BES/)"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
@@ -137,23 +161,23 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Lead Graphic Artist:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Oshi Bobo''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "www.OshiBobo.com"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(For Hire Graphic Artist)"
+	AboutTexts    [ATindex] = "''The Fallen Angel''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
 	AboutTexts    [ATindex] = "Support Graphic Artist:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
+	AboutTexts    [ATindex] = "''Oshi Bobo''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	
+	AboutTexts    [ATindex] = "''www.OshiBobo.com''"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "(For Hire Graphic Artist)"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+
 	AboutTexts    [ATindex] = "Lead Music Artist:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
@@ -161,7 +185,7 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "''Neo's Kiss™'' Graphical User Interface By:"
+	AboutTexts    [ATindex] = "''Neo's Kiss'' Graphical User Interface By:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "''The Fallen Angel''"
@@ -218,7 +242,7 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "''Space Swap™'' Logo Created In:"
+	AboutTexts    [ATindex] = "''Space Swap'' Logo Created In:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "Genuine M.S. Office 365 Publisher"
@@ -237,7 +261,7 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Desktop Code Name: ''BumbleBee''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "ASRock® Q1900-ITX Motherboard"
@@ -262,13 +286,13 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Last 5% Of Game Developed On A:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Pro-Built Custom Desktop"
+	AboutTexts    [ATindex] = "JeZxLee Pro-Built Custom Desktop"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "Desktop Code Name: ''JetFire''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "GigaByte® Mid-Range Motherboard"
@@ -293,13 +317,13 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "''Doom4'' Played on Linux On A:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Pro-Built Custom Super Desktop"
+	AboutTexts    [ATindex] = "JeZxLee Pro-Built Custom Desktop"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "Desktop Code Name: ''Optimus Prime''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 64Bit L.T.S.'' Linux"
+	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "ASUS® 990FX SaberTooth r2.0 Motherboard"
@@ -321,13 +345,14 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
-	AboutTexts    [ATindex] = "Studio Hardware Protected By:"
+
+	AboutTexts    [ATindex] = "16BitSoft Studio Hardware Protected By:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "Untangle™ Linux Firewall On Dell® Desktop"
+	AboutTexts    [ATindex] = "Untangle Linux Firewall On Dell® Desktop"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.Untangle.com/Untangle-NG-Firewall/)"
+	AboutTexts    [ATindex] = "(www.Untangle.com/Untangle-NG-Firewall)"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
@@ -363,13 +388,6 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "ASUS® Nexus 7 Tablet"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "iOS Version Tested On:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Apple® iPad Air Gen1 Tablet"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 

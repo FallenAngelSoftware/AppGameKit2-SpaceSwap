@@ -99,6 +99,8 @@ function SetupForNewGame()
 	BoxBlueUsed = 2
 	BoxPurpleUsed = 2
 	
+	BoxWhiteUsed = 2
+	
 	NumberOfPiecesCleared = 0
 	NumberOfMatchesCleared = 0
 	
@@ -108,6 +110,8 @@ function SetupForNewGame()
 	StagingLevelAdvance = 0
 		
 	WonGame = FALSE
+	
+	GameQuit = FALSE
 	
 	PlayerRankOnGameOver = 999
 	
@@ -124,25 +128,25 @@ endfunction
 
 function DrawPlayfield()
 	index as integer
-	for index = 2 to 78
+	for index = BoxRedUsed to 2 step -1
 		SetSpriteVisible ( BoxRedSprite[index], 0 ) 
 	next index
-	for index = 2 to 78
+	for index = BoxOrangeUsed to 2 step -1
 		SetSpriteVisible ( BoxOrangeSprite[index], 0 ) 
 	next index
-	for index = 2 to 78
+	for index = BoxYellowUsed to 2 step -1
 		SetSpriteVisible ( BoxYellowSprite[index], 0 ) 
 	next index
-	for index = 2 to 78
+	for index = BoxGreenUsed to 2 step -1
 		SetSpriteVisible ( BoxGreenSprite[index], 0 ) 
 	next index
-	for index = 2 to 78
+	for index = BoxBlueUsed to 2 step -1
 		SetSpriteVisible ( BoxBlueSprite[index], 0 ) 
 	next index
-	for index = 2 to 78
+	for index = BoxPurpleUsed to 2 step -1
 		SetSpriteVisible ( BoxPurpleSprite[index], 0 ) 
 	next index
-	for index = 2 to 78
+	for index = BoxWhiteUsed to 2 step -1
 		SetSpriteVisible ( BoxWhiteSprite[index], 0 ) 
 	next index
 
@@ -155,6 +159,7 @@ function DrawPlayfield()
 	
 	BoxWhiteUsed = 2
 
+	state as integer
 	indexY as integer
 	indexX as integer
 	screenY as integer
@@ -164,104 +169,118 @@ function DrawPlayfield()
 	for indexY = 0 to 12
 		for indexX = 0 to 5
 			if ( (PlayerSwapOnePlayfieldX <> indexX or PlayerSwapOnePlayfieldY <> indexY) and (PlayerSwapTwoPlayfieldX <> indexX or PlayerSwapTwoPlayfieldY <> indexY) )
-				if (Playfield[indexX, indexY] = 1)
-					SetSpriteVisible ( BoxRedSprite[BoxRedUsed], 1 ) 
-					SetSpritePositionByOffset( BoxRedSprite[BoxRedUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxRedUsed
-					inc BoxRedUsed, 1
-				elseif (Playfield[indexX, indexY] = 2)
-					SetSpriteVisible ( BoxOrangeSprite[BoxOrangeUsed], 1 ) 
-					SetSpritePositionByOffset( BoxOrangeSprite[BoxOrangeUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxOrangeUsed
-					inc BoxOrangeUsed, 1
-				elseif (Playfield[indexX, indexY] = 3)
-					SetSpriteVisible ( BoxYellowSprite[BoxYellowUsed], 1 ) 
-					SetSpritePositionByOffset( BoxYellowSprite[BoxYellowUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxYellowUsed
-					inc BoxYellowUsed, 1
-				elseif (Playfield[indexX, indexY] = 4)
-					SetSpriteVisible ( BoxGreenSprite[BoxGreenUsed], 1 ) 
-					SetSpritePositionByOffset( BoxGreenSprite[BoxGreenUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxGreenUsed
-					inc BoxGreenUsed, 1
-				elseif (Playfield[indexX, indexY] = 5)
-					SetSpriteVisible ( BoxBlueSprite[BoxBlueUsed], 1 ) 
-					SetSpritePositionByOffset( BoxBlueSprite[BoxBlueUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxBlueUsed
-					inc BoxBlueUsed, 1
-				elseif (Playfield[indexX, indexY] = 6)
-					SetSpriteVisible ( BoxPurpleSprite[BoxPurpleUsed], 1 ) 
-					SetSpritePositionByOffset( BoxPurpleSprite[BoxPurpleUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxPurpleUsed
-					inc BoxPurpleUsed, 1
+				state = Playfield[indexX, indexY]
+                select state 
+                    case 1:
+						SetSpriteVisible ( BoxRedSprite[BoxRedUsed], 1 ) 
+						SetSpritePositionByOffset( BoxRedSprite[BoxRedUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxRedUsed
+						inc BoxRedUsed, 1
+                    endcase
+                    case 2:
+						SetSpriteVisible ( BoxOrangeSprite[BoxOrangeUsed], 1 ) 
+						SetSpritePositionByOffset( BoxOrangeSprite[BoxOrangeUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxOrangeUsed
+						inc BoxOrangeUsed, 1
+                    endcase
+                    case 3:
+						SetSpriteVisible ( BoxYellowSprite[BoxYellowUsed], 1 ) 
+						SetSpritePositionByOffset( BoxYellowSprite[BoxYellowUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxYellowUsed
+						inc BoxYellowUsed, 1
+                    endcase
+                    case 4:
+						SetSpriteVisible ( BoxGreenSprite[BoxGreenUsed], 1 ) 
+						SetSpritePositionByOffset( BoxGreenSprite[BoxGreenUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxGreenUsed
+						inc BoxGreenUsed, 1
+                    endcase
+                    case 5:
+						SetSpriteVisible ( BoxBlueSprite[BoxBlueUsed], 1 ) 
+						SetSpritePositionByOffset( BoxBlueSprite[BoxBlueUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxBlueUsed
+						inc BoxBlueUsed, 1
+                    endcase
+                    case 6:
+						SetSpriteVisible ( BoxPurpleSprite[BoxPurpleUsed], 1 ) 
+						SetSpritePositionByOffset( BoxPurpleSprite[BoxPurpleUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxPurpleUsed
+						inc BoxPurpleUsed, 1
+                    endcase
 
-				elseif (Playfield[indexX, indexY] = 11)
-					SetSpriteVisible ( BoxRedSprite[BoxRedUsed], 1 ) 
-					SetSpritePositionByOffset( BoxRedSprite[BoxRedUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxRedUsed
-					inc BoxRedUsed, 1
+                    case 11:
+						SetSpriteVisible ( BoxRedSprite[BoxRedUsed], 1 ) 
+						SetSpritePositionByOffset( BoxRedSprite[BoxRedUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxRedUsed
+						inc BoxRedUsed, 1
 
-					if ( mod(MatchFlashTimer, 3) = 0 )
-						SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
-						SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
-						inc BoxWhiteUsed, 1
-					endif
-				elseif (Playfield[indexX, indexY] = 12)
-					SetSpriteVisible ( BoxOrangeSprite[BoxOrangeUsed], 1 ) 
-					SetSpritePositionByOffset( BoxOrangeSprite[BoxOrangeUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxOrangeUsed
-					inc BoxOrangeUsed, 1
+						if ( mod(MatchFlashTimer, 3) = 0 )
+							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
+							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
+							inc BoxWhiteUsed, 1
+						endif
+                    endcase
+                    case 12:
+						SetSpriteVisible ( BoxOrangeSprite[BoxOrangeUsed], 1 ) 
+						SetSpritePositionByOffset( BoxOrangeSprite[BoxOrangeUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxOrangeUsed
+						inc BoxOrangeUsed, 1
 
-					if ( mod(MatchFlashTimer, 3) = 0 )
-						SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
-						SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
-						inc BoxWhiteUsed, 1
-					endif
-				elseif (Playfield[indexX, indexY] = 13)
-					SetSpriteVisible ( BoxYellowSprite[BoxYellowUsed], 1 ) 
-					SetSpritePositionByOffset( BoxYellowSprite[BoxYellowUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxYellowUsed
-					inc BoxYellowUsed, 1
+						if ( mod(MatchFlashTimer, 3) = 0 )
+							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
+							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
+							inc BoxWhiteUsed, 1
+						endif
+                    endcase
+                    case 13:
+						SetSpriteVisible ( BoxYellowSprite[BoxYellowUsed], 1 ) 
+						SetSpritePositionByOffset( BoxYellowSprite[BoxYellowUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxYellowUsed
+						inc BoxYellowUsed, 1
 
-					if ( mod(MatchFlashTimer, 3) = 0 )
-						SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
-						SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
-						inc BoxWhiteUsed, 1
-					endif
-				elseif (Playfield[indexX, indexY] = 14)
-					SetSpriteVisible ( BoxGreenSprite[BoxGreenUsed], 1 ) 
-					SetSpritePositionByOffset( BoxGreenSprite[BoxGreenUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxGreenUsed
-					inc BoxGreenUsed, 1
+						if ( mod(MatchFlashTimer, 3) = 0 )
+							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
+							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
+							inc BoxWhiteUsed, 1
+						endif
+                    endcase
+                    case 14:
+						SetSpriteVisible ( BoxGreenSprite[BoxGreenUsed], 1 ) 
+						SetSpritePositionByOffset( BoxGreenSprite[BoxGreenUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxGreenUsed
+						inc BoxGreenUsed, 1
 
-					if ( mod(MatchFlashTimer, 3) = 0 )
-						SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
-						SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
-						inc BoxWhiteUsed, 1
-					endif
-				elseif (Playfield[indexX, indexY] = 15)
-					SetSpriteVisible ( BoxBlueSprite[BoxBlueUsed], 1 ) 
-					SetSpritePositionByOffset( BoxBlueSprite[BoxBlueUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxBlueUsed
-					inc BoxBlueUsed, 1
+						if ( mod(MatchFlashTimer, 3) = 0 )
+							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
+							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
+							inc BoxWhiteUsed, 1
+						endif
+                    endcase
+                    case 15:
+						SetSpriteVisible ( BoxBlueSprite[BoxBlueUsed], 1 ) 
+						SetSpritePositionByOffset( BoxBlueSprite[BoxBlueUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxBlueUsed
+						inc BoxBlueUsed, 1
 
-					if ( mod(MatchFlashTimer, 3) = 0 )
-						SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
-						SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
-						inc BoxWhiteUsed, 1
-					endif
-				elseif (Playfield[indexX, indexY] = 16)
-					SetSpriteVisible ( BoxPurpleSprite[BoxPurpleUsed], 1 ) 
-					SetSpritePositionByOffset( BoxPurpleSprite[BoxPurpleUsed], screenX, screenY-PlayfieldOffsetY )
-					PlayfieldColoredBoxIndex[indexX, indexY] = BoxPurpleUsed
-					inc BoxPurpleUsed, 1
+						if ( mod(MatchFlashTimer, 3) = 0 )
+							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
+							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
+							inc BoxWhiteUsed, 1
+						endif
+                    endcase
+						case 16:
+						SetSpriteVisible ( BoxPurpleSprite[BoxPurpleUsed], 1 ) 
+						SetSpritePositionByOffset( BoxPurpleSprite[BoxPurpleUsed], screenX, screenY-PlayfieldOffsetY )
+						PlayfieldColoredBoxIndex[indexX, indexY] = BoxPurpleUsed
+						inc BoxPurpleUsed, 1
 
-					if ( mod(MatchFlashTimer, 3) = 0 )
-						SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
-						SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
-						inc BoxWhiteUsed, 1
-					endif
-				endif
+						if ( mod(MatchFlashTimer, 3) = 0 )
+							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
+							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
+							inc BoxWhiteUsed, 1
+						endif
+                    endcase
+				endselect
 			endif
 				
 			if (indexY = 12)

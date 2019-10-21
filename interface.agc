@@ -402,7 +402,7 @@ function ThisArrowWasPressed(arrowToCheck as float)
 	index as integer
 	index = floor(arrowToCheck)
 
-	if ArrowSetLeftAnimationTimer[index] > 0
+	if index = arrowToCheck and ArrowSetLeftAnimationTimer[index] > 0
 		if ArrowSetLeftAnimationTimer[index] = 3
 			ArrowSetLeftScale[index] = .75
 			GUIchanged = TRUE
@@ -423,7 +423,7 @@ function ThisArrowWasPressed(arrowToCheck as float)
 		exitfunction returnValue
 	endif
 
-	if ArrowSetRightAnimationTimer[index] > 0
+	if (index + .5) = arrowToCheck and ArrowSetRightAnimationTimer[index] > 0
 		if ArrowSetRightAnimationTimer[index] = 3
 			ArrowSetRightScale[index] = .75
 			GUIchanged = TRUE

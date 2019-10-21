@@ -2,7 +2,8 @@
 
 remstart
 ---------------------------------------------------------------------------------------------------
-                            AppGameKit Classic "NightRider" Engine
+                                                              TM
+                                AppGameKit "NightRider" Engine
              _________                             _________                       
             /   _____/__________    ____  ____    /   _____/_  _  _______  ______TM
             \_____  \\____ \__  \ _/ ___\/ __ \   \_____  \\ \/ \/ /\__  \ \____ \ 
@@ -10,11 +11,11 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% v1.0.7
+                                     Retail1 110% v1.1.3
                                         
 ---------------------------------------------------------------------------------------------------     
 
-      Google Android/Apple iOS SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
+          Google Android SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
 
 ---------------------------------------------------------------------------------------------------                       
 
@@ -32,12 +33,12 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.0.7''"
+GameVersion = "''Retail1 110% - Turbo! - v1.1.3''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_0_7.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_1_3.cfg"
 
-//#option_explicit
-//SetErrorMode(2)
+#option_explicit
+SetErrorMode(2)
 
 global ScreenWidth = 360
 global ScreenHeight = 640
@@ -61,6 +62,7 @@ global DEBUG = FALSE
 #constant Android	1
 #constant iOS		2
 #constant Windows	3
+#constant Linux		4
 global Platform as integer
 
 global OnMobile as integer
@@ -79,21 +81,30 @@ if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 else
 	Platform = Web
 	SetSyncRate( 30, 1 )
+//	SetVSync( 1 ) 
 	SetScissor( 0, 0, ScreenWidth, ScreenHeight )
 	OnMobile = FALSE
 	ShowCursor = TRUE
 endif
 
-if (GetDeviceBaseName() = "windows") then Platform = Windows
+if (GetDeviceBaseName() = "windows")
+	Platform = Windows
+	SetSyncRate( 30, 1 )
+elseif (GetDeviceBaseName() = "linux")
+	Platform = Linux
+	SetSyncRate( 30, 1 )
+endif
 
 global GameUnlocked as integer
 GameUnlocked = 2
 
 global LoadPercent as float
 global LoadPercentFixed as integer
-//																			Platform = Android
-//																			OnMobile = TRUE
-//																			ShowCursor = FALSE
+
+// Uncomment below three lines to test Android version on desktop																			
+// Platform = Android
+// OnMobile = TRUE
+// ShowCursor = FALSE
 
 global PlayingSyncRate as integer
 PlayingSyncRate = 30
@@ -151,7 +162,6 @@ global JoyButtonTwoReleased as integer
 JoyButtonTwoReleased = TRUE
 
 global KeyboardControls as integer
-LoadImage ( 61, "\media\images\gui\KeyboardControls.png" )
 
 global LastKeyboardChar = -1
 
@@ -174,12 +184,13 @@ SetSpriteDepth ( FadingBlackBG, 1 )
 SetSpriteOffset( FadingBlackBG, (GetSpriteWidth(FadingBlackBG)/2) , (GetSpriteHeight(FadingBlackBG)/2) ) 
 SetSpritePositionByOffset( FadingBlackBG, ScreenWidth/2, ScreenHeight/2 )
 SetSpriteTransparency( FadingBlackBG, 1 )
+global FadingToBlackCompleted as integer
+FadingToBlackCompleted = FALSE
 
 UseNewDefaultFonts( 1 )
 LoadFont( 999, "\media\fonts\StardosStencil-Bold.ttf" )
 global CurrentMinTextIndex = 1
 
-LoadImage ( 5, "\media\images\logos\AppGameKitLogo.png" )
 global AppGameKitLogo as integer
 
 LoadImage ( 10, "\media\images\backgrounds\TitleBG.png" )
@@ -188,11 +199,9 @@ global TitleBG as integer
 
 LoadSelectedBackground()
 
-LoadImage (30, "\media\images\logos\FAS-Statue.png")
 global SixteenBitSoftLogo as integer
 
-LoadImage ( 35, "\media\images\logos\Logo.png" )
-global LF110Logo as integer
+global SS110Logo as integer
 
 global NewNameText as integer
 global NewHighScoreCurrentName as String
@@ -217,13 +226,13 @@ PauseGame = FALSE
 #constant NewHighScoreNameInputScreen				11
 #constant NewHighScoreNameInputAndroidScreen		12
 #constant MusicPlayerScreen							13
-global ScreenToDisplay = 0
-global NextScreenToDisplay = 1
+global ScreenToDisplay = 3
+global NextScreenToDisplay = 4
 global ScreenDisplayTimer as integer
 
 if (Platform <> Windows)
-	ScreenToDisplay = 1
-	NextScreenToDisplay = 2
+	ScreenToDisplay = 3
+	NextScreenToDisplay = 4
 endif
 	
 global MusicPlayerScreenIndex as integer
@@ -398,10 +407,12 @@ ClearHighScores()
 global AboutTexts as string[99999]
 global AboutTextsScreenY as integer[99999]
 global AboutTextsBlue as integer[99999]
+global AboutTextVisable as integer[99999]
 for index = 0 to 99998
 	AboutTexts[index] = "Should Not See"
 	AboutTextsScreenY[index] = 99999
 	AboutTextsBlue[index] = 255
+	AboutTextVisable[index] = 0
 next index
 
 global ATindex = 0
@@ -532,13 +543,9 @@ global PlayfieldBottomSprite as integer
 LoadImage ( 39, "\media\images\playing\BoardNewerLeft.png" )
 global PlayfieldLeftSprite as integer
 
-LoadImage ( 200, "\media\images\story\EarthBG.png" )
 global IntroEarthBGSprite as integer
-LoadImage ( 201, "\media\images\story\Earth.png" )
 global IntroEarthSprite as integer
-LoadImage ( 202, "\media\images\story\Shuttle1.png" )
 global IntroShuttleSprite as integer
-LoadImage ( 203, "\media\images\story\Stars.png" )
 global IntroStarsSprite as integer[5]
 
 global IntroAnimationStep as integer
@@ -548,17 +555,11 @@ global IntroShuttleScreenX as integer
 global IntroShuttleScreenY as integer
 global IntroStarsScale as float[5]
 
-LoadImage ( 205, "\media\images\story\MarsBG.png" )
 global EndingEarthBGSprite as integer
-LoadImage ( 206, "\media\images\story\Earth.png" )
 global EndingEarthSprite as integer
-LoadImage ( 207, "\media\images\story\Shuttle2.png" )
 global EndingShuttleSprite as integer
-LoadImage ( 208, "\media\images\story\Stars.png" )
 global EndingStarsSprite as integer[5]
-LoadImage ( 209, "\media\images\story\Asteroid.png" )
 global EndingAsteroidSprite as integer
-LoadImage ( 210, "\media\images\story\Explosion.png" )
 global EndingExplosionSprite as integer
 
 global EndingAnimationStep as integer
@@ -575,11 +576,9 @@ global EndingAsteroidScreenY as integer
 global EndingExplosionScale as float
 global EndingExplosionAlpha as integer
 
-LoadImage ( 42, "\media\images\backgrounds\GamePausedBG.png" )
 global GamePausedBG as integer
 global GamePaused as integer
 
-LoadImage ( 63, "\media\images\gui\Bonus.png" )
 global BonusSprite as integer
 global PlayfieldLow as integer
 
@@ -621,12 +620,14 @@ endif
 
 SecretCodeCombined = ( (SecretCode[0]*1000) + (SecretCode[1]*100) + (SecretCode[2]*10) + (SecretCode[3]) )
 
-SetSyncRate( 30, 0 )
-
 global ScreenIsDirty as integer
 ScreenIsDirty = TRUE
 
 global LoadPercentText as integer
+
+global GameQuit as integer
+
+PlayNewMusic(0, 1)
 
 do
 	inc FrameCount, 1
@@ -737,9 +738,10 @@ do
 		print ( "#Combos="+str(NumberOfCombos) )
 	endif
 
-	Render2DFront( )
-	Swap ( )
-	ScreenIsDirty = TRUE
+	if (ScreenIsDirty = TRUE)
+		Sync()
+		ScreenIsDirty = TRUE
+	endif
 
 	if ExitGame = 1
 		exit
