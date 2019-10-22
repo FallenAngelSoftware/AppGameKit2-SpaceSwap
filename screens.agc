@@ -1794,9 +1794,7 @@ function DisplayIntroSceneScreen( )
 		SetSpritePositionByOffset( IntroShuttleSprite, IntroShuttleScreenX, IntroShuttleScreenY )
 		SetSpriteDepth ( IntroShuttleSprite, 3 )
 
-		IntroAnimationStep = 0
-
-		PlaySoundEffect(3)
+		IntroAnimationStep = -1
 
 		DelayAllUserInput = 20
 
@@ -1807,12 +1805,23 @@ function DisplayIntroSceneScreen( )
 		if (IntroStarsScale[starIndex] < 0)
 			IntroStarsScale[starIndex] = 2
 		else
-			dec IntroStarsScale[starIndex], .05 * (30 / roundedFPS)
+			if (30 / roundedFPS < 1)
+				dec IntroStarsScale[starIndex], .05
+			else
+				dec IntroStarsScale[starIndex], .05 * (30 / roundedFPS)
+			endif
 		endif
 		SetSpriteScaleByOffset( IntroStarsSprite[starIndex], IntroStarsScale[starIndex], IntroStarsScale[starIndex] )
 	next starIndex
 
-	if (IntroAnimationStep = 0)
+	if (IntroAnimationStep = -1)
+		if ( (30 / roundedFPS) < 1 )
+		
+		else
+			PlaySoundEffect(3)
+			IntroAnimationStep = 0
+		endif
+	elseif (IntroAnimationStep = 0)
 		if (IntroShuttleScale < 1)
 			inc IntroShuttleScale, .01 * (30 / roundedFPS)
 			SetSpriteScaleByOffset( IntroShuttleSprite, IntroShuttleScale, IntroShuttleScale )
@@ -1948,10 +1957,8 @@ function DisplayEndingSceneScreen( )
 		SetSpriteColorAlpha( EndingExplosionSprite, EndingExplosionAlpha )
 		SetSpriteDepth ( EndingExplosionSprite, 2 )
 
-		EndingAnimationStep = 0
+		EndingAnimationStep = -1
 
-		PlaySoundEffect(3)
-		
 		DelayAllUserInput = 50
 
 		ScreenIsDirty = TRUE
@@ -1961,12 +1968,23 @@ function DisplayEndingSceneScreen( )
 		if (EndingStarsScale[starIndex] < 0)
 			EndingStarsScale[starIndex] = 2
 		else
-			dec EndingStarsScale[starIndex], .05 * (30 / roundedFPS)
+			if (30 / roundedFPS < 1)
+				dec EndingStarsScale[starIndex], .05
+			else
+				dec EndingStarsScale[starIndex], .05 * (30 / roundedFPS)
+			endif
 		endif
 		SetSpriteScaleByOffset( EndingStarsSprite[starIndex], EndingStarsScale[starIndex], EndingStarsScale[starIndex] )
 	next starIndex
 
-	if (EndingAnimationStep = 0)
+	if (EndingAnimationStep = -1)
+		if ( (30 / roundedFPS) < 1 )
+		
+		else
+			PlaySoundEffect(3)
+			EndingAnimationStep = 0
+		endif
+	elseif (EndingAnimationStep = 0)
 		if (EndingShuttleScale < 1)
 			inc EndingShuttleScale, .01 * (30 / roundedFPS)
 			SetSpriteScaleByOffset( EndingShuttleSprite, EndingShuttleScale, EndingShuttleScale )

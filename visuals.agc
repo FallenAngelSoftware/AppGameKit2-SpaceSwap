@@ -161,13 +161,6 @@ function LoadAboutScreenTexts ( )
 	AboutTexts    [ATindex] = "Lead Graphic Artist:"
 	AboutTextsBlue[ATindex] = 0
 	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Support Graphic Artist:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
 	AboutTexts    [ATindex] = "''Oshi Bobo''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
@@ -175,6 +168,13 @@ function LoadAboutScreenTexts ( )
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 	AboutTexts    [ATindex] = "(For Hire Graphic Artist)"
+	AboutTextsBlue[ATindex] = 255
+	inc ATindex, 1
+
+	AboutTexts    [ATindex] = "Support Graphic Artist:"
+	AboutTextsBlue[ATindex] = 0
+	inc ATindex, 1
+	AboutTexts    [ATindex] = "''The Fallen Angel''"
 	AboutTextsBlue[ATindex] = 255
 	inc ATindex, 1
 
