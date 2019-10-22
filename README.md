@@ -1,7 +1,7 @@
 # AppGameKit2-SpaceSwap
 (Builds & runs on both AppGameKit Classic and Studio)
 
-100% FREE Cross-Platform Open-Source AppGameKit Classic Video Game!
+100% FREE Cross-Platform Open-Source AppGameKit Video Game!
 
 Official Space Swap 110% Webpage URL:
 http://fallenangelsoftware.com/NightRider_Engine.html
