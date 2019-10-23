@@ -780,7 +780,7 @@ function RunGameplayCore()
 					if (PlayfieldOffsetY > 22)	
 						for indexX = 0 to 5
 							if (Playfield[indexX, 0] > 0)
-								GameOverTimer = 100
+								GameOverTimer = -100
 								PlaySoundEffect(10)
 							endif
 						next indexX

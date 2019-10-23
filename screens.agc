@@ -14,6 +14,8 @@ offset as integer
 		inc offset, 10
 	endif
 
+	LoadImage ( 10, "\media\images\backgrounds\TitleBG.png" )
+	LoadImage ( 20, "\media\images\backgrounds\TitleBlurBG.png" )
 	TitleBG = CreateSprite ( 10+offset )
 
 	SetSpriteOffset( TitleBG, (GetSpriteWidth(TitleBG)/2) , (GetSpriteHeight(TitleBG)/2) ) 
@@ -44,7 +46,7 @@ function ApplyScreenFadeTransition ( )
 			inc ScreenFadeTransparency, 85
 			
 			if (ScreenFadeTransparency = 255-85) then ScreenFadeTransparency = 254
-		elseif FadingToBlackCompleted = FALSE //ScreenFadeTransparency = 254
+		elseif FadingToBlackCompleted = FALSE
 			ScreenFadeTransparency = 255
 			FadingToBlackCompleted = TRUE
 		elseif (ScreenFadeTransparency = 255)
@@ -60,17 +62,18 @@ function ApplyScreenFadeTransition ( )
 			
 			DeleteAllSprites()
 			
+			DeleteImage(10)
+			DeleteImage(20)
+			
 			FadingBlackBG = CreateSprite ( 1 )
 			SetSpriteDepth ( FadingBlackBG, 1 )
 			SetSpriteOffset( FadingBlackBG, (GetSpriteWidth(FadingBlackBG)/2) , (GetSpriteHeight(FadingBlackBG)/2) ) 
 			SetSpritePositionByOffset( FadingBlackBG, ScreenWidth/2, ScreenHeight/2 )
 			SetSpriteTransparency( FadingBlackBG, 1 )
 
-			LoadSelectedBackground()
-
 			if (ScreenToDisplay <> AboutScreen and ScreenToDisplay <> IntroSceneScreen and ScreenToDisplay <> EndingSceneScreen)
 				LoadInterfaceSprites()
-				PreRenderButtonsWithTexts()
+				if (ScreenToDisplay <> PlayingScreen) then PreRenderButtonsWithTexts()
 			endif
 		endif
 		
@@ -80,7 +83,6 @@ function ApplyScreenFadeTransition ( )
 	if (SecretCodeCombined = 2777 and ScreenIsDirty = TRUE and ScreenFadeStatus = FadingIdle)
 		SetSpriteColorAlpha( FadingBlackBG, 200 )
 	endif
-
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
@@ -243,7 +245,8 @@ endfunction
 function DisplayTitleScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 		SaveOptionsAndHighScores()
-		
+
+		LoadSelectedBackground()		
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		if MusicVolume > 0 or EffectsVolume > 0
@@ -382,6 +385,7 @@ function DisplayOptionsScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 		ClearScreenWithColor ( 0, 0, 0 )
 
+		LoadSelectedBackground()
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "''O P T I O N S''", 999, 30, 255, 255, 0, 255, 0, 0, 0, 1, ScreenWidth/2, 20-5, 3)
@@ -810,6 +814,7 @@ function DisplayHowToPlayScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 		ClearScreenWithColor ( 0, 0, 0 )
 
+		LoadSelectedBackground()
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "''H O W   T O   P L A Y''", 999, 30, 255, 255, 0, 255, 0, 0, 0, 1, ScreenWidth/2, 20-5, 3)
@@ -881,6 +886,7 @@ function DisplayHighScoresScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 		ClearScreenWithColor ( 0, 0, 0 )
 
+		LoadSelectedBackground()
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "''H I G H   S C O R E S''", 999, 30, 255, 255, 0, 255, 0, 0, 0, 1, ScreenWidth/2, 20-5, 3)
@@ -1032,6 +1038,7 @@ function DisplayAboutScreen( )
 
 		ClearScreenWithColor ( 0, 0, 0 )
 
+		LoadSelectedBackground()
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		NextScreenToDisplay = TitleScreen
@@ -1107,6 +1114,7 @@ function DisplayMusicPlayerScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 		ClearScreenWithColor ( 0, 0, 0 )
 
+		LoadSelectedBackground()
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "''M U S I C   S C R E E N''", 999, 30, 255, 255, 0, 255, 0, 0, 0, 1, ScreenWidth/2, 20-5, 3)
@@ -1213,34 +1221,40 @@ function DisplayPlayingScreen( )
 
 		ClearScreenWithColor ( 0, 0, 0 )
 
+		LoadSelectedBackground()
 		SetSpriteTransparency( TitleBG, 0 ) 
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 		SetSpriteDepth ( TitleBG, 5 )
 		
+		LoadImage ( 36, "\media\images\playing\BoardNewerTop.png" )
 		PlayfieldTopSprite = CreateSprite ( 36 )
 		SetSpriteTransparency( PlayfieldTopSprite, 0 ) 
 		SetSpriteOffset( PlayfieldTopSprite, (GetSpriteWidth(PlayfieldTopSprite)/2) , (GetSpriteHeight(PlayfieldTopSprite)/2) ) 
 		SetSpritePositionByOffset( PlayfieldTopSprite, (ScreenWidth/2), 19 )
 		SetSpriteDepth ( PlayfieldTopSprite, 3 )
 
+		LoadImage ( 37, "\media\images\playing\BoardNewerRight.png" )
 		PlayfieldRightSprite = CreateSprite ( 37 )
 		SetSpriteTransparency( PlayfieldRightSprite, 0 ) 
 		SetSpriteOffset( PlayfieldRightSprite, (GetSpriteWidth(PlayfieldRightSprite)/2) , (GetSpriteHeight(PlayfieldRightSprite)/2) ) 
 		SetSpritePositionByOffset( PlayfieldRightSprite, (ScreenWidth-22), (ScreenHeight/2) )
 		SetSpriteDepth ( PlayfieldRightSprite, 3 )
 
+		LoadImage ( 38, "\media\images\playing\BoardNewerBottom.png" )
 		PlayfieldBottomSprite = CreateSprite ( 38 )
 		SetSpriteTransparency( PlayfieldBottomSprite, 0 ) 
 		SetSpriteOffset( PlayfieldBottomSprite, (GetSpriteWidth(PlayfieldBottomSprite)/2) , (GetSpriteHeight(PlayfieldBottomSprite)/2) ) 
 		SetSpritePositionByOffset( PlayfieldBottomSprite, (ScreenWidth/2), (ScreenHeight-19) )
 		SetSpriteDepth ( PlayfieldBottomSprite, 3 )
 
+		LoadImage ( 39, "\media\images\playing\BoardNewerLeft.png" )
 		PlayfieldLeftSprite = CreateSprite ( 39 )
 		SetSpriteTransparency( PlayfieldLeftSprite, 0 ) 
 		SetSpriteOffset( PlayfieldLeftSprite, (GetSpriteWidth(PlayfieldLeftSprite)/2) , (GetSpriteHeight(PlayfieldLeftSprite)/2) ) 
 		SetSpritePositionByOffset( PlayfieldLeftSprite, (22), (ScreenHeight/2) )
 		SetSpriteDepth ( PlayfieldLeftSprite, 3 )
 
+		LoadImage ( 51, "\media\images\playing\BoxRed.png" )
 		for index = 0 to 78
 			BoxRedSprite[index] = CreateSprite ( 51 )
 			if (index > 1) then SetSpriteVisible ( BoxRedSprite[index], 0 )
@@ -1250,6 +1264,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxRedSprite[index], 5 )
 		next index
 
+		LoadImage ( 52, "\media\images\playing\BoxOrange.png" )
 		for index = 0 to 78
 			BoxOrangeSprite[index] = CreateSprite ( 52 )
 			if (index > 1) then SetSpriteVisible ( BoxOrangeSprite[index], 0 )
@@ -1259,6 +1274,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxOrangeSprite[index], 5 )
 		next index
 
+		LoadImage ( 53, "\media\images\playing\BoxYellow.png" )
 		for index = 0 to 78
 			BoxYellowSprite[index] = CreateSprite ( 53 )
 			if (index > 1) then SetSpriteVisible ( BoxYellowSprite[index], 0 )
@@ -1268,6 +1284,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxYellowSprite[index], 5 )
 		next index
 
+		LoadImage ( 54, "\media\images\playing\BoxGreen.png" )
 		for index = 0 to 78
 			BoxGreenSprite[index] = CreateSprite ( 54 )
 			if (index > 1) then SetSpriteVisible ( BoxGreenSprite[index], 0 )
@@ -1277,6 +1294,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxGreenSprite[index], 5 )
 		next index
 
+		LoadImage ( 55, "\media\images\playing\BoxBlue.png" )
 		for index = 0 to 78
 			BoxBlueSprite[index] = CreateSprite ( 55 )
 			if (index > 1) then SetSpriteVisible ( BoxBlueSprite[index], 0 )
@@ -1286,6 +1304,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxBlueSprite[index], 5 )
 		next index
 
+		LoadImage ( 56, "\media\images\playing\BoxPurple.png" )
 		for index = 0 to 78
 			BoxPurpleSprite[index] = CreateSprite ( 56 )
 			if (index > 1) then SetSpriteVisible ( BoxPurpleSprite[index], 0 )
@@ -1295,6 +1314,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxPurpleSprite[index], 5 )
 		next index
 
+		LoadImage ( 59, "\media\images\playing\BoxWhite.png" )
 		for index = 0 to 78
 			BoxWhiteSprite[index] = CreateSprite ( 59 )
 			SetSpriteVisible ( BoxWhiteSprite[index], 0 )
@@ -1303,6 +1323,7 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxWhiteSprite[index], 5 )
 		next index
 
+		LoadImage ( 58, "\media\images\playing\BoxBlack.png" )
 		for index = 0 to 5
 			BoxBlackSprite[index] = CreateSprite ( 58 )
 			SetSpriteColorAlpha( BoxBlackSprite[index], 160 )
@@ -1311,11 +1332,13 @@ function DisplayPlayingScreen( )
 			SetSpriteDepth ( BoxBlackSprite[index], 4 )
 		next index
 
+		LoadImage ( 57, "\media\images\playing\Selector.png" )
 		SelectorSprite = CreateSprite ( 57 )
 		SetSpriteOffset( SelectorSprite, (GetSpriteWidth(SelectorSprite)/2) , (GetSpriteHeight(SelectorSprite)/2) ) 
 		SetSpritePositionByOffset( SelectorSprite, -9999, -9999 )
 		SetSpriteDepth ( SelectorSprite, 3 )
 
+		LoadImage ( 75, "\media\images\backgrounds\GameOver.png" )
 		GameOverSprite = CreateSprite ( 75 )
 		SetSpriteOffset( GameOverSprite, (GetSpriteWidth(GameOverSprite)/2) , (GetSpriteHeight(GameOverSprite)/2) ) 
 		SetSpritePositionByOffset( GameOverSprite, (ScreenWidth/2), (ScreenHeight/2) ) rem -9999, -9999 )
@@ -1367,7 +1390,6 @@ function DisplayPlayingScreen( )
 		CreateIcon( 4, (ScreenWidth-18-2), 18+2 )
 
 		CreateIcon( 5, 360-18-2, (ScreenHeight-18-2) )
-
 	endif
 
 	if (TimeFreezeTimer > 1)
@@ -1462,6 +1484,25 @@ function DisplayPlayingScreen( )
 
 		DeleteImage(42)
 		DeleteImage(63)
+		
+		DeleteImage(75)
+		
+		DeleteImage(51)
+		DeleteImage(52)
+		DeleteImage(53)
+		DeleteImage(54)
+		DeleteImage(55)
+		DeleteImage(56)
+		
+		DeleteImage(57)
+		
+		DeleteImage(58)
+		DeleteImage(59)
+		
+		DeleteImage(36)
+		DeleteImage(37)
+		DeleteImage(38)
+		DeleteImage(39)
 
 		if (GameIsPlaying = TRUE and GameQuit = FALSE)
 			CheckPlayerForHighScore()
@@ -1496,6 +1537,7 @@ function DisplayNewHighScoreNameInputScreen ( )
 
 		PreRenderCharacterIconTexts()
 
+		LoadSelectedBackground()		
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "''N E W   H I G H   S C O R E''", 999, 28, 255, 255, 0, 255, 0, 0, 0, 1, ScreenWidth/2, 20-5, 3)
@@ -1620,6 +1662,7 @@ function DisplayNewHighScoreNameInputAndroidScreen ( )
 
 		PreRenderCharacterIconTexts()
 
+		LoadSelectedBackground()
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 
 		NameInputCharSpriteChar = 999

@@ -11,7 +11,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% v1.1.3
+                                     Retail1 110% v1.1.4
                                         
 ---------------------------------------------------------------------------------------------------     
 
@@ -33,9 +33,9 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.1.3''"
+GameVersion = "''Retail1 110% - Turbo! - v1.1.4''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_1_3.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_1_4.cfg"
 
 #option_explicit
 SetErrorMode(2)
@@ -82,7 +82,7 @@ else
 	Platform = Web
 	SetSyncRate( 30, 1 )
 //	SetVSync( 1 ) 
-	SetScissor( 0, 0, ScreenWidth, ScreenHeight )
+	SetScissor( 0, 1, ScreenWidth, ScreenHeight )
 	OnMobile = FALSE
 	ShowCursor = TRUE
 endif
@@ -92,7 +92,7 @@ if (GetDeviceBaseName() = "windows")
 	SetSyncRate( 30, 1 )
 elseif (GetDeviceBaseName() = "linux")
 	Platform = Linux
-	SetSyncRate( 30, 1 )
+	SetSyncRate( 30, 0 ) rem 30, 1 )
 endif
 
 global GameUnlocked as integer
@@ -118,7 +118,6 @@ global FingerPlayfieldY as integer
 global GameIsPlaying as integer
 GameIsPlaying = FALSE
 
-LoadImage ( 75, "\media\images\backgrounds\GameOver.png" )
 global GameOverTimer as integer
 
 global GameOverSprite as integer
@@ -193,11 +192,7 @@ global CurrentMinTextIndex = 1
 
 global AppGameKitLogo as integer
 
-LoadImage ( 10, "\media\images\backgrounds\TitleBG.png" )
-LoadImage ( 20, "\media\images\backgrounds\TitleBlurBG.png" )
 global TitleBG as integer
-
-LoadSelectedBackground()
 
 global SixteenBitSoftLogo as integer
 
@@ -318,8 +313,6 @@ LoadImage ( 303, "\media\images\logos\ReviewGooglePlayLogo.png" )
 LoadImage ( 304, "\media\images\gui\Exit.png" )
 LoadImage ( 305, "\media\images\gui\Pause.png" )
 LoadImage ( 306, "\media\images\gui\Play.png" )
-LoadImage ( 307, "\media\images\logos\OptionsBanner.png" )
-LoadImage ( 308, "\media\images\logos\OptionsBannerAndroid.png" )
 
 global IconIndex as integer[100]
 global IconSprite as integer[100]
@@ -446,29 +439,22 @@ global PlayfieldBackup as integer[6, 13]
 global PlayfieldColoredBoxIndex as integer[6, 13]
 global BoxRedSprite as integer[82]
 global BoxRedUsed as integer
-LoadImage ( 51, "\media\images\playing\BoxRed.png" )
 global BoxOrangeSprite as integer[82]
 global BoxOrangeUsed as integer
-LoadImage ( 52, "\media\images\playing\BoxOrange.png" )
 global BoxYellowSprite as integer[82]
 global BoxYellowUsed as integer
-LoadImage ( 53, "\media\images\playing\BoxYellow.png" )
 global BoxGreenSprite as integer[82]
 global BoxGreenUsed as integer
-LoadImage ( 54, "\media\images\playing\BoxGreen.png" )
 global BoxBlueSprite as integer[82]
 global BoxBlueUsed as integer
-LoadImage ( 55, "\media\images\playing\BoxBlue.png" )
 global BoxPurpleSprite as integer[82]
 global BoxPurpleUsed as integer
-LoadImage ( 56, "\media\images\playing\BoxPurple.png" )
 
 global SelectorSprite as integer
 global PlayerScreenX as integer
 global PlayerScreenY as integer
 global PlayerPlayfieldX as integer
 global PlayerPlayfieldY as integer
-LoadImage ( 57, "\media\images\playing\Selector.png" )
 
 global PlayfieldOffsetY as integer
 global PlayfieldOffsetYDelay as integer
@@ -481,9 +467,7 @@ PlayfieldOffsetYDelayTime[4] = 1
 PlayfieldOffsetYDelayTime[5] = 2
 
 global BoxBlackSprite as integer[6]
-LoadImage ( 58, "\media\images\playing\BoxBlack.png" )
 
-LoadImage ( 59, "\media\images\playing\BoxWhite.png" )
 global BoxWhiteSprite as integer[82]
 global BoxWhiteUsed as integer
 
@@ -531,16 +515,9 @@ LevelAdvancePieceCount[5] = 45
 global StagingScore as integer
 global StagingLevelAdvance as integer
 
-LoadImage ( 40, "\media\images\playing\BoardNewer.png" )
-global PlayfieldSprite as integer
-
-LoadImage ( 36, "\media\images\playing\BoardNewerTop.png" )
 global PlayfieldTopSprite as integer
-LoadImage ( 37, "\media\images\playing\BoardNewerRight.png" )
 global PlayfieldRightSprite as integer
-LoadImage ( 38, "\media\images\playing\BoardNewerBottom.png" )
 global PlayfieldBottomSprite as integer
-LoadImage ( 39, "\media\images\playing\BoardNewerLeft.png" )
 global PlayfieldLeftSprite as integer
 
 global IntroEarthBGSprite as integer

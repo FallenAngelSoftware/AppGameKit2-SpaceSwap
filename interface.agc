@@ -80,18 +80,6 @@ function LoadInterfaceSprites()
 	SetSpritePositionByOffset( Icon[6], -9999, -9999 )
 	SetSpriteVisible( Icon[6], 1 )
 
-	Icon[7] = CreateSprite ( 307 )
-	SetSpriteDepth ( Icon[7], 2 )
-	SetSpriteOffset( Icon[7], (GetSpriteWidth(Icon[7])/2) , (GetSpriteHeight(Icon[7])/2) ) 
-	SetSpritePositionByOffset( Icon[7], -9999, -9999 )
-	SetSpriteVisible( Icon[7], 1 )
-
-	Icon[8] = CreateSprite ( 308 )
-	SetSpriteDepth ( Icon[8], 2 )
-	SetSpriteOffset( Icon[8], (GetSpriteWidth(Icon[8])/2) , (GetSpriteHeight(Icon[8])/2) ) 
-	SetSpritePositionByOffset( Icon[8], -9999, -9999 )
-	SetSpriteVisible( Icon[8], 1 )
-
 	NameInputCharSprite = CreateSprite ( 130 )
 	SetSpriteDepth ( NameInputCharSprite, 3 )
 	SetSpriteOffset( NameInputCharSprite, (GetSpriteWidth(NameInputCharSprite)/2) , (GetSpriteHeight(NameInputCharSprite)/2) ) 
