@@ -690,6 +690,13 @@ do
 	endif
 
 	if (SecretCodeCombined = 2777 and ScreenIsDirty = TRUE)
+		if (ScreenFadeStatus = FadingIdle)
+			SetSpritePositionByOffset( FadingBlackBG,  -80, -200 )
+			SetSpriteColorAlpha( FadingBlackBG, 200 )
+		else
+			SetSpritePositionByOffset( FadingBlackBG,  ScreenWidth/2, ScreenHeight/2 )
+		endif
+
 		if (PrintColorDir = 0)
 			if (PrintColor > 0)
 				dec PrintColor, 51

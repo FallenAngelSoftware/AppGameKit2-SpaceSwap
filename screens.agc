@@ -33,11 +33,6 @@ function ApplyScreenFadeTransition ( )
 		else
 			ScreenFadeTransparency = 0
 			ScreenFadeStatus = FadingIdle
-
-			if (SecretCodeCombined = 2777 and ScreenIsDirty = TRUE and ScreenFadeStatus = FadingIdle)
-				SetSpritePositionByOffset( FadingBlackBG,  -80, -200 )
-				ScreenFadeTransparency = 255
-			endif
 		endif
 		
 		SetSpriteColorAlpha( FadingBlackBG, ScreenFadeTransparency )
