@@ -1060,7 +1060,7 @@ function DisplayAboutScreen( )
 
 	if AboutScreenOffsetY > (AboutTextsScreenY[NumberOfAboutScreenTexts-1]+10) or MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27
 		ScreenFadeStatus = FadingToBlack
-		if AboutTextsScreenY[NumberOfAboutScreenTexts-1] > -25 then PlaySoundEffect(1)
+		if AboutScreenOffsetY < (AboutTextsScreenY[NumberOfAboutScreenTexts-1]+10) then PlaySoundEffect(1)
 		SetDelayAllUserInput()
 	endif
 
@@ -1070,11 +1070,7 @@ function DisplayAboutScreen( )
 			SetViewOffset( 0, AboutScreenOffsetY )
 			inc AboutScreenOffsetY, .02
 			inc AboutScreenBackgroundY, .02
-//			if (WonGame = FALSE)
-				SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
-//			elseif (WonGame = TRUE)
-//				SetSpritePositionByOffset( StoryImage, ScreenWidth/2, AboutScreenBackgroundY )
-//			endif
+			SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
 		next index
 	endif
 
@@ -1208,7 +1204,7 @@ function DisplayPlayingScreen( )
 	index as integer
 	
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
-		SetSyncRate( PlayingSyncRate, 0 )
+		if (MaximumFrameRate = 0) then SetSyncRate( PlayingSyncRate, 0 )
 
 		ClearScreenWithColor ( 0, 0, 0 )
 
@@ -1471,7 +1467,7 @@ function DisplayPlayingScreen( )
 	if (GameOverTimer > -1) then SetSpriteVisible( GameOverSprite, 1 )
 
 	if FadingToBlackCompleted = TRUE
-		SetSyncRate( 30, 0 )
+		if (MaximumFrameRate = 0) then SetSyncRate( 30, 0 )
 
 		DeleteImage(42)
 		DeleteImage(63)

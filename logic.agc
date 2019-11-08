@@ -127,6 +127,8 @@ endfunction
 //------------------------------------------------------------------------------------------------------------
 
 function DrawPlayfield()
+//	exitfunction
+	
 	index as integer
 	for index = BoxRedUsed to 2 step -1
 		SetSpriteVisible ( BoxRedSprite[index], 0 ) 
@@ -566,7 +568,7 @@ function AddScoreAndLevelAdvance()
 	inc LevelAdvancePieceCounter, StagingLevelAdvance
 	StagingLevelAdvance = 0
 	
-	if (LevelAdvancePieceCounter > LevelAdvancePieceCount[GameMode])
+	if (MaximumFrameRate = 0 and LevelAdvancePieceCounter > LevelAdvancePieceCount[GameMode])
 		inc Level, 1
 		if (Level < 9 or GameMode = ChildNeverEndMode or GameMode = TeenNeverEndMode or GameMode = AdultNeverEndMode)
 			SetText ( LevelText, str(Level) )
@@ -762,25 +764,57 @@ function RunGameplayCore()
 					dec PlayerSwapPiecesScreenY, 1
 
 					if (PlayerSwapPieceOneScreenX <> -1)
-						if (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 1 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 11)
-							SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
-						elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 2 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 12)
-							SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
-						elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 3 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 13)
-							SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
-						elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 4 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 14)
-							SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
-						elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 5 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 15)
-							SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
-						elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 6 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 16)
-							SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
-						endif
+						select Playfield[PlayerPlayfieldX, PlayerPlayfieldY]
+							case 1:
+								SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 11:
+								SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 2:
+								SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 12:
+								SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 3:
+								SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 13:
+								SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 4:
+								SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 14:
+								SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 5:
+								SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 16:
+								SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 6:
+								SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+							case 16:
+								SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
+							endcase
+						endselect
 					endif
 										
 					if (PlayfieldOffsetY > 22)	
 						for indexX = 0 to 5
 							if (Playfield[indexX, 0] > 0)
-								GameOverTimer = 100
+								if (MaximumFrameRate = 0)
+									GameOverTimer = 100
+								else
+									topX as integer
+									for topX = 0 to 5
+										Playfield[indexX, 0] = 0
+									next topX
+								endif
 								PlaySoundEffect(10)
 							endif
 						next indexX
@@ -836,60 +870,134 @@ function RunGameplayCore()
 				if (PlayerMovePlayfieldY <> -1)
 					PlayerPlayfieldY = PlayerMovePlayfieldY
 				endif
-				
-				if (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 1 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 11)
-					SetSpriteScaleByOffset( BoxRedSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
-					SetSpriteDepth ( BoxRedSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 2 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 12)
-					SetSpriteScaleByOffset( BoxOrangeSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
-					SetSpriteDepth ( BoxOrangeSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 3 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 13)
-					SetSpriteScaleByOffset( BoxYellowSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
-					SetSpriteDepth ( BoxYellowSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 4 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 14)
-					SetSpriteScaleByOffset( BoxGreenSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
-					SetSpriteDepth ( BoxGreenSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 5 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 15)
-					SetSpriteScaleByOffset( BoxBlueSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
-					SetSpriteDepth ( BoxBlueSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 6 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 16)
-					SetSpriteScaleByOffset( BoxPurpleSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
-					SetSpriteDepth ( BoxPurpleSprite[ 0 ], 3 )
-				endif
+						
+				select Playfield[PlayerPlayfieldX, PlayerPlayfieldY]
+					case 1:
+						SetSpriteScaleByOffset( BoxRedSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxRedSprite[ 0 ], 3 )
+					endcase
+					case 11:
+						SetSpriteScaleByOffset( BoxRedSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxRedSprite[ 0 ], 3 )
+					endcase
+					case 2:
+						SetSpriteScaleByOffset( BoxOrangeSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxOrangeSprite[ 0 ], 3 )
+					endcase
+					case 12:
+						SetSpriteScaleByOffset( BoxOrangeSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxOrangeSprite[ 0 ], 3 )
+					endcase
+					case 3:
+						SetSpriteScaleByOffset( BoxYellowSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxYellowSprite[ 0 ], 3 )
+					endcase
+					case 13:
+						SetSpriteScaleByOffset( BoxYellowSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxYellowSprite[ 0 ], 3 )
+					endcase
+					case 4:
+						SetSpriteScaleByOffset( BoxGreenSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxGreenSprite[ 0 ], 3 )
+					endcase
+					case 14:
+						SetSpriteScaleByOffset( BoxGreenSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxGreenSprite[ 0 ], 3 )
+					endcase
+					case 5:
+						SetSpriteScaleByOffset( BoxBlueSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxBlueSprite[ 0 ], 3 )
+					endcase
+					case 15:
+						SetSpriteScaleByOffset( BoxBlueSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxBlueSprite[ 0 ], 3 )
+					endcase
+					case 6:
+						SetSpriteScaleByOffset( BoxPurpleSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxPurpleSprite[ 0 ], 3 )
+					endcase
+					case 16:
+						SetSpriteScaleByOffset( BoxPurpleSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerScreenX-22, PlayerScreenY-PlayfieldOffsetY )
+						SetSpriteDepth ( BoxPurpleSprite[ 0 ], 3 )
+					endcase
+				endselect
 
 				PlayerSwapPieceOneScreenX = MouseScreenX
-			elseif (PlayerPlayfieldX = PlayerMovePlayfieldX and PlayerPlayfieldY = PlayerMovePlayfieldY and PlayerSwapMovement = -1 and MouseButtonLeft = ON)
-				if (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 1 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 11)
-					SetSpriteScaleByOffset( BoxRedSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxRedSprite[ 0 ], MouseScreenX, PlayerScreenY )
-					SetSpriteDepth ( BoxRedSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 2 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 12)
-					SetSpriteScaleByOffset( BoxOrangeSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], MouseScreenX, PlayerScreenY )
-					SetSpriteDepth ( BoxOrangeSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 3 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 13)
-					SetSpriteScaleByOffset( BoxYellowSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxYellowSprite[ 0 ], MouseScreenX, PlayerScreenY )
-					SetSpriteDepth ( BoxYellowSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 4 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 14)
-					SetSpriteScaleByOffset( BoxGreenSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxGreenSprite[ 0 ], MouseScreenX, PlayerScreenY )
-					SetSpriteDepth ( BoxGreenSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 5 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 15)
-					SetSpriteScaleByOffset( BoxBlueSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxBlueSprite[ 0 ], MouseScreenX, PlayerScreenY )
-					SetSpriteDepth ( BoxBlueSprite[ 0 ], 3 )
-				elseif (Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 6 or Playfield[PlayerPlayfieldX, PlayerPlayfieldY] = 16)
-					SetSpriteScaleByOffset( BoxPurpleSprite[ 0 ], 1.5, 1.5 )
-					SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], MouseScreenX, PlayerScreenY )
-					SetSpriteDepth ( BoxPurpleSprite[ 0 ], 3 )
-				endif
+			elseif (PlayerPlayfieldX = PlayerMovePlayfieldX and PlayerPlayfieldY = PlayerMovePlayfieldY and PlayerSwapMovement = -1 and MouseButtonLeft = ON)				
+				select Playfield[PlayerPlayfieldX, PlayerPlayfieldY]
+					case 1:
+						SetSpriteScaleByOffset( BoxRedSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxRedSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxRedSprite[ 0 ], 3 )
+					endcase
+					case 11:
+						SetSpriteScaleByOffset( BoxRedSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxRedSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxRedSprite[ 0 ], 3 )
+					endcase
+					case 2:
+						SetSpriteScaleByOffset( BoxOrangeSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxOrangeSprite[ 0 ], 3 )
+					endcase
+					case 12:
+						SetSpriteScaleByOffset( BoxOrangeSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxOrangeSprite[ 0 ], 3 )
+					endcase
+					case 3:
+						SetSpriteScaleByOffset( BoxYellowSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxYellowSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxYellowSprite[ 0 ], 3 )
+					endcase
+					case 13:
+						SetSpriteScaleByOffset( BoxYellowSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxYellowSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxYellowSprite[ 0 ], 3 )
+					endcase
+					case 4:
+						SetSpriteScaleByOffset( BoxGreenSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxGreenSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxGreenSprite[ 0 ], 3 )
+					endcase
+					case 14:
+						SetSpriteScaleByOffset( BoxGreenSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxGreenSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxGreenSprite[ 0 ], 3 )
+					endcase
+					case 5:
+						SetSpriteScaleByOffset( BoxBlueSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxBlueSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxBlueSprite[ 0 ], 3 )
+					endcase
+					case 15:
+						SetSpriteScaleByOffset( BoxBlueSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxBlueSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxBlueSprite[ 0 ], 3 )
+					endcase
+					case 6:
+						SetSpriteScaleByOffset( BoxPurpleSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxPurpleSprite[ 0 ], 3 )
+					endcase
+					case 16:
+						SetSpriteScaleByOffset( BoxPurpleSprite[ 0 ], 1.5, 1.5 )
+						SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], MouseScreenX, PlayerScreenY )
+						SetSpriteDepth ( BoxPurpleSprite[ 0 ], 3 )
+					endcase
+				endselect
 
 				if ( MouseScreenX < (PlayerSwapPieceOneScreenX-22) )
 					if (PlayerPlayfieldX > 0)
@@ -940,35 +1048,49 @@ function RunGameplayCore()
 				if (PlayerSwapMovement < 45)
 					inc PlayerSwapMovement, 10
 
-					if (PlayerSwapDirection = JoyLEFT)
-						if (PlayerSwapPieceOne = 1)
-							SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 2)
-							SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 3)
-							SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 4)
-							SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 5)
-							SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 6)
-							SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						endif
+					if (PlayerSwapDirection = JoyLEFT)						
+						select PlayerSwapPieceOne
+							case 1:
+								SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 2:
+								SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 3:
+								SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 4:
+								SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 5:
+								SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 6:
+								SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerSwapPieceOneScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+						endselect
 
-						if (PlayerSwapPieceTwo = 1)
-							SetSpritePositionByOffset( BoxRedSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 2)
-							SetSpritePositionByOffset( BoxOrangeSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 3)
-							SetSpritePositionByOffset( BoxYellowSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 4)
-							SetSpritePositionByOffset( BoxGreenSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 5)
-							SetSpritePositionByOffset( BoxBlueSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 6)
-							SetSpritePositionByOffset( BoxPurpleSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						endif
-				
+						select PlayerSwapPieceTwo
+							case 1:
+								SetSpritePositionByOffset( BoxRedSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 2:
+								SetSpritePositionByOffset( BoxOrangeSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 3:
+								SetSpritePositionByOffset( BoxYellowSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 4:
+								SetSpritePositionByOffset( BoxGreenSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 5:
+								SetSpritePositionByOffset( BoxBlueSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 6:
+								SetSpritePositionByOffset( BoxPurpleSprite[ 1 ], PlayerSwapPieceTwoScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+						endselect
+						
 						if (PlayerSwapMovement > 44)
 							PlayerSwapMovement = -1
 							Playfield[PlayerSwapOnePlayfieldX, PlayerSwapOnePlayfieldY] = PlayerSwapPieceTwo
@@ -983,33 +1105,47 @@ function RunGameplayCore()
 							CheckForMatches (TRUE)
 						endif
 					elseif (PlayerSwapDirection = JoyRIGHT)
-						if (PlayerSwapPieceOne = 1)
-							SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 2)
-							SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 3)
-							SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 4)
-							SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 5)
-							SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceOne = 6)
-							SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						endif
+						select PlayerSwapPieceOne
+							case 1:
+								SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 2:
+								SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 3:
+								SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 4:
+								SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 5:
+								SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 6:
+								SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+						endselect
 
-						if (PlayerSwapPieceTwo = 1)
-							SetSpritePositionByOffset( BoxRedSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 2)
-							SetSpritePositionByOffset( BoxOrangeSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 3)
-							SetSpritePositionByOffset( BoxYellowSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 4)
-							SetSpritePositionByOffset( BoxGreenSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 5)
-							SetSpritePositionByOffset( BoxBlueSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						elseif (PlayerSwapPieceTwo = 6)
-							SetSpritePositionByOffset( BoxPurpleSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-						endif
+						select PlayerSwapPieceTwo
+							case 1:
+								SetSpritePositionByOffset( BoxRedSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 2:
+								SetSpritePositionByOffset( BoxOrangeSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 3:
+								SetSpritePositionByOffset( BoxYellowSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 4:
+								SetSpritePositionByOffset( BoxGreenSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 5:
+								SetSpritePositionByOffset( BoxBlueSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+							case 6:
+								SetSpritePositionByOffset( BoxPurpleSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+							endcase
+						endselect		
 				
 						if (PlayerSwapMovement > 44)
 							PlayerSwapMovement = -1
@@ -1125,35 +1261,49 @@ function RunGameplayCore()
 			if (PlayerSwapOnePlayfieldX <> -1 and PlayerSwapOnePlayfieldY <> -1)
 				if (PlayerSwapMovement < 45)
 					inc PlayerSwapMovement, 10
-				
-					if (PlayerSwapPieceOne = 1)
-						SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceOne = 2)
-						SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceOne = 3)
-						SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceOne = 4)
-						SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceOne = 5)
-						SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceOne = 6)
-						SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					endif
 
-					if (PlayerSwapPieceTwo = 1)
-						SetSpritePositionByOffset( BoxRedSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceTwo = 2)
-						SetSpritePositionByOffset( BoxOrangeSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceTwo = 3)
-						SetSpritePositionByOffset( BoxYellowSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceTwo = 4)
-						SetSpritePositionByOffset( BoxGreenSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceTwo = 5)
-						SetSpritePositionByOffset( BoxBlueSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					elseif (PlayerSwapPieceTwo = 6)
-						SetSpritePositionByOffset( BoxPurpleSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
-					endif
-				
+					select PlayerSwapPieceOne
+						case 1:
+							SetSpritePositionByOffset( BoxRedSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 2:
+							SetSpritePositionByOffset( BoxOrangeSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 3:
+							SetSpritePositionByOffset( BoxYellowSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 4:
+							SetSpritePositionByOffset( BoxGreenSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 5:
+							SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 6:
+							SetSpritePositionByOffset( BoxPurpleSprite[ 0 ], PlayerSwapPieceOneScreenX+PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+					endselect
+
+					select PlayerSwapPieceTwo
+						case 1:
+							SetSpritePositionByOffset( BoxRedSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 2:
+							SetSpritePositionByOffset( BoxOrangeSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 3:
+							SetSpritePositionByOffset( BoxYellowSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 4:
+							SetSpritePositionByOffset( BoxGreenSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 5:
+							SetSpritePositionByOffset( BoxBlueSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+						case 6:
+							SetSpritePositionByOffset( BoxPurpleSprite[ 1 ], PlayerSwapPieceTwoScreenX-PlayerSwapMovement, PlayerSwapPiecesScreenY )
+						endcase
+					endselect
+
 					if (PlayerSwapMovement > 45)
 						PlayerSwapMovement = -1
 						Playfield[PlayerSwapOnePlayfieldX, PlayerSwapOnePlayfieldY] = PlayerSwapPieceTwo
