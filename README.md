@@ -1,5 +1,5 @@
 # AppGameKit2-SpaceSwap
-(Builds & runs on both AppGameKit Classic and Studio)
+(Builds & runs on both AppGameKit Classic and Studio by commenting out two lines)
 
 100% FREE Cross-Platform Open-Source AppGameKit Video Game!
 
