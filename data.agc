@@ -68,62 +68,139 @@ endfunction
 //------------------------------------------------------------------------------------------------------------
 
 function LoadOptionsAndHighScores ( )
-	index as integer
-	if GetFileExists( DataVersion ) = 0
-	else
-		OpenToRead(1, DataVersion)
-			MusicVolume = readInteger( 1 )
-			EffectsVolume = readInteger( 1 )
-			GameMode = readInteger( 1 )
-			PlayingSyncRate = readInteger( 1 )
-			
+	if (Platform <> Web)
+		index as integer
+		if GetFileExists( DataVersion ) = 0
+		else
+			OpenToRead(1, DataVersion)
+				MusicVolume = readInteger( 1 )
+				EffectsVolume = readInteger( 1 )
+				GameMode = readInteger( 1 )
+				PlayingSyncRate = readInteger( 1 )
+				
+				for index = 0 to 5
+					LevelSkip[index] = ReadInteger( 1 )
+				next index
+
+				for index = 0 to 3
+					SecretCode[index] = readInteger( 1 )
+				next index
+
+				mode as integer
+				rank as integer
+				for mode = 0 to 5
+					for rank = 0 to 9
+						HighScoreName [ mode, rank ] = readString( 1 )
+						HighScoreLevel [ mode, rank ] = ReadInteger( 1 )
+						HighScoreScore [ mode, rank ] = ReadInteger( 1 )
+					next rank
+				next mode
+			CloseFile ( 1 )
+		endif
+	else		
+		currentToken as integer
+		currentToken = 1
+		maxTokens as integer
+		cookieValue as string
+		cookieValue = LoadSharedVariable(HTML5DataVersion+"Data", "No Value")
+		if (cookieValue <> "No Value")
+			maxTokens = CountStringTokens(cookieValue, "*")
+			MusicVolume = Val(  GetStringToken( cookieValue, "*", (currentToken) )  )
+			inc currentToken, 1
+			EffectsVolume = Val(  GetStringToken( cookieValue, "*", (currentToken) )  )
+			inc currentToken, 1
+			GameMode = Val(  GetStringToken( cookieValue, "*", (currentToken) )  )
+			inc currentToken, 1
+			PlayingSyncRate = Val(  GetStringToken( cookieValue, "*", (currentToken) )  )
+			inc currentToken, 1
+
 			for index = 0 to 5
-				LevelSkip[index] = ReadInteger( 1 )
+				LevelSkip[index]= Val(  GetStringToken( cookieValue, "*", (currentToken) )  )
+				inc currentToken, 1
 			next index
 
-			for index = 0 to 4
-				SecretCode[index] = readInteger( 1 )
+			for index = 0 to 3
+				SecretCode[index]= Val(  GetStringToken( cookieValue, "*", (currentToken) )  )
+				inc currentToken, 1
 			next index
 
-			mode as integer
-			rank as integer
+			agk_i as integer
+			agk_i = currentToken
 			for mode = 0 to 5
 				for rank = 0 to 9
-					HighScoreName [ mode, rank ] = readString( 1 )
-					HighScoreLevel [ mode, rank ] = ReadInteger( 1 )
-					HighScoreScore [ mode, rank ] = ReadInteger( 1 )
+					HighScoreName [ mode, rank ] = GetStringToken( cookieValue, "*", (agk_i) )
+					HighScoreLevel [ mode, rank ] = Val(  GetStringToken( cookieValue, "*", (agk_i+1) )  )
+					HighScoreScore [ mode, rank ] = Val(  GetStringToken( cookieValue, "*", (agk_i+2) )  )
+					inc agk_i, 3
 				next rank
 			next mode
-		CloseFile ( 1 )
+		endif
 	endif
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
 
 function SaveOptionsAndHighScores ( )
-	index as integer
-	OpenToWrite( 1 , DataVersion )
-		WriteInteger ( 1, MusicVolume )
-		WriteInteger ( 1, EffectsVolume )
-		WriteInteger ( 1, GameMode )
-		WriteInteger ( 1, PlayingSyncRate )
-  			
+	if (Platform <> Web)
+		index as integer
+		OpenToWrite( 1 , DataVersion )
+			WriteInteger ( 1, MusicVolume )
+			WriteInteger ( 1, EffectsVolume )
+			WriteInteger ( 1, GameMode )
+			WriteInteger ( 1, PlayingSyncRate )
+				
+			for index = 0 to 5
+				WriteInteger ( 1, LevelSkip[index] )
+			next index
+
+			for index = 0 to 3
+				WriteInteger ( 1, SecretCode[index] )
+			next index
+	 
+			mode as integer
+			rank as integer
+			for mode = 0 to 5
+				for rank = 0 to 9
+					WriteString ( 1, HighScoreName [ mode, rank ] )
+					WriteInteger ( 1, HighScoreLevel [ mode, rank ] )
+					WriteInteger ( 1, HighScoreScore [ mode, rank ] )
+				next rank
+			next mode
+		CloseFile ( 1 )
+	else
+		optionsScoresString as String
+		optionsScoresString = ""
+		
+		optionsScoresString = optionsScoresString+str(MusicVolume)
+		optionsScoresString = optionsScoresString+'*'
+		optionsScoresString = optionsScoresString+str(EffectsVolume)
+		optionsScoresString = optionsScoresString+'*'
+		optionsScoresString = optionsScoresString+str(GameMode)
+		optionsScoresString = optionsScoresString+'*'
+		optionsScoresString = optionsScoresString+str(PlayingSyncRate)
+		optionsScoresString = optionsScoresString+'*'
+		
 		for index = 0 to 5
-			WriteInteger ( 1, LevelSkip[index] )
+			optionsScoresString = optionsScoresString+str(LevelSkip[index])
+			optionsScoresString = optionsScoresString+'*'
 		next index
 
-		for index = 0 to 4
-			WriteInteger ( 1, SecretCode[index] )
+		for index = 0 to 3
+			optionsScoresString = optionsScoresString+str(SecretCode[index])
+			optionsScoresString = optionsScoresString+'*'
 		next index
- 
-		mode as integer
-		rank as integer
+		
 		for mode = 0 to 5
 			for rank = 0 to 9
-				WriteString ( 1, HighScoreName [ mode, rank ] )
-				WriteInteger ( 1, HighScoreLevel [ mode, rank ] )
-				WriteInteger ( 1, HighScoreScore [ mode, rank ] )
+				optionsScoresString = optionsScoresString+HighScoreName[mode, rank]
+				optionsScoresString = optionsScoresString+'*'
+				optionsScoresString = optionsScoresString+str(HighScoreLevel[mode, rank])
+				optionsScoresString = optionsScoresString+'*'
+				optionsScoresString = optionsScoresString+str(HighScoreScore[mode, rank])
+				if (mode < 5 or rank < 9) then optionsScoresString = optionsScoresString+'*'
 			next rank
+			
 		next mode
-	CloseFile ( 1 )
+		SaveSharedVariable( HTML5DataVersion+"Data", optionsScoresString )
+	endif
 endfunction

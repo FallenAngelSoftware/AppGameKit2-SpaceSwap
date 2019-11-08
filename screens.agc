@@ -37,6 +37,7 @@ function ApplyScreenFadeTransition ( )
 		
 		SetSpriteColorAlpha( FadingBlackBG, ScreenFadeTransparency )
 	elseif ScreenFadeStatus = FadingToBlack
+		if (ScreenToDisplay = AboutScreen) then SetSpritePositionByOffset( FadingBlackBG, ScreenWidth/2, AboutScreenBackgroundY )
 		if ScreenFadeTransparency < 255-85
 			inc ScreenFadeTransparency, 85
 			
@@ -981,16 +982,21 @@ endfunction
 
 function SetupAboutScreenTexts( )
 	outline as integer
-	outline = FALSE
+	
+	if (WonGame = TRUE)	
+		outline = TRUE
+	else
+		outline = FALSE
+	endif
 
 	startScreenY as integer
 	startScreenY = 640+15
 	AboutTextsScreenY[0] = startScreenY
-	StartIndexOfAboutScreenTexts = CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[0], 999, 17, 255, 255, AboutTextsBlue[0], 255, 0, 0, 0, 1, ScreenWidth/2+100-30, AboutTextsScreenY[0], 3)
+	StartIndexOfAboutScreenTexts = CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[0], 999, 16, 255, 255, AboutTextsBlue[0], 255, 0, 0, 0, 1, ScreenWidth/2+84, AboutTextsScreenY[0], 3)
 	AboutTextVisable[0] = 0
 	inc startScreenY, 25
 	AboutTextsScreenY[1] = startScreenY
-	CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[1], 999, 17, 255, 255, AboutTextsBlue[1], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[1], 3)
+	CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[1], 999, 16, 255, 255, AboutTextsBlue[1], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[1], 3)
 	AboutTextVisable[1] = 0
 
 	index as integer
@@ -1012,15 +1018,19 @@ function SetupAboutScreenTexts( )
 		endif
 
 		AboutTextsScreenY[index] = startScreenY
-
-		if (AboutTexts[index] = "nVidia® GeForce GTX 750TI 2GB GDDR5 GPU")
-			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 16, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
-		elseif (AboutTexts[index] = "nVidia® GeForce GTX 970TT 4GB GDDR5 GPU")
-			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 16, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
-		else
-			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 17, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
-		endif
 		
+		if (AboutTexts[index] = "Hyper-Custom ''JeZxLee'' Pro-Built Desktop")
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 15, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		elseif (AboutTexts[index] = "GIGABYTE® GA-970A-DS3P 2.0 AM3+ Motherboard")
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 13, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		elseif (AboutTexts[index] = "nVidia® GeForce GTX 970TT 4GB GDDR5 GPU")
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 15, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		elseif (AboutTexts[index] = "Western Digital® 1TB HDD Hard Drive(Personal Data)")
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 13, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		else
+			CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[index], 999, 16, 255, 255, AboutTextsBlue[index], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[index], 3)
+		endif
+
 		AboutTextVisable[index] = 0
 	next index
 endfunction
@@ -1041,50 +1051,36 @@ function DisplayAboutScreen( )
 		SetupAboutScreenTexts()
 
 		AboutScreenTextFrameSkip = 0
+		
+		AboutScreenOffsetY = 0
+		AboutScreenBackgroundY = 320
 
 		ScreenIsDirty = TRUE
 	endif
 
-	if AboutTextsScreenY[NumberOfAboutScreenTexts-1] < -25 or MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27
+	if AboutScreenOffsetY > (AboutTextsScreenY[NumberOfAboutScreenTexts-1]+10) or MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27
 		ScreenFadeStatus = FadingToBlack
 		if AboutTextsScreenY[NumberOfAboutScreenTexts-1] > -25 then PlaySoundEffect(1)
 		SetDelayAllUserInput()
 	endif
 
+	index as integer
 	if (ScreenFadeStatus = FadingIdle)
-		index as integer
 		for index = 0 to (NumberOfAboutScreenTexts-1)
-			arrayLength as integer
-			arrayLength = 25
-
-			textX as float
-			textY as float
-			dec AboutTextsScreenY[index], 3
-			indexTwo as integer
-			for indexTwo = 0 to arrayLength
-				if GetTextExists(StartIndexOfAboutScreenTexts+(index*26)+indexTwo)
-					textX = GetTextX(StartIndexOfAboutScreenTexts+(index*26)+indexTwo)
-					textY = GetTextY(StartIndexOfAboutScreenTexts+(index*26)+indexTwo)
-					dec textY, 3
-					if ( AboutTextVisable[index] = 0 and textY < (640+30) )
-						SetTextVisible( (StartIndexOfAboutScreenTexts+(index*26)+indexTwo), 1 )
-						AboutTextVisable[index] = 1
-					elseif ( AboutTextVisable[index] = 1 and textY < (-30) )
-						SetTextVisible( (StartIndexOfAboutScreenTexts+(index*26)+indexTwo), 0 )
-						AboutTextVisable[index] = -1
-					endif						
-
-					if (index > 0)
-						SetTextPosition( StartIndexOfAboutScreenTexts+(index*26)+indexTwo, textX, textY )
-					else
-						SetTextPosition( StartIndexOfAboutScreenTexts+(index*26)+indexTwo, GetTextX(StartIndexOfAboutScreenTexts+(index*26)+indexTwo), textY )
-					endif
-				endif
-			next indexTwo
+			SetViewOffset( 0, AboutScreenOffsetY )
+			inc AboutScreenOffsetY, .02
+			inc AboutScreenBackgroundY, .02
+//			if (WonGame = FALSE)
+				SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
+//			elseif (WonGame = TRUE)
+//				SetSpritePositionByOffset( StoryImage, ScreenWidth/2, AboutScreenBackgroundY )
+//			endif
 		next index
 	endif
 
 	if FadingToBlackCompleted = TRUE
+		SetViewOffset( 0, 0 )
+
 		if (WonGame = TRUE)
 			if (PlayerRankOnGameOver < 10)
 				if (OnMobile = TRUE)

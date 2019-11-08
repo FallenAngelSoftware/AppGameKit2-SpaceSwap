@@ -2,8 +2,10 @@
 
 remstart
 ---------------------------------------------------------------------------------------------------
-                                                              TM
-                                AppGameKit "NightRider" Engine
+                                           JeZxLee's
+                                                                   TM
+                             AppGameKit Classic "NightRider" Engine
+                                        (Version 1.9.1)
              _________                             _________                       
             /   _____/__________    ____  ____    /   _____/_  _  _______  ______TM
             \_____  \\____ \__  \ _/ ___\/ __ \   \_____  \\ \/ \/ /\__  \ \____ \ 
@@ -11,11 +13,11 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% v1.1.4
-                                        
+                                     Retail1 110% - v1.1.7              
+
 ---------------------------------------------------------------------------------------------------     
 
-          Google Android SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
+           Google Android SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
 
 ---------------------------------------------------------------------------------------------------                       
 
@@ -33,9 +35,11 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.1.4''"
+GameVersion = "''Retail1 110% - Turbo! - v1.1.7''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_1_4.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_1_7.cfg"
+global HTML5DataVersion as String
+HTML5DataVersion = "SS-v1_1_7-"
 
 #option_explicit
 SetErrorMode(2)
@@ -81,7 +85,6 @@ if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 else
 	Platform = Web
 	SetSyncRate( 30, 1 )
-//	SetVSync( 1 ) 
 	SetScissor( 0, 1, ScreenWidth, ScreenHeight )
 	OnMobile = FALSE
 	ShowCursor = TRUE
@@ -92,7 +95,7 @@ if (GetDeviceBaseName() = "windows")
 	SetSyncRate( 30, 1 )
 elseif (GetDeviceBaseName() = "linux")
 	Platform = Linux
-	SetSyncRate( 30, 0 ) rem 30, 1 )
+	SetSyncRate( 30, 0 )
 endif
 
 global GameUnlocked as integer
@@ -385,7 +388,7 @@ global HighScoreName as string[5, 10]
 global HighScoreLevel as integer[5, 10]
 global HighScoreScore as integer[5, 10]
 
-global LevelSkip as integer[5]
+global LevelSkip as integer[6]
 LevelSkip[0] = 1
 LevelSkip[1] = 1
 LevelSkip[2] = 1
@@ -414,6 +417,9 @@ global NumberOfAboutScreenTexts
 NumberOfAboutScreenTexts = ATindex
 global StartIndexOfAboutScreenTexts
 StartIndexOfAboutScreenTexts = 0
+
+global AboutScreenOffsetY as float
+global AboutScreenBackgroundY as float
 
 global AboutScreenTextFrameSkip as integer
 

@@ -7,523 +7,200 @@ endfunction
 
 //------------------------------------------------------------------------------------------------------------
 
+function AddAboutScreenText ( text as string, blue as integer )
+	AboutTexts    [ATindex] = text
+	AboutTextsBlue[ATindex] = blue
+	inc ATindex, 1
+endfunction
+
+//------------------------------------------------------------------------------------------------------------
+
 function LoadAboutScreenTexts ( )
 	StartIndexOfAboutScreenTexts = 0
 	ATindex = 0
-	AboutTexts    [ATindex] = " "
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Space Swap™''"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "©2019 By Team Fallen Angel Software"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
 	
-	AboutTexts    [ATindex] = "www.FallenAngelSoftware.com"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
+	AddAboutScreenText("TM", 0)
+	AddAboutScreenText("''Space Swap 110%''", 0)
+	AddAboutScreenText("©2019 By Team Fallen Angel Software", 255)
+	AddAboutScreenText("www.FallenAngelSoftware.com", 255)
+	AddAboutScreenText("Made With ''AppGameKit Classic''", 0)
+	AddAboutScreenText("(www.AppGameKit.com)", 255)
+	AddAboutScreenText("Game Built On:", 0)
+	AddAboutScreenText("Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux", 255)
+	AddAboutScreenText("(www.Kubuntu.org)", 255)
+	AddAboutScreenText("Real Programmers Use Linux!", 255)
+	AddAboutScreenText("Original Game Idea By:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Project Directed By:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''AppGameKit'' 2-D Game Engine:", 0)
+	AddAboutScreenText("The ''NightRider'' Engine[TM]", 255)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Lead Game Designer:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Lead Game Programmer:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Lead Game Tester:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Optimizations Tested Using:", 0)
+	AddAboutScreenText("''BES – Battle Encoder Shirase'''", 255)
+	AddAboutScreenText("(http://mion.faireal.net/BES/)", 255)
+	AddAboutScreenText("Support Game Programmers:", 0)
+	AddAboutScreenText("''Daotheman''", 255)
+	AddAboutScreenText("''theweirdn8''", 255)
+	AddAboutScreenText("''mattmatteh''", 255)
+	AddAboutScreenText("Lead Graphic Artist:", 0)
+	AddAboutScreenText("''Oshi Bobo''", 255)
+	AddAboutScreenText("''www.OshiBobo.com''", 255)
+	AddAboutScreenText("(For Hire Graphic Artist)", 255)
+	AddAboutScreenText("Support Graphic Artist:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Lead Music Artist:", 0)
+	AddAboutScreenText("''D.J. Fading Twilight''", 255)
+	AddAboutScreenText("''Neo's Kiss'' Graphical User Interface By:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("Sound Effects Compiled & Edited By:", 0)
+	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("PNG Graphics Edited In:", 0)
+	AddAboutScreenText("''NeoPaint''", 255)
+	AddAboutScreenText("(www.NeoSoftware.com/NPW.html)", 255)
+	AddAboutScreenText("PNG Graphics Optimized Using:", 0)
+	AddAboutScreenText("''TinyPNG''", 255)
+	AddAboutScreenText("(www.TinyPNG.com)", 255)
+	AddAboutScreenText("OGG Audio Edited In:", 0)
+	AddAboutScreenText("''GoldWave''", 255)
+	AddAboutScreenText("(www.GoldWave.com)", 255)
+	AddAboutScreenText("OGG Audio Optimized Using:", 0)
+	AddAboutScreenText("''OGGResizer''", 255)
+	AddAboutScreenText("(www.SkyShape.com)", 255)
+	AddAboutScreenText("''Space Swap 110%'' Logo Created In:", 0)
+	AddAboutScreenText("Genuine M.S. Office 365 Publisher", 255)
+	AddAboutScreenText("(www.Office.com)", 255)
+		
+	AddAboutScreenText("Game Created On A:", 0)
+	AddAboutScreenText("Hyper-Custom ''JeZxLee'' Pro-Built Desktop", 255)
+	AddAboutScreenText("Desktop Code Name: ''Optimus Prime''", 255)
+	AddAboutScreenText("Corsair® 750watt Modular Power Supply", 255)
+	AddAboutScreenText("GIGABYTE® GA-970A-DS3P 2.0 AM3+ Motherboard", 255)
+	AddAboutScreenText("AMD® FX 3.5GHz(4GHz Turbo) 8-Core CPU", 255)
+	AddAboutScreenText("Corsair® 32GB DDR3 RAM Memory", 255)
+	AddAboutScreenText("nVidia® GeForce GTX 970TT 4GB GDDR5 GPU", 255)
+	AddAboutScreenText("ADATA® 1TB SSD Hard Drive(OS/Apps)", 255)
+	AddAboutScreenText("Western Digital® 1TB HDD Hard Drive(Personal Data)", 255)
+		
+	AddAboutScreenText("HTML5 Version Tested On:", 0)
+	AddAboutScreenText("Genuine Windows® 10 Pro 64Bit", 255)
+	AddAboutScreenText("Edge", 255)
+	AddAboutScreenText("Firefox", 255)
+	AddAboutScreenText("Chrome", 255)
+	AddAboutScreenText("Opera", 255)
+	AddAboutScreenText("Android Version Tested On:", 0)
+	AddAboutScreenText("Samsung® Galaxy S7 Edge Smartphone", 255)
+	AddAboutScreenText("Eken® Tablet", 255)
+	AddAboutScreenText("Big Thank You To People Who Helped:", 0)
+	AddAboutScreenText("''blink0k''", 255)
+	AddAboutScreenText("''easter bunny''", 255)
+	AddAboutScreenText("''Phaelax''", 255)
+	AddAboutScreenText("''NGP''", 255)
+	AddAboutScreenText("''Jerry McGuire''", 255)
+	AddAboutScreenText("''BatVink''", 255)
+	AddAboutScreenText("''programming is ace''", 255)
+	AddAboutScreenText("''Ranietz''", 255)
+	AddAboutScreenText("''MikeHart''", 255)
+	AddAboutScreenText("''Wilf''", 255)
+	AddAboutScreenText("''PSY''", 255)
+	AddAboutScreenText("''JohnnyMeek''", 255)
+	AddAboutScreenText("''=PRoF=''", 255)
+	AddAboutScreenText("''Xaron''", 255)
+	AddAboutScreenText("''AjiMundi''", 255)
+	AddAboutScreenText("''nz0''", 255)
+	AddAboutScreenText("''Blendman''", 255)
+	AddAboutScreenText("''29 games''", 255)
+	AddAboutScreenText("''Stab in the Dark software''", 255)
+	AddAboutScreenText("''JLMoondog''", 255)
+	AddAboutScreenText("''janbo''", 255)
+	AddAboutScreenText("''Kevin Picone''", 255)
+	AddAboutScreenText("''Preben''", 255)
+	AddAboutScreenText("''Dybing''", 255)
+	AddAboutScreenText("''MikeHart''", 255)
+	AddAboutScreenText("''PartTimeCoder''", 255)
+	AddAboutScreenText("''mash''", 255)
+	AddAboutScreenText("''MikeMax''", 255)
+	AddAboutScreenText("''xCept''", 255)
+	AddAboutScreenText("''smallg''", 255)
+	AddAboutScreenText("''Markus''", 255)
+	AddAboutScreenText("''Kevin Cross''", 255)
+	AddAboutScreenText("''Mobiius''", 255)
+	AddAboutScreenText("''CJB''", 255)
+	AddAboutScreenText("''puzzler2018''", 255)
+	AddAboutScreenText("''fubarpk''", 255)
+	AddAboutScreenText("''Conjured Entertainment''", 255)
+	AddAboutScreenText("''DavidAGK''", 255)
+	AddAboutScreenText("''LillyByte''", 255)
+	AddAboutScreenText("''Midget Blaster''", 255)
+	AddAboutScreenText("''basicFanatic''", 255)
+	AddAboutScreenText("''nonom''", 255)
+	AddAboutScreenText("''Alex_Peres''", 255)
+	AddAboutScreenText("''Riusz''", 255)
+	AddAboutScreenText("''Rick Nasher''", 255)
+	AddAboutScreenText("''Scraggle''", 255)
+	AddAboutScreenText("''Bengismo''", 255)
+	AddAboutScreenText("''IronManhood''", 255)
+	AddAboutScreenText("''Xaby''", 255)
+	AddAboutScreenText("''Jack''", 255)
+	AddAboutScreenText("''Ortu''", 255)
+	AddAboutScreenText("''Crazy Programmer''", 255)
+	AddAboutScreenText("''Carharttguy''", 255)
+	AddAboutScreenText("''linuxluvuback''", 255)
+	AddAboutScreenText("''Cliff Mellangard 3DEGS''", 255)
+	AddAboutScreenText("''TomToad''", 255)
+	AddAboutScreenText("''Supertino''", 255)
+	AddAboutScreenText("''Golelorn''", 255)
+	AddAboutScreenText("''hoyoyo80''", 255)
+	AddAboutScreenText("''Sh4d0xx''", 255)
+	AddAboutScreenText("''Zigi''", 255)
+	AddAboutScreenText("''Tristanlogd''", 255)
+	AddAboutScreenText("''Rich Dersheimer''", 255)
+	AddAboutScreenText("''PHeMoX''", 255)
+	AddAboutScreenText("''JokerZ''", 255)
+	AddAboutScreenText("''Takis76''", 255)
+	AddAboutScreenText("''Tobias_Ripper''", 255)
+	AddAboutScreenText("''GarBenjamin''", 255)
+	AddAboutScreenText("''Mac''", 255)
+	AddAboutScreenText("''The Next''", 255)
+	AddAboutScreenText("''fraktal77''", 255)
+	AddAboutScreenText("''Maverick_LSC''", 255)
+	AddAboutScreenText("''GH69''", 255)
+	AddAboutScreenText("''Santman''", 255)
+	AddAboutScreenText("''adambiser''", 255)
+	AddAboutScreenText("''BraindeaD''", 255)
+	AddAboutScreenText("''Lee Rayson''", 255)
+	AddAboutScreenText("''Parry''", 255)
+	AddAboutScreenText("''AliceSim1''", 255)
+	AddAboutScreenText("''Qugurun''", 255)
+	AddAboutScreenText("''Bored of the Rings''", 255)
+	AddAboutScreenText("''Bubba''", 255)
+	AddAboutScreenText("''Pfaber1''", 255)
+	AddAboutScreenText("''Onomatopoesie''", 255)
+	AddAboutScreenText("''tiresius''", 255)
+	AddAboutScreenText("''Sph!nx''", 255)
+	AddAboutScreenText("''Captain Ouais''", 255)
+	AddAboutScreenText("''NPNPNPNPNPNP''", 255)
+	AddAboutScreenText("''LucidWhite''", 255)
+	AddAboutScreenText("''Dark Raven''", 255)
+	AddAboutScreenText("''Qube_''", 255)
+	AddAboutScreenText("''smerf''", 255)
+	AddAboutScreenText("''Loktofeit''", 255)
+	AddAboutScreenText("''EdzUp''", 255)
+	AddAboutScreenText("''SFSW''", 255)
+	AddAboutScreenText("''DannyD''", 255)
+	AddAboutScreenText("''Virtual Nomad''", 255)
+	AddAboutScreenText("''george++''", 255)
+	AddAboutScreenText(" ", 255)
+	AddAboutScreenText("''You!''", 255)
+	AddAboutScreenText("''A 110% By Team Fallen Angel Software!''", 0)
+	AddAboutScreenText("(Admin@FallenAngelSoftware.com)", 255)
 
-	AboutTexts    [ATindex] = "Made With ''AppGameKit Classic''"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.AppGameKit.com)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Game Built On:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.Kubuntu.org)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Real Programmers Use Linux!"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Original Game Idea By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Project Directed By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "''AppGameKit'' 2-D Game Engine:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "The ''Night Rider'' Engine"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Lead Game Designer:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Lead Game Programmer:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Lead Game Tester:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Support Game Tester:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Mike Quatro''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Game Engine TurboCharger By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''smallg''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Lead Game Engine Optimization By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Markus''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Qugurun''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Support Game Engine Optimization By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Text Drawing Optimizations By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''SFSW''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''PSY''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''TomToad''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Optimizations Tested Using:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''BES – Battle Encoder Shirase'''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(http://mion.faireal.net/BES/)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Support Game Programmers:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "''Daotheman''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''theweirdn8''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''mattmatteh''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Lead Graphic Artist:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Oshi Bobo''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''www.OshiBobo.com''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(For Hire Graphic Artist)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Support Graphic Artist:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Lead Music Artist:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''D.J. Fading Twilight''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "''Neo's Kiss'' Graphical User Interface By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''The Fallen Angel''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Bengismo''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Sound Effects Compiled & Edited By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "The Fallen Angel"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "PNG Graphics Edited In:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''NeoPaint''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.NeoSoftware.com/NPW.html)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "PNG Graphics Optimized Using:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''TinyPNG''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.TinyPNG.com)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "OGG Audio Edited In:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''GoldWave''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.GoldWave.com)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "OGG Audio Optimized Using:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''OGGResizer''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.SkyShape.com)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "''Space Swap'' Logo Created In:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine M.S. Office 365 Publisher"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.Office.com)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "95% Of Game Developed On A:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Hyper-Custom Thin Client Desktop"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Desktop Code Name: ''BumbleBee''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "ASRock® Q1900-ITX Motherboard"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Intel® Celeron 2GHz 4-Core CPU"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "16GB 1333MHz DDR3 RAM"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Intel® ''Baytrail'' 7th Gen GPU"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Samsung® EVO 850 500GB SSD"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "100 Watt Power Supply"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Last 5% Of Game Developed On A:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "JeZxLee Pro-Built Custom Desktop"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Desktop Code Name: ''JetFire''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "GigaByte® Mid-Range Motherboard"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Intel® Core i5 3GHz 4-Core CPU"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "16GB 1333MHz DDR3 RAM"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "nVidia® GeForce GTX 750TI 2GB GDDR5 GPU"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Western Digital® 1TB HDD"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "500 Watt Power Supply"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "''Doom4'' Played on Linux On A:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "JeZxLee Pro-Built Custom Desktop"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Desktop Code Name: ''Optimus Prime''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "ASUS® 990FX SaberTooth r2.0 Motherboard"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "AMD® FX 4GHz 8-Core CPU"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "32GB 1333MHz DDR3 RAM"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "nVidia® GeForce GTX 970TT 4GB GDDR5 GPU"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Western Digital® 1TB HDD"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "850 Watt Power Supply"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-
-	AboutTexts    [ATindex] = "16BitSoft Studio Hardware Protected By:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Untangle Linux Firewall On Dell® Desktop"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "(www.Untangle.com/Untangle-NG-Firewall)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "HTML5 Version Tested On:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Genuine Windows® 10 Pro 64Bit"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Edge''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Firefox''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Chrome''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Opera''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Internet Explorer''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Android Version Tested On:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Samsung® Galaxy S7 Edge Smartphone"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "Eken® Tablet"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "ASUS® Nexus 7 Tablet"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "Original Game Engine Testers:"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''blink0k''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''easter bunny''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Phaelax''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''NGP''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Jerry McGuire''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''BatVink''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''programming is ace''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Ranietz''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''MikeHart''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Wilf''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''PSY''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''JohnnyMeek''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''=PRoF=''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Blendman''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''29 games''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''nz0''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Stab in the Dark software''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''JLMoondog''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''janbo''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Kevin Picone''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Preben''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Dybing''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''CJB''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''xCept''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''MikeMax''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''smallg''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Kevin Cross''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Markus''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Mobiius''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''fubarpk''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Conjured Entertainment''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''DavidAGK''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''puzzler2018''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''cyberleon''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''claydog72''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Bengismo''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Crazy Programmer''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''Carharttguy''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	AboutTexts    [ATindex] = "''linuxluvuback''"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "You!"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "''A 110% By Team Fallen Angel Software!''"
-	AboutTextsBlue[ATindex] = 0
-	inc ATindex, 1
-
-	AboutTexts    [ATindex] = "(Admin@FallenAngelSoftware.com)"
-	AboutTextsBlue[ATindex] = 255
-	inc ATindex, 1
-	
 	NumberOfAboutScreenTexts = ATindex
 endfunction
 
