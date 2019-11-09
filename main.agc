@@ -44,6 +44,8 @@ HTML5DataVersion = "SS-v1_2_0-"
 global MaximumFrameRate as integer
 MaximumFrameRate = 0
 
+global PerformancePercent as float
+
 #option_explicit
 SetErrorMode(2)
 
@@ -467,8 +469,8 @@ global PlayerScreenY as integer
 global PlayerPlayfieldX as integer
 global PlayerPlayfieldY as integer
 
-global PlayfieldOffsetY as integer
-global PlayfieldOffsetYDelay as integer
+global PlayfieldOffsetY as float
+global PlayfieldOffsetYDelay as float
 global PlayfieldOffsetYDelayTime as integer[6]
 PlayfieldOffsetYDelayTime[0] = 3
 PlayfieldOffsetYDelayTime[1] = 1
@@ -694,6 +696,18 @@ do
 	endif
 
 	roundedFPS = Round( ScreenFPS() )
+
+	if (ScreenToDisplay = PlayingScreen)
+		if (PlayingSyncRate = 20)
+			PerformancePercent = (20 / roundedFPS)
+		elseif (PlayingSyncRate = 30)
+			PerformancePercent = (30 / roundedFPS)
+		elseif (PlayingSyncRate = 45)
+			PerformancePercent = (45 / roundedFPS)
+		elseif (PlayingSyncRate = 60)
+			PerformancePercent = (60 / roundedFPS)
+		endif
+	endif
 
 	if (FrameCount > roundedFPS)
 		FrameCount = 0

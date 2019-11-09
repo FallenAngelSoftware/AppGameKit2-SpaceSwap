@@ -159,6 +159,16 @@ function DrawPlayfield()
 	
 	BoxWhiteUsed = 2
 
+	flashDelay as integer
+	flashDelay = 3
+	if (PerformancePercent = 1)
+		flashDelay = 3
+	elseif (PerformancePercent < 1.3)
+		flashDelay = 2
+	else
+		flashDelay = 1
+	endif
+
 	state as integer
 	indexY as integer
 	indexX as integer
@@ -214,7 +224,7 @@ function DrawPlayfield()
 						PlayfieldColoredBoxIndex[indexX, indexY] = BoxRedUsed
 						inc BoxRedUsed, 1
 
-						if ( mod(MatchFlashTimer, 3) = 0 )
+						if ( mod(MatchFlashTimer, flashDelay) = 0 )
 							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
 							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
 							inc BoxWhiteUsed, 1
@@ -226,7 +236,7 @@ function DrawPlayfield()
 						PlayfieldColoredBoxIndex[indexX, indexY] = BoxOrangeUsed
 						inc BoxOrangeUsed, 1
 
-						if ( mod(MatchFlashTimer, 3) = 0 )
+						if ( mod(MatchFlashTimer, flashDelay) = 0 )
 							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
 							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
 							inc BoxWhiteUsed, 1
@@ -238,7 +248,7 @@ function DrawPlayfield()
 						PlayfieldColoredBoxIndex[indexX, indexY] = BoxYellowUsed
 						inc BoxYellowUsed, 1
 
-						if ( mod(MatchFlashTimer, 3) = 0 )
+						if ( mod(MatchFlashTimer, flashDelay) = 0 )
 							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
 							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
 							inc BoxWhiteUsed, 1
@@ -250,7 +260,7 @@ function DrawPlayfield()
 						PlayfieldColoredBoxIndex[indexX, indexY] = BoxGreenUsed
 						inc BoxGreenUsed, 1
 
-						if ( mod(MatchFlashTimer, 3) = 0 )
+						if ( mod(MatchFlashTimer, flashDelay) = 0 )
 							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
 							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
 							inc BoxWhiteUsed, 1
@@ -262,7 +272,7 @@ function DrawPlayfield()
 						PlayfieldColoredBoxIndex[indexX, indexY] = BoxBlueUsed
 						inc BoxBlueUsed, 1
 
-						if ( mod(MatchFlashTimer, 3) = 0 )
+						if ( mod(MatchFlashTimer, flashDelay) = 0 )
 							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
 							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
 							inc BoxWhiteUsed, 1
@@ -274,7 +284,7 @@ function DrawPlayfield()
 						PlayfieldColoredBoxIndex[indexX, indexY] = BoxPurpleUsed
 						inc BoxPurpleUsed, 1
 
-						if ( mod(MatchFlashTimer, 3) = 0 )
+						if ( mod(MatchFlashTimer, flashDelay) = 0 )
 							SetSpriteVisible ( BoxWhiteSprite[BoxWhiteUsed], 1 ) 
 							SetSpritePositionByOffset( BoxWhiteSprite[BoxWhiteUsed], screenX, screenY-PlayfieldOffsetY )
 							inc BoxWhiteUsed, 1
@@ -766,7 +776,7 @@ function RunGameplayCore()
 			else
 				PlayfieldOffsetYDelay = 0
 				if (PlayfieldOffsetY < 44)
-					inc PlayfieldOffsetY, 1
+					inc PlayfieldOffsetY, 1 * (PerformancePercent)
 					dec PlayerSwapPiecesScreenY, 1
 
 					if (PlayerSwapPieceOneScreenX <> -1)
