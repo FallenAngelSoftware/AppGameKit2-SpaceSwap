@@ -13,7 +13,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.1.9
+                                     Retail1 110% - v1.2.0
 
 ---------------------------------------------------------------------------------------------------     
 
@@ -35,11 +35,11 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.1.9''"
+GameVersion = "''Retail1 110% - Turbo! - v1.2.0''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_1_9.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_2_0.cfg"
 global HTML5DataVersion as String
-HTML5DataVersion = "SS-v1_1_9-"
+HTML5DataVersion = "SS-v1_2_0-"
 
 global MaximumFrameRate as integer
 MaximumFrameRate = 0
@@ -99,10 +99,8 @@ endif
 
 if (GetDeviceBaseName() = "windows")
 	Platform = Windows
-//	SetSyncRate( 30, 1 )
 elseif (GetDeviceBaseName() = "linux")
 	Platform = Linux
-//	SetSyncRate( 30, 0 )
 endif
 
 global GameUnlocked as integer
@@ -733,6 +731,7 @@ do
 		print ( "Matches="+str(NumberOfMatchesCleared) )
 		print ( "MTimer="+str(MatchFlashTimer) )
 		print ( "#Combos="+str(NumberOfCombos) )
+		print ( "P-Fell="+str(PiecesFell) )
 	endif
 
 	if (ScreenIsDirty = TRUE)

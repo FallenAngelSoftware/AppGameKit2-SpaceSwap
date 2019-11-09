@@ -88,7 +88,7 @@ function SetupForNewGame()
 	
 	PlayerSwapDirection = 0
 	
-	PiecesFell = FALSE
+	PiecesFell = TRUE
 	
 	MatchFlashTimer = -1
 
@@ -127,8 +127,6 @@ endfunction
 //------------------------------------------------------------------------------------------------------------
 
 function DrawPlayfield()
-//	exitfunction
-	
 	index as integer
 	for index = BoxRedUsed to 2 step -1
 		SetSpriteVisible ( BoxRedSprite[index], 0 ) 
@@ -319,17 +317,23 @@ function ApplyGravity()
 	indexX as integer
 	indexTwoY as integer
 	
-	PiecesFell = FALSE
-	
 	for indexY = 11 to 1 step -1
 		for indexX = 0 to 5
 			if (Playfield[indexX, indexY] = 0 and Playfield[indexX, indexY-1] > 0)
 				for indexTwoY = indexY to 1 step -1
 					Playfield[indexX, indexTwoY] = Playfield[indexX, indexTwoY-1]
-					PiecesFell = TRUE
 				next indexTwoY
 
 				Playfield[indexX, 0] = 0
+			endif
+		next indexX
+	next indexY
+
+	piecesFell = TRUE
+	for indexY = 11 to 1 step -1
+		for indexX = 0 to 5
+			if (Playfield[indexX, indexY] = 0 and Playfield[indexX, indexY-1] > 0)
+				PiecesFell = FALSE
 			endif
 		next indexX
 	next indexY
@@ -554,6 +558,8 @@ function ClearMatchesFromPlayfield()
 	if (somethingCleared = TRUE)
 		PlaySoundEffect(6)
 		
+		PiecesFell = FALSE
+		
 		AddScoreAndLevelAdvance ( )
 	endif
 endfunction
@@ -717,7 +723,7 @@ function RunGameplayCore()
 	screenY as integer
 	screenX as integer
 
-	ApplyGravity ( )
+	if (PiecesFell = FALSE) then ApplyGravity ( )
 
 	if (MatchFlashTimer > 0)
 		dec MatchFlashTimer, 1
@@ -728,7 +734,7 @@ function RunGameplayCore()
 
 	MoveOffScreenSwappingPieces ( )
 
-	if (PiecesFell = FALSE)
+	if (PiecesFell = TRUE)
 		if (ComboTakenCareOf = TRUE)
 			if ( ThereWillBeAnotherMatchAfterGravity() = TRUE )
 				MatchFlashTimer = 50
@@ -736,14 +742,14 @@ function RunGameplayCore()
 			endif
 		endif
 	endif
-	
-	if (ComboTakenCareOf = FALSE and PiecesFell = FALSE and MatchFlashTimer = -1)
+
+	if (ComboTakenCareOf = FALSE and MatchFlashTimer = -1)
 		ComboTakenCareOf = TRUE
 		inc NumberOfCombos, 1
 		PlaySoundEffect(7)
 		inc TimeFreezeTimer, 150
 		inc Score, (1000*NumberOfCombos)
-	elseif (PiecesFell = FALSE and ComboTakenCareOf = TRUE)
+	elseif (PiecesFell = TRUE and ComboTakenCareOf = TRUE)
 		if ( PlayfieldIsLow() = TRUE )
 			SetSpriteVisible( BonusSprite, 1 )
 		else
@@ -792,7 +798,7 @@ function RunGameplayCore()
 							case 5:
 								SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
 							endcase
-							case 16:
+							case 15:
 								SetSpritePositionByOffset( BoxBlueSprite[ 0 ], PlayerScreenX-22, PlayerScreenY )
 							endcase
 							case 6:
@@ -833,6 +839,7 @@ function RunGameplayCore()
 					if (PlayerPlayfieldY > 0) then dec PlayerPlayfieldY, 1
 					
 					PlayfieldOffsetY = 0
+					PiecesFell = FALSE
 					CheckForMatches (TRUE)
 				endif
 			endif
@@ -1102,6 +1109,7 @@ function RunGameplayCore()
 							PlayerSwapPieceOneScreenX = -1
 							PlayerSwapDirection = 0
 
+							PiecesFell = FALSE
 							CheckForMatches (TRUE)
 						endif
 					elseif (PlayerSwapDirection = JoyRIGHT)
@@ -1158,6 +1166,7 @@ function RunGameplayCore()
 							PlayerSwapPieceOneScreenX = -1
 							PlayerSwapDirection = 0
 
+							PiecesFell = FALSE
 							CheckForMatches (TRUE)
 						endif
 					endif
@@ -1315,6 +1324,7 @@ function RunGameplayCore()
 
 						MoveOffScreenSwappingPieces ( )
 						
+						PiecesFell = FALSE
 						CheckForMatches (TRUE)
 					endif
 				endif
@@ -1340,7 +1350,5 @@ function RunGameplayCore()
 				endif
 			endif
 		endif
-	else
-		
 	endif
 endfunction
