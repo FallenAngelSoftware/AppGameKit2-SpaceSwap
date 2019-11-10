@@ -105,7 +105,8 @@ function SetupForNewGame()
 	NumberOfMatchesCleared = 0
 	
 	LevelAdvancePieceCounter = 0
-	
+	if (SecretCodeCombined = 9876) then LevelAdvancePieceCounter = LevelAdvancePieceCount[GameMode]-10
+		
 	StagingScore = 0
 	StagingLevelAdvance = 0
 		

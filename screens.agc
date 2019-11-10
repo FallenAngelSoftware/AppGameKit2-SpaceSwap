@@ -1591,8 +1591,8 @@ function DisplayNewHighScoreNameInputScreen ( )
 		NewHighScoreCurrentName = left( NewHighScoreCurrentName, len(NewHighScoreCurrentName) -1 )
 	endif
 
-	if NewHighScoreNameIndex > 13
-		NewHighScoreNameIndex = 13
+	if NewHighScoreNameIndex > 9
+		NewHighScoreNameIndex = 9
 		NewHighScoreCurrentName= left( NewHighScoreCurrentName, len(NewHighScoreCurrentName) -1 )
 	endif
 
@@ -1724,8 +1724,8 @@ function DisplayNewHighScoreNameInputAndroidScreen ( )
 		NewHighScoreCurrentName = left( NewHighScoreCurrentName, len(NewHighScoreCurrentName) -1 )
 	endif
 
-	if NewHighScoreNameIndex > 13
-		NewHighScoreNameIndex = 13
+	if NewHighScoreNameIndex > 9
+		NewHighScoreNameIndex = 9
 		NewHighScoreCurrentName= left( NewHighScoreCurrentName, len(NewHighScoreCurrentName) -1 )
 	endif
 
@@ -2001,7 +2001,7 @@ function DisplayEndingSceneScreen( )
 	for starIndex = 0 to 4
 		if (EndingStarsScale[starIndex] < 0)
 			EndingStarsScale[starIndex] = 2
-		else
+		else			
 			if (30 / roundedFPS < 1)
 				dec EndingStarsScale[starIndex], .05
 			else
@@ -2049,7 +2049,7 @@ function DisplayEndingSceneScreen( )
 		
 			SetSpriteColorAlpha( EndingExplosionSprite, EndingExplosionAlpha )
 		else
-			
+			PlaySoundEffect(3)
 			EndingAnimationStep = 3
 		endif
 	elseif (EndingAnimationStep = 3)

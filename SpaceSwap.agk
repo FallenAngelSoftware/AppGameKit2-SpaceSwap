@@ -15,8 +15,8 @@ play_app_id=
 admob_app_id=
 snapchat_client_id=
 sdk_version=1
-version_name=1.2.1
-version_number=121
+version_name=1.2.2
+version_number=122
 firebase_config_path=
 url_scheme=
 deep_link=
@@ -46,7 +46,7 @@ prov_profile_path=/Users/Jesse/Downloads/Test1.mobileprovision
 [html5_settings]
 commands_used=0
 dynamic_memory=0
-output_path=/home/jlp/Desktop/VM-SHARE/HTML5test
+output_path=/home/jlp/Desktop/VM-SHARE/HTML5
 
 [projectfiles]
 FILE_0=audio.agc;-1
