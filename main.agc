@@ -13,7 +13,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.2.0
+                                     Retail1 110% - v1.2.1
 
 ---------------------------------------------------------------------------------------------------     
 
@@ -35,11 +35,11 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.2.0''"
+GameVersion = "''Retail1 110% - Turbo! - v1.2.1''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_2_0.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_2_1.cfg"
 global HTML5DataVersion as String
-HTML5DataVersion = "SS-v1_2_0-"
+HTML5DataVersion = "SS-v1_2_1-"
 
 global MaximumFrameRate as integer
 MaximumFrameRate = 0
@@ -427,6 +427,8 @@ StartIndexOfAboutScreenTexts = 0
 
 global AboutScreenOffsetY as float
 global AboutScreenBackgroundY as float
+global AboutScreenFPSY as float
+AboutScreenFPSY = -200
 
 global AboutScreenTextFrameSkip as integer
 
@@ -716,7 +718,11 @@ do
 
 	if (SecretCodeCombined = 2777 and ScreenIsDirty = TRUE)
 		if (ScreenFadeStatus = FadingIdle)
-			SetSpritePositionByOffset( FadingBlackBG,  -80, -200 )
+			if (ScreenToDisplay = AboutScreen)
+				SetSpritePositionByOffset( FadingBlackBG,  -80, AboutScreenFPSY )
+			else
+				SetSpritePositionByOffset( FadingBlackBG,  -80, -200 )
+			endif			
 			SetSpriteColorAlpha( FadingBlackBG, 200 )
 		else
 			SetSpritePositionByOffset( FadingBlackBG,  ScreenWidth/2, ScreenHeight/2 )

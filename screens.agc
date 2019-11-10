@@ -1055,6 +1055,8 @@ function DisplayAboutScreen( )
 		AboutScreenOffsetY = 0
 		AboutScreenBackgroundY = 320
 
+		AboutScreenFPSY = -200
+
 		ScreenIsDirty = TRUE
 	endif
 
@@ -1070,7 +1072,9 @@ function DisplayAboutScreen( )
 			SetViewOffset( 0, AboutScreenOffsetY )
 			inc AboutScreenOffsetY, .02
 			inc AboutScreenBackgroundY, .02
+			inc AboutScreenFPSY, .02
 			SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
+			if (SecretCodeCombined = 2777) then SetSpritePositionByOffset( FadingBlackBG, -80, AboutScreenFPSY )
 		next index
 	endif
 
@@ -2079,6 +2083,12 @@ function DisplayEndingSceneScreen( )
 		DeleteImage(208)
 		DeleteImage(209)
 		DeleteImage(210)
+		
+		if (PlayingSyncRate = 60)
+			PlayNewMusic(10, 1)
+		else
+			PlayNewMusic(9, 1)
+		endif
 		
 		NextScreenToDisplay = AboutScreen
 	endif						

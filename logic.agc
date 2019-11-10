@@ -600,11 +600,7 @@ function AddScoreAndLevelAdvance()
 			elseif (Level = 10)
 				WonGame = TRUE
 							
-				if (PlayingSyncRate = 60)
-					PlayNewMusic(10, 1)
-				else
-					PlayNewMusic(9, 1)
-				endif
+				StopMusicOGG(MusicTrack[CurrentlyPlayingMusicIndex])
 							
 				GameOverTimer = 1
 				ScreenFadeStatus = FadingToBlack
@@ -721,7 +717,8 @@ function RaisePlayfieldManually()
 		Playfield[indexX, 12] = Random( 1, 6 )
 	next indexX
 	
-	inc Score, 1000
+	inc Score, 10000 * (1+Level)
+	SetText ( ScoreText, str(Score) )
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
@@ -759,6 +756,7 @@ function RunGameplayCore()
 		PlaySoundEffect(7)
 		inc TimeFreezeTimer, 150
 		inc Score, (1000*NumberOfCombos)
+		SetText ( ScoreText, str(Score) )
 	elseif (PiecesFell = TRUE and ComboTakenCareOf = TRUE)
 		if ( PlayfieldIsLow() = TRUE )
 			SetSpriteVisible( BonusSprite, 1 )
