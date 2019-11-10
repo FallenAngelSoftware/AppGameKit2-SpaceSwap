@@ -161,14 +161,7 @@ function DrawPlayfield()
 	BoxWhiteUsed = 2
 
 	flashDelay as integer
-	flashDelay = 3
-	if (PerformancePercent = 1)
-		flashDelay = 3
-	elseif (PerformancePercent < 1.3)
-		flashDelay = 2
-	else
-		flashDelay = 1
-	endif
+	flashDelay = 2
 
 	state as integer
 	indexY as integer
@@ -501,7 +494,7 @@ function CheckForMatches(mark as integer)
 	
 	if (thereIsMatch = TRUE)
 		if (mark = TRUE)
-			MatchFlashTimer = 50
+			MatchFlashTimer = 50 / (PerformancePercent)
 		endif
 		returnValue = TRUE
 	endif
@@ -745,7 +738,7 @@ function RunGameplayCore()
 	if (PiecesFell = TRUE)
 		if (ComboTakenCareOf = TRUE)
 			if ( ThereWillBeAnotherMatchAfterGravity() = TRUE )
-				MatchFlashTimer = 50
+				MatchFlashTimer = 50 / (PerformancePercent)
 				ComboTakenCareOf = FALSE
 			endif
 		endif
@@ -1062,7 +1055,7 @@ function RunGameplayCore()
 			
 			if (PlayerSwapOnePlayfieldX <> -1 and PlayerSwapOnePlayfieldY <> -1)
 				if (PlayerSwapMovement < 45)
-					inc PlayerSwapMovement, 10
+					inc PlayerSwapMovement, (10*PerformancePercent)
 
 					if (PlayerSwapDirection = JoyLEFT)						
 						select PlayerSwapPieceOne
@@ -1278,7 +1271,7 @@ function RunGameplayCore()
 
 			if (PlayerSwapOnePlayfieldX <> -1 and PlayerSwapOnePlayfieldY <> -1)
 				if (PlayerSwapMovement < 45)
-					inc PlayerSwapMovement, 10
+					inc PlayerSwapMovement, (10*PerformancePercent)
 
 					select PlayerSwapPieceOne
 						case 1:
