@@ -46,7 +46,7 @@ prov_profile_path=/Users/Jesse/Downloads/Test1.mobileprovision
 [html5_settings]
 commands_used=0
 dynamic_memory=0
-output_path=/home/jlp/Desktop/VM-SHARE/HTML5
+output_path=/home/jlp/Desktop/VM-SHARE/HTML5test1
 
 [projectfiles]
 FILE_0=audio.agc;-1

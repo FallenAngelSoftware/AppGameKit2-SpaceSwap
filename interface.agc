@@ -638,6 +638,8 @@ function CreateIcon(spriteIndex as integer, screenX as integer, screenY as integ
 
 	inc NumberOfIconsOnScreen, 1
 	GUIchanged = TRUE
+
+	CurrentIconBeingPressed = -1
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
@@ -730,51 +732,60 @@ function ThisIconWasPressed(iconIndexToCheck as integer)
 	returnValue as integer
 	returnValue = FALSE
 
-	index as integer
-	for index = 0 to (NumberOfIconsOnScreen-1)
-		if IconAnimationTimer[index] > 0 and iconIndexToCheck = IconIndex[index]
-			if IconAnimationTimer[index] = 3
-				IconScale[index] = .9
-				GUIchanged = TRUE
-			elseif IconAnimationTimer[index] = 1
-				IconScale[index] = 1
-				GUIchanged = TRUE
-			endif
-			
-			if IconAnimationTimer[index] > 1
-				dec IconAnimationTimer[index], 1
-			elseif IconAnimationTimer[index] = 1
-				if iconIndexToCheck = IconIndex[index] then returnValue = TRUE
-
-				IconAnimationTimer[index] = 0
-			endif
-			
-			exitfunction returnValue
-		endif
-	next index
-
-	if DelayAllUserInput = 0
+	if (CurrentIconBeingPressed > -1)
+		index as integer
 		for index = 0 to (NumberOfIconsOnScreen-1)
-			if MouseButtonLeft = ON
-				iconWidthHalf as integer
-				iconWidthHalf = GetSpriteWidth(Icon[IconSprite[index]])/2
-				iconHeightHalf as integer
-				iconHeightHalf = GetSpriteHeight(Icon[IconSprite[index]])/2
-				if (  ( MouseScreenY > (IconScreenY[index]-iconHeightHalf) ) and ( MouseScreenY < (IconScreenY[index]+iconHeightHalf) ) and ( MouseScreenX > (IconScreenX[index]-iconWidthHalf) ) and ( MouseScreenX < (IconScreenX[index]+iconWidthHalf) )  )
-					IconAnimationTimer[index] = 3
-			
-					if (IconSprite[index] = 80)
-						
-					elseif (IconSprite[index] = 81)
-					
-					else
-						PlaySoundEffect(1)
-					endif
+			if IconAnimationTimer[index] > 0 and iconIndexToCheck = IconIndex[index]
+				if IconAnimationTimer[index] = 2
+					IconScale[index] = .9
 					GUIchanged = TRUE
-					SetDelayAllUserInput()
+				elseif IconAnimationTimer[index] = 1
+					IconScale[index] = 1
+					GUIchanged = TRUE
 				endif
+				
+				if IconAnimationTimer[index] > 1
+					dec IconAnimationTimer[index], 1
+				elseif IconAnimationTimer[index] = 1
+					if iconIndexToCheck = IconIndex[index] then returnValue = TRUE
+
+					CurrentIconBeingPressed = -1
+
+					IconAnimationTimer[index] = 0
+				endif
+				
+				exitfunction returnValue
 			endif
 		next index
+	endif
+
+	if (CurrentIconBeingPressed = -1)
+		if DelayAllUserInput = 0
+			if MouseButtonLeft = ON
+			for index = 0 to (NumberOfIconsOnScreen-1)
+					iconWidthHalf as integer
+					iconWidthHalf = GetSpriteWidth(Icon[IconSprite[index]])/2
+					iconHeightHalf as integer
+					iconHeightHalf = GetSpriteHeight(Icon[IconSprite[index]])/2
+					if (  ( MouseScreenY > (IconScreenY[index]-iconHeightHalf) ) and ( MouseScreenY < (IconScreenY[index]+iconHeightHalf) ) and ( MouseScreenX > (IconScreenX[index]-iconWidthHalf) ) and ( MouseScreenX < (IconScreenX[index]+iconWidthHalf) )  )
+						IconAnimationTimer[index] = 2
+				
+						if (IconSprite[index] = 80)
+							
+						elseif (IconSprite[index] = 81)
+						
+						else
+							PlaySoundEffect(1)
+						endif
+						GUIchanged = TRUE
+						
+						CurrentIconBeingPressed = index
+						
+						SetDelayAllUserInput()
+					endif
+				next index
+			endif
+		endif
 	endif
 endfunction returnValue
 

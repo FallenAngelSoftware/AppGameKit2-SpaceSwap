@@ -1066,13 +1066,19 @@ function DisplayAboutScreen( )
 		SetDelayAllUserInput()
 	endif
 
+	multiplier as float
+	if (PerformancePercent < 1)
+		multiplier = .02
+	else
+		multiplier = .02 * (PerformancePercent)
+	endif
 	index as integer
 	if (ScreenFadeStatus = FadingIdle)
 		for index = 0 to (NumberOfAboutScreenTexts-1)
 			SetViewOffset( 0, AboutScreenOffsetY )
-			inc AboutScreenOffsetY, .02
-			inc AboutScreenBackgroundY, .02
-			inc AboutScreenFPSY, .02
+			inc AboutScreenOffsetY, multiplier
+			inc AboutScreenBackgroundY, multiplier
+			inc AboutScreenFPSY, multiplier
 			SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
 			if (SecretCodeCombined = 2777) then SetSpritePositionByOffset( FadingBlackBG, -80, AboutScreenFPSY )
 		next index
@@ -1574,6 +1580,8 @@ function DisplayNewHighScoreNameInputScreen ( )
 
 		NextScreenToDisplay = HighScoresScreen
 
+CurrentIconBeingPressed = -1
+
 		ScreenIsDirty = TRUE
 	endif
 
@@ -1600,38 +1608,34 @@ function DisplayNewHighScoreNameInputScreen ( )
 	shiftAddition = 0
 	if ShiftKeyPressed = FALSE then inc shiftAddition, 26
 		if DelayAllUserInput = 0
-			
-		for index = 65 to 90
-			if LastKeyboardChar = index
-				IconAnimationTimer[ (index-65) + shiftAddition ] = 10
+			index = LastKeyboardChar
+			if (LastKeyboardChar >= 65 and LastKeyboardChar <= 90)
+				IconAnimationTimer[ (index-65) + shiftAddition ] = 2
+				CurrentIconBeingPressed = index
+				PlaySoundEffect(1)
+				SetDelayAllUserInput()
+			elseif (LastKeyboardChar >= 48 and LastKeyboardChar <= 57)
+				IconAnimationTimer[ (index+4) ] = 2
+				CurrentIconBeingPressed = index
+				PlaySoundEffect(1)
+				SetDelayAllUserInput()
+			elseif LastKeyboardChar = 107
+				IconAnimationTimer[26+36] = 2
+				CurrentIconBeingPressed = 26+36
+				PlaySoundEffect(1)
+				SetDelayAllUserInput()
+			elseif LastKeyboardChar = 32
+				IconAnimationTimer[26+37] = 2
+				CurrentIconBeingPressed = 26+37
+				PlaySoundEffect(1)
+				SetDelayAllUserInput()
+			elseif LastKeyboardChar = 8
+				IconAnimationTimer[26+38] = 2
+				CurrentIconBeingPressed = 26+38
 				PlaySoundEffect(1)
 				SetDelayAllUserInput()
 			endif
-		next index
-
-		for index = 48 to 57
-			if LastKeyboardChar = index
-				IconAnimationTimer[ (index+4) ] = 10
-				PlaySoundEffect(1)
-				SetDelayAllUserInput()
-			endif
-		next index
-
-		if LastKeyboardChar = 107
-			IconAnimationTimer[26+36] = 10
-			PlaySoundEffect(1)
-			SetDelayAllUserInput()
-		elseif LastKeyboardChar = 32
-			IconAnimationTimer[26+37] = 10
-			PlaySoundEffect(1)
-			SetDelayAllUserInput()
-
-		elseif LastKeyboardChar = 8
-			IconAnimationTimer[26+38] = 10
-			PlaySoundEffect(1)
-			SetDelayAllUserInput()
 		endif
-	endif
 
 	if ThisButtonWasPressed(5) = TRUE
 		NextScreenToDisplay = HighScoresScreen
@@ -1642,6 +1646,7 @@ function DisplayNewHighScoreNameInputScreen ( )
 
 	if FadingToBlackCompleted = TRUE
 		HighScoreName [ GameMode, PlayerRankOnGameOver ] = NewHighScoreCurrentName
+		SaveOptionsAndHighScores()
 	endif
 endfunction
 

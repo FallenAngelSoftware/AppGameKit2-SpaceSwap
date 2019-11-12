@@ -46,7 +46,7 @@ function SetupForNewGame()
 		Score = 0
 		Level = StartingLevel
 	endif
-	
+
 	if (GameMode = ChildStoryMode or GameMode = TeenStoryMode or GameMode = AdultStoryMode)
 		if (Level < 3)
 			PlayNewMusic(3, 1)
@@ -494,11 +494,14 @@ function CheckForMatches(mark as integer)
 	
 	if (thereIsMatch = TRUE)
 		if (mark = TRUE)
-			MatchFlashTimer = 50 / (PerformancePercent)
+			if (PerformancePercent < 1)
+				MatchFlashTimer = 50
+			else
+				MatchFlashTimer = 50 / (PerformancePercent)
+			endif
 		endif
 		returnValue = TRUE
 	endif
-	
 endfunction returnValue
 
 //------------------------------------------------------------------------------------------------------------
@@ -738,7 +741,11 @@ function RunGameplayCore()
 	if (PiecesFell = TRUE)
 		if (ComboTakenCareOf = TRUE)
 			if ( ThereWillBeAnotherMatchAfterGravity() = TRUE )
-				MatchFlashTimer = 50 / (PerformancePercent)
+				if (PerformancePercent < 1)
+					MatchFlashTimer = 50
+				else
+					MatchFlashTimer = 50 / (PerformancePercent)
+				endif
 				ComboTakenCareOf = FALSE
 			endif
 		endif

@@ -621,6 +621,13 @@ global GameQuit as integer
 
 PlayNewMusic(0, 1)
 
+global CurrentIconBeingPressed as integer
+CurrentIconBeingPressed = -1
+/*
+Score = 5555
+Level = 5
+ScreenToDisplay = NewHighScoreNameInputScreen
+*/
 do
 	inc FrameCount, 1
 		
