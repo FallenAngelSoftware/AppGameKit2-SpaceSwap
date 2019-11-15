@@ -292,7 +292,7 @@ function ThisButtonWasPressed(buttonToCheck as integer)
 							endif
 						endif
 
-						if (LastKeyboardChar = 32 and ScreenToDisplay <> 9) or LastKeyboardChar = 13
+						if (LastKeyboardChar = 32 and ScreenToDisplay <> NewHighScoreNameInputScreen) or LastKeyboardChar = 13
 							ButtonAnimationTimer[ButtonSelectedByKeyboard] = 3
 							
 							PlaySoundEffect(1)
@@ -748,6 +748,8 @@ function ThisIconWasPressed(iconIndexToCheck as integer)
 					dec IconAnimationTimer[index], 1
 				elseif IconAnimationTimer[index] = 1
 					if iconIndexToCheck = IconIndex[index] then returnValue = TRUE
+
+					PlaySoundEffect(1)
 
 					CurrentIconBeingPressed = -1
 

@@ -1585,9 +1585,60 @@ CurrentIconBeingPressed = -1
 		ScreenIsDirty = TRUE
 	endif
 
+	shiftAddition as integer
+	shiftAddition = 0
+	if ShiftKeyPressed = FALSE then inc shiftAddition, 26
+	
+	if DelayAllUserInput = 0
+		index = LastKeyboardChar
+		if (LastKeyboardChar >= 65 and LastKeyboardChar <= 90)
+			IconAnimationTimer[ (index-65) + shiftAddition ] = 2
+			CurrentIconBeingPressed = index
+
+			if (CurrentKeyboardKeyPressed < 2)
+				inc NewHighScoreNameIndex, 1
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[(index-65) + 10 + shiftAddition] //10+index]
+				CurrentKeyboardKeyPressed = 2
+			endif
+		elseif (LastKeyboardChar >= 48 and LastKeyboardChar <= 57)
+			IconAnimationTimer[ (index+4) ] = 2
+			CurrentIconBeingPressed = index
+
+			if (CurrentKeyboardKeyPressed < 2)
+				inc NewHighScoreNameIndex, 1
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[index+4+10] //10+index]
+				CurrentKeyboardKeyPressed = 2
+			endif
+		elseif LastKeyboardChar = 32
+			IconAnimationTimer[26+37] = 2
+			CurrentIconBeingPressed = 26+37
+
+			if (CurrentKeyboardKeyPressed < 2)
+				inc NewHighScoreNameIndex, 1
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[26+37+10] //10+index]
+				CurrentKeyboardKeyPressed = 2
+			endif
+		elseif LastKeyboardChar = 107
+			IconAnimationTimer[72-10] = 2
+			CurrentIconBeingPressed = 72
+
+			if (CurrentKeyboardKeyPressed < 2)
+				inc NewHighScoreNameIndex, 1
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[72] //10+index]
+				CurrentKeyboardKeyPressed = 2
+			endif
+		elseif LastKeyboardChar = 8
+			IconAnimationTimer[26+38] = 2
+			CurrentIconBeingPressed = 26+38
+
+			CurrentKeyboardKeyPressed = index
+		else
+			if (CurrentKeyboardKeyPressed > -1) then dec CurrentKeyboardKeyPressed, 1
+		endif
+	endif
+
 	for index = 0 to 63
-		if ThisIconWasPressed(index)
-			SetDelayAllUserInput()
+		if ThisIconWasPressed(index) and CurrentKeyboardKeyPressed = -1
 			inc NewHighScoreNameIndex, 1
 			NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[10+index]
 		endif
@@ -1603,39 +1654,6 @@ CurrentIconBeingPressed = -1
 		NewHighScoreNameIndex = 9
 		NewHighScoreCurrentName= left( NewHighScoreCurrentName, len(NewHighScoreCurrentName) -1 )
 	endif
-
-	shiftAddition as integer
-	shiftAddition = 0
-	if ShiftKeyPressed = FALSE then inc shiftAddition, 26
-		if DelayAllUserInput = 0
-			index = LastKeyboardChar
-			if (LastKeyboardChar >= 65 and LastKeyboardChar <= 90)
-				IconAnimationTimer[ (index-65) + shiftAddition ] = 2
-				CurrentIconBeingPressed = index
-				PlaySoundEffect(1)
-				SetDelayAllUserInput()
-			elseif (LastKeyboardChar >= 48 and LastKeyboardChar <= 57)
-				IconAnimationTimer[ (index+4) ] = 2
-				CurrentIconBeingPressed = index
-				PlaySoundEffect(1)
-				SetDelayAllUserInput()
-			elseif LastKeyboardChar = 107
-				IconAnimationTimer[26+36] = 2
-				CurrentIconBeingPressed = 26+36
-				PlaySoundEffect(1)
-				SetDelayAllUserInput()
-			elseif LastKeyboardChar = 32
-				IconAnimationTimer[26+37] = 2
-				CurrentIconBeingPressed = 26+37
-				PlaySoundEffect(1)
-				SetDelayAllUserInput()
-			elseif LastKeyboardChar = 8
-				IconAnimationTimer[26+38] = 2
-				CurrentIconBeingPressed = 26+38
-				PlaySoundEffect(1)
-				SetDelayAllUserInput()
-			endif
-		endif
 
 	if ThisButtonWasPressed(5) = TRUE
 		NextScreenToDisplay = HighScoresScreen
