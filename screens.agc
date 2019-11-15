@@ -1597,7 +1597,7 @@ CurrentIconBeingPressed = -1
 
 			if (CurrentKeyboardKeyPressed < 2)
 				inc NewHighScoreNameIndex, 1
-				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[(index-65) + 10 + shiftAddition] //10+index]
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[(index-65) + 10 + shiftAddition]
 				CurrentKeyboardKeyPressed = 2
 			endif
 		elseif (LastKeyboardChar >= 48 and LastKeyboardChar <= 57)
@@ -1606,7 +1606,7 @@ CurrentIconBeingPressed = -1
 
 			if (CurrentKeyboardKeyPressed < 2)
 				inc NewHighScoreNameIndex, 1
-				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[index+4+10] //10+index]
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[index+4+10]
 				CurrentKeyboardKeyPressed = 2
 			endif
 		elseif LastKeyboardChar = 32
@@ -1615,7 +1615,7 @@ CurrentIconBeingPressed = -1
 
 			if (CurrentKeyboardKeyPressed < 2)
 				inc NewHighScoreNameIndex, 1
-				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[26+37+10] //10+index]
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[26+37+10]
 				CurrentKeyboardKeyPressed = 2
 			endif
 		elseif LastKeyboardChar = 107
@@ -1624,7 +1624,7 @@ CurrentIconBeingPressed = -1
 
 			if (CurrentKeyboardKeyPressed < 2)
 				inc NewHighScoreNameIndex, 1
-				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[72] //10+index]
+				NewHighScoreCurrentName = NewHighScoreCurrentName + IconText[72]
 				CurrentKeyboardKeyPressed = 2
 			endif
 		elseif LastKeyboardChar = 8
