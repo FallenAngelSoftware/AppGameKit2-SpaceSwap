@@ -1072,6 +1072,7 @@ function DisplayAboutScreen( )
 	else
 		multiplier = .02 * (PerformancePercent)
 	endif
+
 	index as integer
 	if (ScreenFadeStatus = FadingIdle)
 		for index = 0 to (NumberOfAboutScreenTexts-1)

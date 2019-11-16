@@ -697,7 +697,7 @@ function RaisePlayfieldManually()
 	indexY as integer
 	indexX as integer
 
-	if ( PlayfieldIsLow() = FALSE ) then exitfunction
+	if ( PlayfieldIsLow() = FALSE or MatchFlashTimer > -1) then exitfunction
 
 	ResetSwappingPieces ( )
 	MoveOffScreenSwappingPieces ( )
@@ -1058,7 +1058,7 @@ function RunGameplayCore()
 				endif
 			endif
 			
-			if ( MouseButtonLeft = ON and MouseScreenX > (180-75) and MouseScreenX < (180+75) and MouseScreenY > (78-42) and MouseScreenY < (78+42) and PlayfieldIsLow() = TRUE ) then RaisePlayfieldManually ( )
+			if ( MouseButtonLeft = ON and MouseScreenX > (180-75) and MouseScreenX < (180+75) and MouseScreenY > (78-42) and MouseScreenY < (78+42) ) then RaisePlayfieldManually ( )
 			
 			if (PlayerSwapOnePlayfieldX <> -1 and PlayerSwapOnePlayfieldY <> -1)
 				if (PlayerSwapMovement < 45)
