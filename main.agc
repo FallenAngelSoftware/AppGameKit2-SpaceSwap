@@ -13,7 +13,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.2.7       TURBO!
+                                     Retail1 110% - v1.2.8       TURBO!
 
 ---------------------------------------------------------------------------------------------------     
 
@@ -35,11 +35,11 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.2.7''"
+GameVersion = "''Retail1 110% - Turbo! - v1.2.8''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_2_7.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_2_8.cfg"
 global HTML5DataVersion as String
-HTML5DataVersion = "SS-v1_2_7-"
+HTML5DataVersion = "SS-v1_2_8-"
 
 global MaximumFrameRate as integer
 MaximumFrameRate = 0

@@ -1799,6 +1799,7 @@ function DisplayNewHighScoreNameInputAndroidScreen ( )
 
 	if FadingToBlackCompleted = TRUE
 		HighScoreName [ GameMode, PlayerRankOnGameOver ] = NewHighScoreCurrentName
+		SaveOptionsAndHighScores()
 	endif
 endfunction
 	
