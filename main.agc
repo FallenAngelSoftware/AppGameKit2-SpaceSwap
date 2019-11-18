@@ -13,7 +13,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.2.8       TURBO!
+                                     Retail1 110% - v1.3.0       TURBO!
 
 ---------------------------------------------------------------------------------------------------     
 
@@ -35,11 +35,11 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.2.8''"
+GameVersion = "''Retail1 110% - Turbo! - v1.3.0''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_2_8.cfg"
+DataVersion = "SS110-Retail1-110-Turbo-v1_3_0.cfg"
 global HTML5DataVersion as String
-HTML5DataVersion = "SS-v1_2_8-"
+HTML5DataVersion = "SS-v1_3_0-"
 
 global MaximumFrameRate as integer
 MaximumFrameRate = 0
@@ -708,18 +708,22 @@ do
 
 	roundedFPS = Round( ScreenFPS() )
 
-	if (ScreenToDisplay = PlayingScreen)
-		if (PlayingSyncRate = 20)
-			PerformancePercent = (20 / roundedFPS)
+	if (roundedFPS > 0)
+		if (ScreenToDisplay = PlayingScreen)
+			if (PlayingSyncRate = 20)
+				PerformancePercent = (20 / roundedFPS)
+			elseif (PlayingSyncRate = 30)
+				PerformancePercent = (30 / roundedFPS)
+			elseif (PlayingSyncRate = 45)
+				PerformancePercent = (45 / roundedFPS)
+			elseif (PlayingSyncRate = 60)
+				PerformancePercent = (60 / roundedFPS)
+			endif
 		elseif (PlayingSyncRate = 30)
 			PerformancePercent = (30 / roundedFPS)
-		elseif (PlayingSyncRate = 45)
-			PerformancePercent = (45 / roundedFPS)
-		elseif (PlayingSyncRate = 60)
-			PerformancePercent = (60 / roundedFPS)
 		endif
-	elseif (PlayingSyncRate = 30)
-		PerformancePercent = (30 / roundedFPS)
+	else
+		PerformancePercent = 1
 	endif
 
 	if (FrameCount > roundedFPS)
