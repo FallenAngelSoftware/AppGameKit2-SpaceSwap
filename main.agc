@@ -585,7 +585,7 @@ QuitPlaying = FALSE
 global GUIchanged as integer
 GUIchanged = TRUE
 
-global roundedFPS as integer
+global roundedFPS as float
 
 SetPrintColor ( 255, 255, 255 )
 SetPrintSize(17)
@@ -766,7 +766,7 @@ do
 		print ( "Matches="+str(NumberOfMatchesCleared) )
 		print ( "MTimer="+str(MatchFlashTimer) )
 		print ( "#Combos="+str(NumberOfCombos) )
-		print ( "P-Fell="+str(PiecesFell) )
+		print ( "Per%"+str(PerformancePercent) )
 	endif
 
 	if (ScreenIsDirty = TRUE)
