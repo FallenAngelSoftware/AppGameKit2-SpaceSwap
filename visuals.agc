@@ -80,6 +80,7 @@ function LoadAboutScreenTexts ( )
 	AddAboutScreenText("Game Created On A:", 0)
 	AddAboutScreenText("Hyper-Custom ''JeZxLee'' Pro-Built Desktop", 255)
 	AddAboutScreenText("Desktop Code Name: ''Optimus Prime''", 255)
+	AddAboutScreenText("Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux", 255)
 	AddAboutScreenText("Corsair® 750watt Modular Power Supply", 255)
 	AddAboutScreenText("GIGABYTE® GA-970A-DS3P 2.0 AM3+ Motherboard", 255)
 	AddAboutScreenText("AMD® FX 3.5GHz(4GHz Turbo) 8-Core CPU", 255)
@@ -96,7 +97,7 @@ function LoadAboutScreenTexts ( )
 	AddAboutScreenText("Opera", 255)
 	AddAboutScreenText("Android Version Tested On:", 0)
 	AddAboutScreenText("Samsung® Galaxy S7 Edge Smartphone", 255)
-	AddAboutScreenText("Eken® Tablet", 255)
+	AddAboutScreenText("Onn® Android 10.1'' 16GB Tablet", 255)
 	AddAboutScreenText("Big Thank You To People Who Helped:", 0)
 	AddAboutScreenText("''blink0k''", 255)
 	AddAboutScreenText("''easter bunny''", 255)
@@ -215,26 +216,29 @@ function CreateAndInitializeOutlinedText (outline as integer, index as integer, 
 	if outline = TRUE
 		posX as integer
 		posY as integer
-		for posX = -2 to 2 step 1
-			for posY = -2 to 2 step 1
-				CreateText( index+outlineIndex, text )
-				SetTextFont( index+outlineIndex, font ) 
-				SetTextSize(index+outlineIndex, size)
+		for posX = -2 to 2 step 2
+			for posY = -2 to 2 step 2
+				if (posX = 0 and posY = 0)
+					
+				else
+					CreateText( index+outlineIndex, text )
+					SetTextFont( index+outlineIndex, font ) 
+					SetTextSize(index+outlineIndex, size)
 
-				if posX = -2 and posY = -2
-					dec screenY, ( GetTextTotalHeight(index+outlineIndex)/2 )
+					if posX = -2 and posY = -2
+						dec screenY, ( GetTextTotalHeight(index+outlineIndex)/2 )
+					endif
+
+					SetTextColor(index+outlineIndex, outRed, outGreen, outBlue, alpha)
+					SetTextAlignment(index+outlineIndex, horizontalJustification)
+					SetTextPosition(index+outlineIndex, screenX+posX, screenY+posY)
+					SetTextDepth(index+outlineIndex, depth)
+					inc outlineIndex, 1
 				endif
-
-				SetTextColor(index+outlineIndex, outRed, outGreen, outBlue, alpha)
-				SetTextAlignment(index+outlineIndex, horizontalJustification)
-				SetTextPosition(index+outlineIndex, screenX+posX, screenY+posY)
-				SetTextDepth(index+outlineIndex, depth)
-				inc outlineIndex, 1
 			next posY
 		next posX
-	else
-		outlineIndex = 26
 	endif
+	outlineIndex = 26
 
 	CreateText( index, text )
 	SetTextFont( index, font ) 

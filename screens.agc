@@ -1057,6 +1057,8 @@ function DisplayAboutScreen( )
 
 		AboutScreenFPSY = -200
 
+		multiplier = 3
+
 		ScreenIsDirty = TRUE
 	endif
 
@@ -1066,23 +1068,21 @@ function DisplayAboutScreen( )
 		SetDelayAllUserInput()
 	endif
 
-	multiplier as float
-	if (PerformancePercent < 1)
-		multiplier = .02
-	else
-		multiplier = .02 * (PerformancePercent)
+	if (PerformancePercent > 1)
+		multiplier = 3 * PerformancePercent
 	endif
 
-	index as integer
 	if (ScreenFadeStatus = FadingIdle)
-		for index = 0 to (NumberOfAboutScreenTexts-1)
-			SetViewOffset( 0, AboutScreenOffsetY )
-			inc AboutScreenOffsetY, multiplier
-			inc AboutScreenBackgroundY, multiplier
-			inc AboutScreenFPSY, multiplier
-			SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
-			if (SecretCodeCombined = 2777) then SetSpritePositionByOffset( FadingBlackBG, -80, AboutScreenFPSY )
-		next index
+		inc AboutScreenOffsetY, multiplier
+		inc AboutScreenBackgroundY, multiplier
+		inc AboutScreenFPSY, multiplier
+		
+//		if (WonGame = TRUE) then SetSpritePositionByOffset( Kiss, ScreenWidth/2, 15+AboutScreenBackgroundY )
+		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
+
+		if (SecretCodeCombined = 2777) then SetSpritePositionByOffset( FadingBlackBG, -80, AboutScreenFPSY )
+
+		SetViewOffset( 0, AboutScreenOffsetY )
 	endif
 
 	if FadingToBlackCompleted = TRUE
