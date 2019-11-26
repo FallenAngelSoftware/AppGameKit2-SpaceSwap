@@ -575,7 +575,7 @@ endfunction
 
 function AddScoreAndLevelAdvance()
 	inc Score, StagingScore
-	if (StagingScore > 0) then SetText ( ScoreText, str(Score) )
+	if (StagingScore > 0) then SetTextStringOutlined ( ScoreText, str(Score) )
 	StagingScore = 0
 	
 	inc LevelAdvancePieceCounter, StagingLevelAdvance
@@ -584,9 +584,9 @@ function AddScoreAndLevelAdvance()
 	if (MaximumFrameRate = 0 and LevelAdvancePieceCounter > LevelAdvancePieceCount[GameMode])
 		inc Level, 1
 		if (Level < 9 or GameMode = ChildNeverEndMode or GameMode = TeenNeverEndMode or GameMode = AdultNeverEndMode)
-			SetText ( LevelText, str(Level) )
+			SetTextStringOutlined ( LevelText, str(Level) )
 		else
-			SetText ( LevelText, "Final Level!" )
+			SetTextStringOutlined ( LevelText, "Final Level!" )
 		endif
 
 		if (GameMode = ChildStoryMode or GameMode = TeenStoryMode or GameMode = AdultStoryMode)
@@ -715,7 +715,7 @@ function RaisePlayfieldManually()
 	next indexX
 	
 	inc Score, 10000 * (1+Level)
-	SetText ( ScoreText, str(Score) )
+	SetTextStringOutlined ( ScoreText, str(Score) )
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
@@ -757,7 +757,7 @@ function RunGameplayCore()
 		PlaySoundEffect(7)
 		inc TimeFreezeTimer, 150
 		inc Score, (1000*NumberOfCombos)
-		SetText ( ScoreText, str(Score) )
+		SetTextStringOutlined ( ScoreText, str(Score) )
 	elseif (PiecesFell = TRUE and ComboTakenCareOf = TRUE)
 		if ( PlayfieldIsLow() = TRUE )
 			SetSpriteVisible( BonusSprite, 1 )
