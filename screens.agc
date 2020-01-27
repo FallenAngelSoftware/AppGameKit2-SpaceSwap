@@ -488,12 +488,12 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
-		if (Platform = Windows)
-			CreateIcon(8, 180, 527 )
-		else
+//		if (Platform = Windows)
+//			CreateIcon(8, 180, 527 )
+//		else
 			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
 			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
-		endif
+//		endif
 		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
 				
@@ -1069,7 +1069,7 @@ function DisplayAboutScreen( )
 	endif
 
 	if (PerformancePercent > 1)
-		multiplier = 3 * PerformancePercent
+		multiplier = 1.5 * PerformancePercent
 	endif
 
 	if (ScreenFadeStatus = FadingIdle)
@@ -1215,7 +1215,7 @@ function DisplayPlayingScreen( )
 	index as integer
 	
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
-		if (MaximumFrameRate = 0) then SetSyncRate( PlayingSyncRate, 0 )
+//		if (MaximumFrameRate = 0) then SetSyncRate( PlayingSyncRate, 0 )
 
 		ClearScreenWithColor ( 0, 0, 0 )
 
@@ -1478,7 +1478,7 @@ function DisplayPlayingScreen( )
 	if (GameOverTimer > -1) then SetSpriteVisible( GameOverSprite, 1 )
 
 	if FadingToBlackCompleted = TRUE
-		if (MaximumFrameRate = 0) then SetSyncRate( 30, 0 )
+//		if (MaximumFrameRate = 0) then SetSyncRate( 30, 0 )
 
 		DeleteImage(42)
 		DeleteImage(63)
@@ -1864,17 +1864,17 @@ function DisplayIntroSceneScreen( )
 		if (IntroStarsScale[starIndex] < 0)
 			IntroStarsScale[starIndex] = 2
 		else
-			if (30 / roundedFPS < 1)
+			if (PerformancePercent < 1)
 				dec IntroStarsScale[starIndex], .05
 			else
-				dec IntroStarsScale[starIndex], .05 * (30 / roundedFPS)
+				dec IntroStarsScale[starIndex], .05 * PerformancePercent
 			endif
 		endif
 		SetSpriteScaleByOffset( IntroStarsSprite[starIndex], IntroStarsScale[starIndex], IntroStarsScale[starIndex] )
 	next starIndex
 
 	if (IntroAnimationStep = -1)
-		if ( (30 / roundedFPS) < 1 )
+		if ( (PerformancePercent) < 1 )
 		
 		else
 			PlaySoundEffect(3)
@@ -1882,15 +1882,15 @@ function DisplayIntroSceneScreen( )
 		endif
 	elseif (IntroAnimationStep = 0)
 		if (IntroShuttleScale < 1)
-			inc IntroShuttleScale, .01 * (30 / roundedFPS)
+			inc IntroShuttleScale, .01 * (PerformancePercent)
 			SetSpriteScaleByOffset( IntroShuttleSprite, IntroShuttleScale, IntroShuttleScale )
 		else
 			IntroAnimationStep = 1
 		endif
 	elseif (IntroAnimationStep = 1)
 		if (IntroShuttleScreenX < 360+160)
-			inc IntroShuttleScreenX, 3 * (30 / roundedFPS)
-			dec IntroShuttleScreenY, 2 * (30 / roundedFPS)
+			inc IntroShuttleScreenX, 3 * (PerformancePercent)
+			dec IntroShuttleScreenY, 2 * (PerformancePercent)
 			SetSpritePositionByOffset( IntroShuttleSprite, IntroShuttleScreenX, IntroShuttleScreenY )
 		else
 			IntroShuttleScale = 0
@@ -1905,7 +1905,7 @@ function DisplayIntroSceneScreen( )
 		endif
 	elseif (IntroAnimationStep = 2)
 		if (IntroShuttleScale < 1)
-			inc IntroShuttleScale, .01 * (30 / roundedFPS)
+			inc IntroShuttleScale, .01 * (PerformancePercent)
 			SetSpriteScaleByOffset( IntroShuttleSprite, IntroShuttleScale, IntroShuttleScale )
 		else
 			IntroAnimationStep = 3
@@ -1913,7 +1913,7 @@ function DisplayIntroSceneScreen( )
 	elseif (IntroAnimationStep = 3)
 		if (IntroShuttleScreenX < 360+160)
 			if (IntroEarthScale > 0)
-				dec IntroEarthScale, .01 * (30 / roundedFPS)
+				dec IntroEarthScale, .01 * (PerformancePercent)
 				SetSpriteScaleByOffset( IntroEarthSprite, IntroEarthScale, IntroEarthScale )
 			endif
 					
@@ -2027,17 +2027,17 @@ function DisplayEndingSceneScreen( )
 		if (EndingStarsScale[starIndex] < 0)
 			EndingStarsScale[starIndex] = 2
 		else			
-			if (30 / roundedFPS < 1)
+			if (PerformancePercent < 1)
 				dec EndingStarsScale[starIndex], .05
 			else
-				dec EndingStarsScale[starIndex], .05 * (30 / roundedFPS)
+				dec EndingStarsScale[starIndex], .05 * (PerformancePercent)
 			endif
 		endif
 		SetSpriteScaleByOffset( EndingStarsSprite[starIndex], EndingStarsScale[starIndex], EndingStarsScale[starIndex] )
 	next starIndex
 
 	if (EndingAnimationStep = -1)
-		if ( (30 / roundedFPS) < 1 )
+		if ( (PerformancePercent) < 1 )
 		
 		else
 			PlaySoundEffect(3)
@@ -2045,14 +2045,14 @@ function DisplayEndingSceneScreen( )
 		endif
 	elseif (EndingAnimationStep = 0)
 		if (EndingShuttleScale < 1)
-			inc EndingShuttleScale, .01 * (30 / roundedFPS)
+			inc EndingShuttleScale, .01 * (PerformancePercent)
 			SetSpriteScaleByOffset( EndingShuttleSprite, EndingShuttleScale, EndingShuttleScale )
 
-			inc EndingAsteroidScreenX, 3 * (30 / roundedFPS)
-			inc EndingAsteroidScreenY, 1 * (30 / roundedFPS)
+			inc EndingAsteroidScreenX, 3 * (PerformancePercent)
+			inc EndingAsteroidScreenY, 1 * (PerformancePercent)
 			SetSpritePositionByOffset( EndingAsteroidSprite, EndingAsteroidScreenX, EndingAsteroidScreenY )
 
-			dec EndingAsteroidScale, .005 * (30 / roundedFPS)
+			dec EndingAsteroidScale, .005 * (PerformancePercent)
 			SetSpriteScaleByOffset( EndingAsteroidSprite, EndingAsteroidScale, EndingAsteroidScale )
 		else
 			PlaySoundEffect(11)
@@ -2061,7 +2061,7 @@ function DisplayEndingSceneScreen( )
 		endif
 	elseif (EndingAnimationStep = 1)
 		if (EndingExplosionScale < 20)
-			inc EndingExplosionScale, 1 * (30 / roundedFPS)
+			inc EndingExplosionScale, 1 * (PerformancePercent)
 			
 			SetSpriteScaleByOffset( EndingExplosionSprite, EndingExplosionScale, EndingExplosionScale )
 		else
@@ -2070,7 +2070,7 @@ function DisplayEndingSceneScreen( )
 		endif
 	elseif (EndingAnimationStep = 2)
 		if (EndingExplosionAlpha > 0)
-			dec EndingExplosionAlpha, 5 * (30 / roundedFPS)
+			dec EndingExplosionAlpha, 5 * (PerformancePercent)
 		
 			SetSpriteColorAlpha( EndingExplosionSprite, EndingExplosionAlpha )
 		else
@@ -2079,13 +2079,13 @@ function DisplayEndingSceneScreen( )
 		endif
 	elseif (EndingAnimationStep = 3)
 		if (EndingShuttleScale > 0)
-			dec EndingShuttleScale, .01 * (30 / roundedFPS)
+			dec EndingShuttleScale, .01 * (PerformancePercent)
 			SetSpriteScaleByOffset( EndingShuttleSprite, EndingShuttleScale, EndingShuttleScale )
 
-			dec EndingShuttleScreenX, 1 * (30 / roundedFPS)
+			dec EndingShuttleScreenX, 1 * (PerformancePercent)
 			SetSpritePositionByOffset( EndingShuttleSprite, EndingShuttleScreenX, EndingShuttleScreenY )
 			
-			inc EndingEarthScreenX, 2 * (30 / roundedFPS)
+			inc EndingEarthScreenX, 2 * (PerformancePercent)
 			SetSpritePositionByOffset( EndingEarthSprite, EndingEarthScreenX, EndingEarthScreenY )
 		else
 			SetDelayAllUserInput()
