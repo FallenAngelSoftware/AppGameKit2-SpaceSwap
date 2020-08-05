@@ -728,6 +728,8 @@ endfunction
 
 function ThisIconWasPressed(iconIndexToCheck as integer)
 	if (NumberOfIconsOnScreen = 0) then exitfunction(-1)
+
+//	if (DelayAllUserInput > 0) then exitfunction(-1)
 	
 	returnValue as integer
 	returnValue = FALSE
@@ -748,8 +750,6 @@ function ThisIconWasPressed(iconIndexToCheck as integer)
 					dec IconAnimationTimer[index], 1
 				elseif IconAnimationTimer[index] = 1
 					if iconIndexToCheck = IconIndex[index] then returnValue = TRUE
-
-					PlaySoundEffect(1)
 
 					CurrentIconBeingPressed = -1
 

@@ -13,7 +13,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.3.5       TURBO!
+                                     Retail1 110% - v1.3.7       TURBO!
 
 ---------------------------------------------------------------------------------------------------     
 
@@ -35,7 +35,7 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.3.5''"
+GameVersion = "''Retail1 110% - Turbo! - v1.3.7''"
 global DataVersion as string
 DataVersion = "SS110-Retail1-110-Turbo-v1_3_5.cfg"
 global HTML5DataVersion as String
@@ -627,11 +627,7 @@ global CurrentKeyboardKeyPressed as integer
 CurrentKeyboardKeyPressed = -1
 
 global multiplier as float
-/*
-Score = 5555
-Level = 5
-ScreenToDisplay = NewHighScoreNameInputScreen
-*/
+
 do
 	inc FrameCount, 1
 		
@@ -780,5 +776,7 @@ do
 		exit
 	endif
 loop
+
+end
 rem                                      [TM]
 rem "A 110% By Team Fallen Angel Software!"

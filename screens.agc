@@ -1,7 +1,7 @@
 // "screens.agc"...
 
 function SetDelayAllUserInput()
-	DelayAllUserInput = 5
+	DelayAllUserInput = 7
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
@@ -488,12 +488,8 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
-//		if (Platform = Windows)
-//			CreateIcon(8, 180, 527 )
-//		else
-			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
-			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
-//		endif
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
 		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
 				
@@ -825,7 +821,7 @@ function DisplayHowToPlayScreen( )
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "will appear at the bottom.", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 72+(3*25), 3 )
 
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Rearrange the pieces horizontally", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 82+(4*25), 3 )
-		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "into sets or 3 or more.", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 82+(5*25), 3 )
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "into sets of 3 or more.", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 82+(5*25), 3 )
 
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "3 or more same pieces horizontally", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 92+(6*25), 3 )
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "or vertically will be cleared.", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 92+(7*25), 3 )
@@ -983,11 +979,7 @@ endfunction
 function SetupAboutScreenTexts( )
 	outline as integer
 	
-//	if (WonGame = TRUE)	
-		outline = TRUE
-//	else
-//		outline = FALSE
-//	endif
+	outline = TRUE
 
 	startScreenY as integer
 	startScreenY = 640+15
@@ -1077,7 +1069,6 @@ function DisplayAboutScreen( )
 		inc AboutScreenBackgroundY, multiplier
 		inc AboutScreenFPSY, multiplier
 		
-//		if (WonGame = TRUE) then SetSpritePositionByOffset( Kiss, ScreenWidth/2, 15+AboutScreenBackgroundY )
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, AboutScreenBackgroundY )
 
 		if (SecretCodeCombined = 2777) then SetSpritePositionByOffset( FadingBlackBG, -80, AboutScreenFPSY )
@@ -1215,7 +1206,6 @@ function DisplayPlayingScreen( )
 	index as integer
 	
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
-//		if (MaximumFrameRate = 0) then SetSyncRate( PlayingSyncRate, 0 )
 
 		ClearScreenWithColor ( 0, 0, 0 )
 
@@ -1478,7 +1468,6 @@ function DisplayPlayingScreen( )
 	if (GameOverTimer > -1) then SetSpriteVisible( GameOverSprite, 1 )
 
 	if FadingToBlackCompleted = TRUE
-//		if (MaximumFrameRate = 0) then SetSyncRate( 30, 0 )
 
 		DeleteImage(42)
 		DeleteImage(63)
@@ -1581,7 +1570,7 @@ function DisplayNewHighScoreNameInputScreen ( )
 
 		NextScreenToDisplay = HighScoresScreen
 
-CurrentIconBeingPressed = -1
+		CurrentIconBeingPressed = -1
 
 		ScreenIsDirty = TRUE
 	endif
@@ -1860,6 +1849,8 @@ function DisplayIntroSceneScreen( )
 		ScreenIsDirty = TRUE
 	endif
 
+PerformancePercent = 1.0
+
 	for starIndex = 0 to 4
 		if (IntroStarsScale[starIndex] < 0)
 			IntroStarsScale[starIndex] = 2
@@ -1874,12 +1865,8 @@ function DisplayIntroSceneScreen( )
 	next starIndex
 
 	if (IntroAnimationStep = -1)
-		if ( (PerformancePercent) < 1 )
-		
-		else
-			PlaySoundEffect(3)
-			IntroAnimationStep = 0
-		endif
+		PlaySoundEffect(3)
+		IntroAnimationStep = 0
 	elseif (IntroAnimationStep = 0)
 		if (IntroShuttleScale < 1)
 			inc IntroShuttleScale, .01 * (PerformancePercent)
@@ -2023,6 +2010,8 @@ function DisplayEndingSceneScreen( )
 		ScreenIsDirty = TRUE
 	endif
 
+PerformancePercent = 1.0
+
 	for starIndex = 0 to 4
 		if (EndingStarsScale[starIndex] < 0)
 			EndingStarsScale[starIndex] = 2
@@ -2074,6 +2063,7 @@ function DisplayEndingSceneScreen( )
 		
 			SetSpriteColorAlpha( EndingExplosionSprite, EndingExplosionAlpha )
 		else
+			SetSpriteColorAlpha( EndingExplosionSprite, 0.0 )
 			PlaySoundEffect(3)
 			EndingAnimationStep = 3
 		endif

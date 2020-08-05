@@ -28,7 +28,7 @@ function LoadAllMusic ( )
 	MusicTrack[ 7] = LoadMusicOGG( "\media\music\NewHighScoreBGM.ogg" )
 	MusicTrack[ 8] = LoadMusicOGG( "\media\music\TopHighScoreBGM.ogg" )
 	MusicTrack[ 9] = LoadMusicOGG( "\media\music\Ending2BGM.ogg" )
-	MusicTrack[10] = LoadMusicOGG( "\media\music\WinTurbo2BGM.ogg" )
+	MusicTrack[10] = LoadMusicOGG( "\media\music\WinTurbo3BGM.ogg" )
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
