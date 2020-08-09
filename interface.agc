@@ -729,8 +729,6 @@ endfunction
 function ThisIconWasPressed(iconIndexToCheck as integer)
 	if (NumberOfIconsOnScreen = 0) then exitfunction(-1)
 
-//	if (DelayAllUserInput > 0) then exitfunction(-1)
-	
 	returnValue as integer
 	returnValue = FALSE
 
