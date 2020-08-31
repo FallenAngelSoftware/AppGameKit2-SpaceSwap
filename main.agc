@@ -13,7 +13,7 @@ remstart
            /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
                    \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.3.9       TURBO!
+                                     Retail1 110% - v1.4.0       TURBO!
 
 ---------------------------------------------------------------------------------------------------     
 
@@ -35,7 +35,7 @@ remend
 #include "visuals.agc"
 
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.3.9''"
+GameVersion = "''Retail1 110% - Turbo! - v1.4.0''"
 global DataVersion as string
 DataVersion = "SS110-Retail1-110-Turbo-v1_3_5.cfg"
 global HTML5DataVersion as String
@@ -234,11 +234,6 @@ PauseGame = FALSE
 global ScreenToDisplay = 3
 global NextScreenToDisplay = 4
 global ScreenDisplayTimer as integer
-
-if (Platform <> Windows)
-	ScreenToDisplay = 3
-	NextScreenToDisplay = 4
-endif
 	
 global MusicPlayerScreenIndex as integer
 MusicPlayerScreenIndex = 0
@@ -573,6 +568,9 @@ global GamePaused as integer
 
 global BonusSprite as integer
 global PlayfieldLow as integer
+
+global IntroText as integer
+global TextFlash as integer
 
 global FrameCount as integer
 FrameCount = 0

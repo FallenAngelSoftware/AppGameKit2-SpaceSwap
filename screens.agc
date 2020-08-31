@@ -193,16 +193,16 @@ function DisplaySixteenBitSoftScreen( )
 		SetSpriteOffset( BlackBG, (GetSpriteWidth(BlackBG)/2) , (GetSpriteHeight(BlackBG)/2) ) 
 		SetSpritePositionByOffset( BlackBG, ScreenWidth/2, ScreenHeight/2 )
 
-		LoadImage (30, "\media\images\logos\FAS-Statue.png")
-		SixteenBitSoftLogo = CreateSprite ( 30 )
-		SetSpriteDepth ( SixteenBitSoftLogo, 3 )
-		SetSpriteOffset( SixteenBitSoftLogo, (GetSpriteWidth(SixteenBitSoftLogo)/2) , (GetSpriteHeight(SixteenBitSoftLogo)/2) ) 
-		SetSpriteScaleByOffset( SixteenBitSoftLogo, .65, .65 )
-		SetSpritePositionByOffset( SixteenBitSoftLogo, ScreenWidth/2, ScreenHeight/2 )
+//		LoadImage (30, "\media\images\logos\FAS-Statue.png")
+//		SixteenBitSoftLogo = CreateSprite ( 30 )
+//		SetSpriteDepth ( SixteenBitSoftLogo, 3 )
+//		SetSpriteOffset( SixteenBitSoftLogo, (GetSpriteWidth(SixteenBitSoftLogo)/2) , (GetSpriteHeight(SixteenBitSoftLogo)/2) ) 
+//		SetSpriteScaleByOffset( SixteenBitSoftLogo, .65, .65 )
+//		SetSpritePositionByOffset( SixteenBitSoftLogo, ScreenWidth/2, ScreenHeight/2 )
 
-		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "www.FallenAngelSoftware.com", 999, 25, 0, 255, 0, 255, 0, 128, 0, 1, ScreenWidth/2, ScreenHeight-22, 3)
+//		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "www.FallenAngelSoftware.com", 999, 25, 0, 255, 0, 255, 0, 128, 0, 1, ScreenWidth/2, ScreenHeight-22, 3)
 		
-		ScreenDisplayTimer = 200
+		ScreenDisplayTimer = 3200
 		NextScreenToDisplay = TitleScreen
 
 		ScreenIsDirty = TRUE
@@ -216,7 +216,7 @@ function DisplaySixteenBitSoftScreen( )
 	
 	if ScreenDisplayTimer > 0
 		if MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27
-			PlaySoundEffect(1)
+//			PlaySoundEffect(1)
 			SetDelayAllUserInput()
 			ScreenDisplayTimer = 0
 		endif
@@ -233,6 +233,8 @@ function DisplaySixteenBitSoftScreen( )
 
 	if FadingToBlackCompleted = TRUE
 		DeleteImage(30)
+		PlayNewMusic(0, 1)
+
 	endif
 endfunction
 
@@ -1422,6 +1424,8 @@ function DisplayPlayingScreen( )
 				SetDelayAllUserInput()
 
 				SetSpriteVisible ( GamePausedBG, 1 )
+
+				SetSpritePositionByOffset( BonusSprite, (ScreenWidth/2), (78-9999) )
 				
 				SetSpriteDepth ( Icon[0], 1 )
 				SetSpriteDepth ( Icon[1], 1 )
@@ -1434,6 +1438,8 @@ function DisplayPlayingScreen( )
 				SetDelayAllUserInput()
 
 				SetSpriteVisible ( GamePausedBG, 0 )
+
+				SetSpritePositionByOffset( BonusSprite, (ScreenWidth/2), (78) )
 
 				SetSpriteDepth ( Icon[0], 2 )
 				SetSpriteDepth ( Icon[1], 2 )
@@ -1847,7 +1853,31 @@ function DisplayIntroSceneScreen( )
 
 		DelayAllUserInput = 20
 
+		if (OnMobile = TRUE)
+			IntroText = CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Tap To Continue!", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25, 3 )
+		elseif (OnMobile = FALSE)
+			IntroText = CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Click To Continue!", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25, 3 )
+		endif
+
+		TextFlash = 0
+
 		ScreenIsDirty = TRUE
+	endif
+
+	if (TextFlash < 25)
+		inc TextFlash, 1
+	else
+		TextFlash = 0
+	endif
+
+	if (TextFlash < 20)
+		if (OnMobile = TRUE)
+			SetTextStringOutlined (IntroText,  "Tap To Continue!")
+		elseif (OnMobile = FALSE)
+			SetTextStringOutlined (IntroText,  "Click To Continue!")
+		endif
+	else
+		SetTextStringOutlined (IntroText,  " ")
 	endif
 
 	PerformancePercent = 1.0

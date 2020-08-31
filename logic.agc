@@ -333,7 +333,7 @@ function ApplyGravity()
 		next indexX
 	next indexY
 
-	piecesFell = TRUE
+	PiecesFell = TRUE
 	for indexY = 11 to 1 step -1
 		for indexX = 0 to 5
 			if (Playfield[indexX, indexY] = 0 and Playfield[indexX, indexY-1] > 0)
@@ -697,7 +697,7 @@ function RaisePlayfieldManually()
 	indexY as integer
 	indexX as integer
 
-	if ( PlayfieldIsLow() = FALSE or MatchFlashTimer > -1) then exitfunction
+	if ( PlayfieldIsLow() = FALSE or MatchFlashTimer > -1 or ComboTakenCareOf = FALSE) then exitfunction
 
 	ResetSwappingPieces ( )
 	MoveOffScreenSwappingPieces ( )
@@ -716,6 +716,10 @@ function RaisePlayfieldManually()
 	
 	inc Score, 10000 * (1+Level)
 	SetTextStringOutlined ( ScoreText, str(Score) )
+	
+	CheckForMatches (TRUE)
+	
+	DelayAllUserInput = 10
 endfunction
 
 //------------------------------------------------------------------------------------------------------------
@@ -759,7 +763,7 @@ function RunGameplayCore()
 		inc Score, (1000*NumberOfCombos)
 		SetTextStringOutlined ( ScoreText, str(Score) )
 	elseif (PiecesFell = TRUE and ComboTakenCareOf = TRUE)
-		if ( PlayfieldIsLow() = TRUE )
+		if ( PlayfieldIsLow() = TRUE and MatchFlashTimer = -1 )
 			SetSpriteVisible( BonusSprite, 1 )
 		else
 			SetSpriteVisible( BonusSprite, 0 )
@@ -834,7 +838,27 @@ function RunGameplayCore()
 							endif
 						next indexX
 					endif
-				elseif ( (ShowCursor = TRUE and PlayerSwapMovement = -1 and PlayerMovePlayfieldX = -1 and PlayerMovePlayfieldY = -1) or (ShowCursor = FALSE and MouseButtonLeft = OFF and PlayerSwapMovement = -1 and PlayerSwapPieceOneScreenX = -1) )
+				elseif (OnMobile = FALSE)
+					if (PlayerSwapMovement = -1 and PlayerMovePlayfieldX = -1 and PlayerMovePlayfieldY = -1)
+						for indexY = 1 to 12
+							for indexX = 0 to 5
+								Playfield[indexX, indexY-1] = Playfield[indexX, indexY]
+							next indexX
+						next indexY
+						
+						for indexX = 0 to 5
+							Playfield[indexX, 12] = Random( 1, 6 )
+						next indexX
+
+						if (PlayerPlayfieldY > 0) then dec PlayerPlayfieldY, 1
+						
+						PlayfieldOffsetY = 0
+						PiecesFell = FALSE
+						CheckForMatches (TRUE)
+					endif
+				elseif (OnMobile = TRUE)
+					DelayAllUserInput = 1
+
 					for indexY = 1 to 12
 						for indexX = 0 to 5
 							Playfield[indexX, indexY-1] = Playfield[indexX, indexY]
@@ -854,10 +878,10 @@ function RunGameplayCore()
 			endif
 		endif
 //--[TOUCH Input]-------------------------------------------------------------------------------------------------------------------------------------
-		if (ShowCursor = FALSE)
+		if (OnMobile = TRUE)
 			if (MouseButtonLeft = OFF and PlayerSwapDirection = 0)
 				PlayerSwapPieceOneScreenX = -1
-	
+
 				ResetSwappingPieces ()
 
 				MoveOffScreenSwappingPieces ()
@@ -1181,7 +1205,7 @@ function RunGameplayCore()
 					endif
 				endif
 			endif
-		else
+		elseif (OnMobile = FALSE)
 //--[KEYBOARD/MOUSE Input]----------------------------------------------------------------------------------------------------------------------------
 			if (PlayerMovementDelay = 0)
 				moveDelay as integer
