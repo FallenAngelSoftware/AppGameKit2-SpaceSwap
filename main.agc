@@ -83,8 +83,11 @@ if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 		Platform = iOS
 	endif
 
+	SetImmersiveMode(1) 
+
 	SetSyncRate( 30, 0 )
 	SetScissor( 0,0,0,0 )
+	SetVirtualResolution( ScreenWidth, ScreenHeight) //+40 )
 	OnMobile = TRUE
 	ShowCursor = FALSE
 else
@@ -722,8 +725,20 @@ do
 		PerformancePercent = 1
 	endif
 
+//	if (FrameCount > roundedFPS)
+//		FrameCount = 0
+//		inc SecondsSinceStart, 1
+//	endif
+
 	if (FrameCount > roundedFPS)
 		FrameCount = 0
+		
+		if (OnMobile = TRUE)
+			if (  ( GetDeviceWidth() <> 360 ) or ( GetDeviceHeight() <> 640 )  )
+				SetImmersiveMode(1)
+			endif
+		endif
+				
 		inc SecondsSinceStart, 1
 	endif
 
