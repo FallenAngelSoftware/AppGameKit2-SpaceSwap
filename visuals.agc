@@ -21,7 +21,7 @@ function LoadAboutScreenTexts ( )
 	
 	AddAboutScreenText("TM", 0)
 	AddAboutScreenText("''Space Swap 110%''", 0)
-	AddAboutScreenText("©2019 By Team Fallen Angel Software", 255)
+	AddAboutScreenText("©2021 By Team Fallen Angel Software", 255)
 	AddAboutScreenText("www.FallenAngelSoftware.com", 255)
 	AddAboutScreenText("Made With ''AppGameKit Classic''", 0)
 	AddAboutScreenText("(www.AppGameKit.com)", 255)

@@ -725,11 +725,6 @@ do
 		PerformancePercent = 1
 	endif
 
-//	if (FrameCount > roundedFPS)
-//		FrameCount = 0
-//		inc SecondsSinceStart, 1
-//	endif
-
 	if (FrameCount > roundedFPS)
 		FrameCount = 0
 		

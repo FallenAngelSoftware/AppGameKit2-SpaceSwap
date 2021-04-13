@@ -291,16 +291,13 @@ function DisplayTitleScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, ScreenHeight-165+offsetY+13 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		if ShowCursor = TRUE
-			CreateIcon(2, (ScreenWidth/2), (ScreenHeight-100+13) )
-		elseif ShowCursor = FALSE
-			CreateIcon(3, (ScreenWidth/2), (ScreenHeight-100+13) )
-		endif
-
 		SetSpritePositionByOffset( ScreenLine[3], ScreenWidth/2, ScreenHeight-40+offsetY-15+13 )
 		SetSpriteColor(ScreenLine[3], 255, 255, 255, 255)
 
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2019 By www.FallenAngelSoftware.com", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2021 By", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-40-50, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Team", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-20-50, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''www.FallenAngelSoftware.com''", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-50, 3)
+
 
 		if (SecretCodeCombined = 5432 or SecretCodeCombined = 5431) then CreateIcon(6, 360-17, 17)
 		
@@ -493,10 +490,20 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
+//		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
+//		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
 		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
+
+
+
+		if ShowCursor = TRUE
+			CreateIcon(2, (ScreenWidth/2), (ScreenHeight-100+13)-25 )
+		elseif ShowCursor = FALSE
+			CreateIcon(3, (ScreenWidth/2), (ScreenHeight-100+13)-25 )
+		endif
+
+
 				
 		ChangingBackground = FALSE
 
@@ -508,6 +515,18 @@ function DisplayOptionsScreen( )
 		NextScreenToDisplay = TitleScreen
 		ScreenFadeStatus = FadingToBlack
 	endif
+
+
+
+	if ThisIconWasPressed(0) = TRUE
+		if (Platform = Android or Platform = Web or Platform = Windows or Platform = Linux)
+			OpenBrowser( "https://play.google.com/store/apps/details?id=com.fallenangelsoftware.spaceswap" )
+		elseif (Platform = iOS)
+			OpenBrowser( "itms-apps://itunes.apple.com/app/id1394918474" )
+		endif
+	endif
+
+
 
 	index as integer
 
