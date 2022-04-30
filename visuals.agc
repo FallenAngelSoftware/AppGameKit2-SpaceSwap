@@ -1,5 +1,28 @@
 // "visuals.agc"...
 
+remstart
+---------------------------------------------------------------------------------------------------
+
+    Copyright 2022 Team "www.FallenAngelSoftware.com"
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+---------------------------------------------------------------------------------------------------
+remend
+
 function ClearScreenWithColor ( red as integer, green as integer, blue as integer )
 	SetClearColor( red, green, blue ) 
 	ClearScreen()
@@ -21,58 +44,97 @@ function LoadAboutScreenTexts ( )
 	
 	AddAboutScreenText("TM", 0)
 	AddAboutScreenText("''Space Swap 110%''", 0)
-	AddAboutScreenText("©2021 By Team Fallen Angel Software", 255)
+	AddAboutScreenText("©2022 By Team Fallen Angel Software", 255)
 	AddAboutScreenText("www.FallenAngelSoftware.com", 255)
-	AddAboutScreenText("Made With ''AppGameKit Classic''", 0)
+
+	AddAboutScreenText("Original SNES Game Idea By:", 0)
+	AddAboutScreenText("Nintendo", 255)
+	AddAboutScreenText("(This Is A 100% Free Tribute Game!)", 255)
+
+	AddAboutScreenText("Game Made Possible By Our Mentors:", 0)
+	AddAboutScreenText("Garry Kitchen", 255)
+	AddAboutScreenText("Andre' LaMothe", 255)
+	
+	AddAboutScreenText("Made With ''AppGameKit Studio''", 0)
 	AddAboutScreenText("(www.AppGameKit.com)", 255)
+	
 	AddAboutScreenText("Game Built On:", 0)
-	AddAboutScreenText("Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux", 255)
-	AddAboutScreenText("(www.Kubuntu.org)", 255)
+	AddAboutScreenText("Genuine ''Manjaro KDE 64Bit'' Linux", 255)
+	AddAboutScreenText("(www.manjaro.org)", 255)
 	AddAboutScreenText("Real Programmers Use Linux!", 255)
+	
 	AddAboutScreenText("Original Game Idea By:", 0)
-	AddAboutScreenText("''Nintendo®''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	AddAboutScreenText("''Merkredy''", 255)
+	
+	AddAboutScreenText("Project Produced By:", 0)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("Project Directed By:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("''AppGameKit'' 2-D Game Engine:", 0)
 	AddAboutScreenText("The ''NightRider'' Engine[TM]", 255)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("Lead Game Designer:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("Lead Game Programmer:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("Lead Game Tester:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+
+	AddAboutScreenText("Android Mobile Full Screen By:", 0)
+	AddAboutScreenText("''hendron''", 255)
+
+	AddAboutScreenText("Support Game Testers:", 0)
+	AddAboutScreenText("''fogobogo''", 255)
+
 	AddAboutScreenText("Optimizations Tested Using:", 0)
-	AddAboutScreenText("''BES – Battle Encoder Shirase'''", 255)
+	AddAboutScreenText("'' BES – Battle Encoder Shirase' ''", 255)
 	AddAboutScreenText("(http://mion.faireal.net/BES/)", 255)
+	
 	AddAboutScreenText("Support Game Programmers:", 0)
 	AddAboutScreenText("''Daotheman''", 255)
 	AddAboutScreenText("''theweirdn8''", 255)
 	AddAboutScreenText("''mattmatteh''", 255)
+	
 	AddAboutScreenText("Lead Graphic Artist:", 0)
-	AddAboutScreenText("''Oshi Bobo''", 255)
-	AddAboutScreenText("''www.OshiBobo.com''", 255)
-	AddAboutScreenText("(For Hire Graphic Artist)", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("Support Graphic Artist:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
-	AddAboutScreenText("Lead Music Artist:", 0)
+	AddAboutScreenText("''Oshi Bobo''", 255)
+	AddAboutScreenText("For Hire Graphic Artist", 255)
+	
+	AddAboutScreenText("Music Soundtrack Compiled & Edited By:", 0)
 	AddAboutScreenText("''D.J. Fading Twilight''", 255)
+			
 	AddAboutScreenText("''Neo's Kiss'' Graphical User Interface By:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("Sound Effects Compiled & Edited By:", 0)
-	AddAboutScreenText("''The Fallen Angel''", 255)
+	AddAboutScreenText("''JeZxLee''", 255)
+	
 	AddAboutScreenText("PNG Graphics Edited In:", 0)
-	AddAboutScreenText("''NeoPaint''", 255)
-	AddAboutScreenText("(www.NeoSoftware.com/NPW.html)", 255)
+	AddAboutScreenText("''PixelNeo'' For P.C. Windows", 255)
+	AddAboutScreenText("(https://visualneo.com/product/pixelneo)", 255)
+	AddAboutScreenText("Linux Alternative: ''Krita''", 255)
+	
 	AddAboutScreenText("PNG Graphics Optimized Using:", 0)
 	AddAboutScreenText("''TinyPNG''", 255)
 	AddAboutScreenText("(www.TinyPNG.com)", 255)
+	
 	AddAboutScreenText("OGG Audio Edited In:", 0)
-	AddAboutScreenText("''GoldWave''", 255)
+	AddAboutScreenText("''GoldWave'' For P.C. Windows", 255)
 	AddAboutScreenText("(www.GoldWave.com)", 255)
+	AddAboutScreenText("Linux Alternative: ''Audacity''", 255)
+	
 	AddAboutScreenText("OGG Audio Optimized Using:", 0)
 	AddAboutScreenText("''OGGResizer''", 255)
 	AddAboutScreenText("(www.SkyShape.com)", 255)
+	
 	AddAboutScreenText("''Space Swap 110%'' Logo Created In:", 0)
 	AddAboutScreenText("Genuine M.S. Office 365 Publisher", 255)
 	AddAboutScreenText("(www.Office.com)", 255)
@@ -80,7 +142,7 @@ function LoadAboutScreenTexts ( )
 	AddAboutScreenText("Game Created On A:", 0)
 	AddAboutScreenText("Hyper-Custom ''JeZxLee'' Pro-Built Desktop", 255)
 	AddAboutScreenText("Desktop Code Name: ''Optimus Prime''", 255)
-	AddAboutScreenText("Genuine ''Kubuntu 18.04 L.T.S. 64Bit'' Linux", 255)
+	AddAboutScreenText("Genuine ''Manjaro KDE 64Bit'' Linux", 255)
 	AddAboutScreenText("Corsair® 750watt Modular Power Supply", 255)
 	AddAboutScreenText("GIGABYTE® GA-970A-DS3P 2.0 AM3+ Motherboard", 255)
 	AddAboutScreenText("AMD® FX 3.5GHz(4GHz Turbo) 8-Core CPU", 255)
@@ -90,14 +152,16 @@ function LoadAboutScreenTexts ( )
 	AddAboutScreenText("Western Digital® 1TB HDD Hard Drive(Personal Data)", 255)
 		
 	AddAboutScreenText("HTML5 Version Tested On:", 0)
-	AddAboutScreenText("Genuine Windows® 10 Pro 64Bit", 255)
+	AddAboutScreenText("Genuine Windows® 11/10 Pro 64Bit", 255)
 	AddAboutScreenText("Edge", 255)
 	AddAboutScreenText("Firefox", 255)
 	AddAboutScreenText("Chrome", 255)
 	AddAboutScreenText("Opera", 255)
+	
 	AddAboutScreenText("Android Version Tested On:", 0)
-	AddAboutScreenText("Samsung® Galaxy S7 Edge Smartphone", 255)
-	AddAboutScreenText("Onn® Android 10.1'' 16GB Tablet", 255)
+	AddAboutScreenText("Samsung® Galaxy Area51 5G Smartphone", 255)
+	AddAboutScreenText("Vankyo® S20 Android 9 32GB Tablet", 255)
+
 	AddAboutScreenText("Big Thank You To People Who Helped:", 0)
 	AddAboutScreenText("''blink0k''", 255)
 	AddAboutScreenText("''easter bunny''", 255)
@@ -200,7 +264,7 @@ function LoadAboutScreenTexts ( )
 	AddAboutScreenText(" ", 255)
 	AddAboutScreenText("''You!''", 255)
 	AddAboutScreenText("''A 110% By Team Fallen Angel Software!''", 0)
-	AddAboutScreenText("(Admin@FallenAngelSoftware.com)", 255)
+	AddAboutScreenText("(www.FallenAngelSoftware.com)", 255)
 
 	NumberOfAboutScreenTexts = ATindex
 endfunction

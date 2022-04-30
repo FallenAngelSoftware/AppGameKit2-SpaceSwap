@@ -1,5 +1,28 @@
 // "screens.agc"...
 
+remstart
+---------------------------------------------------------------------------------------------------
+
+    Copyright 2022 Team "www.FallenAngelSoftware.com"
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+---------------------------------------------------------------------------------------------------
+remend
+
 function SetDelayAllUserInput()
 	DelayAllUserInput = 7
 endfunction
@@ -14,8 +37,8 @@ offset as integer
 		inc offset, 10
 	endif
 
-	LoadImage ( 10, "\media\images\backgrounds\TitleBG.png" )
-	LoadImage ( 20, "\media\images\backgrounds\TitleBlurBG.png" )
+	LoadImage ( 10, "\media\images\backgrounds\Title1BG.png" )
+	LoadImage ( 20, "\media\images\backgrounds\Title1BlurBG.png" )
 	TitleBG = CreateSprite ( 10+offset )
 
 	SetSpriteOffset( TitleBG, (GetSpriteWidth(TitleBG)/2) , (GetSpriteHeight(TitleBG)/2) ) 
@@ -95,7 +118,7 @@ function DisplaySteamOverlayScreen( )
 
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "TM", 999, 8, 255, 255, 255, 255, 90, 90, 90, 0, 180+110, 23-14, 3 )
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "''Space Swap 110%''", 999, 30, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29, 3 )
-		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Copyright 2019 By Fallen Angel Software", 999, 18, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29+25, 3 )
+		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Copyright 2022 By Fallen Angel Software", 999, 18, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29+25, 3 )
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "www.FallenAngelSoftware.com", 999, 18, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, 29+25+25, 3 )
 
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Loading Now!", 999, 30, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, ScreenHeight*.25, 3 )
@@ -104,14 +127,14 @@ function DisplaySteamOverlayScreen( )
 
 		CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Please Wait!", 999, 30, 255, 255, 255, 255, 90, 90, 90, 1, ScreenWidth/2, ScreenHeight*.75, 3 )
 
-		ScreenDisplayTimer = 275
+		ScreenDisplayTimer = 100
 		NextScreenToDisplay = AppGameKitScreen
 
 		ScreenIsDirty = TRUE
 	endif
 
 	if ScreenDisplayTimer > 0
-		LoadPercent = 275 / ScreenDisplayTimer
+		LoadPercent = 100 / ScreenDisplayTimer
 		LoadPercentFixed = LoadPercent
 		if (LoadPercentFixed > 100) then LoadPercentFixed = 100
 		SetText( LoadPercentText, str(LoadPercentFixed)+"%" )
@@ -144,11 +167,6 @@ function DisplayAppGameKitScreen( )
 		SetSpriteDepth ( AppGameKitLogo, 3 )
 		SetSpriteOffset( AppGameKitLogo, (GetSpriteWidth(AppGameKitLogo)/2) , (GetSpriteHeight(AppGameKitLogo)/2) ) 
 		SetSpritePositionByOffset( AppGameKitLogo, ScreenWidth/2, (ScreenHeight/2) )
-		
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''The Best $79.99 We Ever Spent On A Game Engine!''", 999, 13, 255, 255, 255, 255, 50, 50, 50, 1, ScreenWidth/2, (ScreenHeight/2)-220, 3)
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''The Fallen Angel''", 999, 13, 255, 255, 255, 255, 50, 50, 50, 1, ScreenWidth/2, (ScreenHeight/2)-220+30, 3)
-
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "www.AppGameKit.com", 999, 40, 255, 255, 255, 255, 171, 0, 62, 1, ScreenWidth/2, ScreenHeight-40, 3)
 		
 		ScreenDisplayTimer = 200
 		NextScreenToDisplay = SixteenBitSoftScreen
@@ -186,23 +204,19 @@ endfunction
 
 function DisplaySixteenBitSoftScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
-		ClearScreenWithColor ( 0, 0, 0 )
+		ClearScreenWithColor ( 255, 255, 255 )
 		
-		BlackBG = CreateSprite ( 1 )
-		SetSpriteDepth ( BlackBG, 4 )
-		SetSpriteOffset( BlackBG, (GetSpriteWidth(BlackBG)/2) , (GetSpriteHeight(BlackBG)/2) ) 
-		SetSpritePositionByOffset( BlackBG, ScreenWidth/2, ScreenHeight/2 )
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Fallen Angel Software", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 22, 3)
 
-//		LoadImage (30, "\media\images\logos\FAS-Statue.png")
-//		SixteenBitSoftLogo = CreateSprite ( 30 )
-//		SetSpriteDepth ( SixteenBitSoftLogo, 3 )
-//		SetSpriteOffset( SixteenBitSoftLogo, (GetSpriteWidth(SixteenBitSoftLogo)/2) , (GetSpriteHeight(SixteenBitSoftLogo)/2) ) 
-//		SetSpriteScaleByOffset( SixteenBitSoftLogo, .65, .65 )
-//		SetSpritePositionByOffset( SixteenBitSoftLogo, ScreenWidth/2, ScreenHeight/2 )
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Presents:", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 22+30+110, 3)
 
-//		CreateAndInitializeOutlinedText(FALSE, CurrentMinTextIndex, "www.FallenAngelSoftware.com", 999, 25, 0, 255, 0, 255, 0, 128, 0, 1, ScreenWidth/2, ScreenHeight-22, 3)
-		
-		ScreenDisplayTimer = 3200
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "A", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, (ScreenHeight/2)-15-35, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''JeZxLee''", 999, 50, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, (ScreenHeight/2)-15, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Game", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, (ScreenHeight/2)-15+35, 3)
+
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "www.FallenAngelSoftware.com", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, ScreenHeight-22, 3)
+													
+		ScreenDisplayTimer = 200
 		NextScreenToDisplay = TitleScreen
 
 		ScreenIsDirty = TRUE
@@ -216,7 +230,7 @@ function DisplaySixteenBitSoftScreen( )
 	
 	if ScreenDisplayTimer > 0
 		if MouseButtonLeft = ON or LastKeyboardChar = 32 or LastKeyboardChar = 13 or LastKeyboardChar = 27
-//			PlaySoundEffect(1)
+			PlaySoundEffect(1)
 			SetDelayAllUserInput()
 			ScreenDisplayTimer = 0
 		endif
@@ -294,10 +308,9 @@ function DisplayTitleScreen( )
 		SetSpritePositionByOffset( ScreenLine[3], ScreenWidth/2, ScreenHeight-40+offsetY-15+13 )
 		SetSpriteColor(ScreenLine[3], 255, 255, 255, 255)
 
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2021 By", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-40-50, 3)
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Team", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-20-50, 3)
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''www.FallenAngelSoftware.com''", 999, 19, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-50, 3)
-
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2022 By", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-40-50-5-3+7-10, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Team", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-20-50-1+7-10, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''www.FallenAngelSoftware.com''", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-50+5+7-10, 3)
 
 		if (SecretCodeCombined = 5432 or SecretCodeCombined = 5431) then CreateIcon(6, 360-17, 17)
 		
@@ -359,7 +372,7 @@ function DisplayTitleScreen( )
 	elseif ThisButtonWasPressed(5) = TRUE
 		if (OnMobile = FALSE)
 			if Platform = Web
-				OpenBrowser( "http://www.fallenangelsoftware.com" )
+				OpenBrowser( "https://fallenangelsoftware.com" )
 			else
 				ExitGame = 1
 			endif
@@ -457,7 +470,7 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 256+16+5 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		if ( (Platform = Web or Platform = Android or Platform = Windows or Platform = Linux) or GameUnlocked = 0 )
+		if ( (Platform = Web or Platform = Android or Platform = Windows) or GameUnlocked = 0 )
 			CreateArrowSet(288+16)
 			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Secret Code #1:", 999, 20, 255, 255, 255, 255, 0, 0, 0, 0, 56, 288+16, 3)
 			ArrowSetTextStringIndex[5] = CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 2, (ScreenWidth-56), 288+16, 3)
@@ -485,21 +498,20 @@ function DisplayOptionsScreen( )
 		SetSpritePositionByOffset( ScreenLine[9], ScreenWidth/2, ScreenHeight-65+13 )
 		SetSpriteColor(ScreenLine[9], 255, 255, 0, 255)
 
-//		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "See You Again", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 495, 3)
-//		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Next Time!", 999, 60, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 490+60, 3)
-		
 		CreateButton( 6, (ScreenWidth / 2), (ScreenHeight-40+15) )
 
-
-
-		if ShowCursor = TRUE
-			CreateIcon(2, (ScreenWidth/2), (ScreenHeight-100+13)-25 )
-		elseif ShowCursor = FALSE
-			CreateIcon(3, (ScreenWidth/2), (ScreenHeight-100+13)-25 )
+		if (ValveBuild = FALSE)
+			if ShowCursor = TRUE
+				CreateIcon(2, (ScreenWidth/2), (ScreenHeight-100+13)-25 )
+			elseif ShowCursor = FALSE
+				CreateIcon(3, (ScreenWidth/2), (ScreenHeight-100+13)-25 )
+			endif
+		else
+			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Please Play", 999, 35, 255, 255, 255, 255, 0, 0, 0, 1, 360/2, 490, 3)
+			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Our Other", 999, 35, 255, 255, 255, 255, 0, 0, 0, 1, 360/2, 490+35, 3)
+			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Great Games!", 999, 35, 255, 255, 255, 255, 0, 0, 0, 1, 360/2, 490+35+35, 3)
 		endif
 
-
-				
 		ChangingBackground = FALSE
 
 		ScreenIsDirty = TRUE
@@ -511,17 +523,13 @@ function DisplayOptionsScreen( )
 		ScreenFadeStatus = FadingToBlack
 	endif
 
-
-
 	if ThisIconWasPressed(0) = TRUE
-		if (Platform = Android or Platform = Web or Platform = Windows or Platform = Linux)
+		if (Platform = Android or Platform = Web or Platform = Windows)
 			OpenBrowser( "https://play.google.com/store/apps/details?id=com.fallenangelsoftware.spaceswap" )
 		elseif (Platform = iOS)
 			OpenBrowser( "itms-apps://itunes.apple.com/app/id1394918474" )
 		endif
 	endif
-
-
 
 	index as integer
 
@@ -859,7 +867,7 @@ function DisplayHowToPlayScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 415 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		if (Platform = Web or Platform = Windows or Platform = Linux)
+		if (Platform = Web or Platform = Windows)
 			LoadImage ( 61, "\media\images\gui\KeyboardControls.png" )
 			KeyboardControls = CreateSprite ( 61 )
 			SetSpriteOffset( KeyboardControls, (GetSpriteWidth(KeyboardControls)/2) , (GetSpriteHeight(KeyboardControls)/2) ) 
@@ -1003,11 +1011,11 @@ function SetupAboutScreenTexts( )
 	startScreenY as integer
 	startScreenY = 640+15
 	AboutTextsScreenY[0] = startScreenY
-	StartIndexOfAboutScreenTexts = CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[0], 999, 16, 255, 255, AboutTextsBlue[0], 255, 0, 0, 0, 1, ScreenWidth/2+84, AboutTextsScreenY[0], 3)
+	StartIndexOfAboutScreenTexts = CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[0], 999, 16, 255, 255, AboutTextsBlue[0], 255, 0, 0, 0, 1, ScreenWidth/2+84+20, AboutTextsScreenY[0], 3)
 	AboutTextVisable[0] = 0
 	inc startScreenY, 25
 	AboutTextsScreenY[1] = startScreenY
-	CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[1], 999, 16, 255, 255, AboutTextsBlue[1], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[1], 3)
+	CreateAndInitializeOutlinedText(outline, CurrentMinTextIndex, AboutTexts[1], 999, 25, 255, 255, AboutTextsBlue[1], 255, 0, 0, 0, 1, ScreenWidth/2, AboutTextsScreenY[1], 3)
 	AboutTextVisable[1] = 0
 
 	index as integer
@@ -1081,6 +1089,12 @@ function DisplayAboutScreen( )
 
 	multiplier = 3.0
 
+	if JoystickDirection = JoyUP
+		multiplier = 10
+	else
+		multiplier = 3.0
+	endif
+
 	if (ScreenFadeStatus = FadingIdle)
 		inc AboutScreenOffsetY, multiplier
 		inc AboutScreenBackgroundY, multiplier
@@ -1129,8 +1143,6 @@ function DisplayMusicPlayerScreen( )
 		SetSpriteColor(ScreenLine[0], 255, 255, 0, 255)
 
 		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "CHOOSE", 999, 65, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 120, 3)
-
-		PlayNewMusic(MusicPlayerScreenIndex, 1)
 
 		CreateArrowSet(ScreenHeight/3)
 		ArrowSetTextStringIndex[0] = CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, " ", 999, 20, 255, 255, 255, 255, 0, 0, 0, 1, (ScreenWidth/2), (ScreenHeight/3), 3 )
@@ -1191,8 +1203,9 @@ function DisplayMusicPlayerScreen( )
 			else
 				MusicPlayerScreenIndex = 10
 			endif
-
 		endif
+
+		PlayNewMusic(MusicPlayerScreenIndex, 1)
 		
 		NextScreenToDisplay = MusicPlayerScreen
 		ScreenFadeStatus = FadingToBlack
@@ -1206,7 +1219,9 @@ function DisplayMusicPlayerScreen( )
 		if (SecretCodeCombined <> 5431 and MusicPlayerScreenIndex = 1) then MusicPlayerScreenIndex = 2
 
 		if (SecretCodeCombined <> 5431 and MusicPlayerScreenIndex > 8) then MusicPlayerScreenIndex = 0
-		
+
+		PlayNewMusic(MusicPlayerScreenIndex, 1)
+						
 		NextScreenToDisplay = MusicPlayerScreen
 		ScreenFadeStatus = FadingToBlack
 	endif
@@ -1225,6 +1240,14 @@ function DisplayPlayingScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 
 		ClearScreenWithColor ( 0, 0, 0 )
+
+		KeysTransparency = 255
+		KeysImage = CreateSprite ( 2 )
+		SetSpriteTransparency( KeysImage, 1 )
+		SetSpriteColor ( KeysImage, 255, 255, 255, 255 )
+		SetSpriteOffset( KeysImage, (GetSpriteWidth(KeysImage)/2) , (GetSpriteHeight(KeysImage)/2) ) 
+		SetSpritePositionByOffset( KeysImage, (ScreenWidth/2), (ScreenHeight/3)-45 )
+		SetSpriteDepth ( KeysImage, 1 )
 
 		LoadSelectedBackground()
 		SetSpriteTransparency( TitleBG, 0 ) 
@@ -1395,6 +1418,11 @@ function DisplayPlayingScreen( )
 		CreateIcon( 4, (ScreenWidth-18-2), 18+2 )
 
 		CreateIcon( 5, 360-18-2, (ScreenHeight-18-2) )
+	endif
+
+	if (KeysTransparency > 0)
+		dec KeysTransparency, 1
+		SetSpriteColor ( KeysImage, 255, 255, 255, KeysTransparency )
 	endif
 
 	if (TimeFreezeTimer > 1)

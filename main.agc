@@ -2,26 +2,49 @@
 
 remstart
 ---------------------------------------------------------------------------------------------------
-                                           JeZxLee's
-                                                                   TM
-                             AppGameKit Classic "NightRider" Engine
-                                        (Version 1.9.1)
-             _________                             _________                       
-            /   _____/__________    ____  ____    /   _____/_  _  _______  ______TM
-            \_____  \\____ \__  \ _/ ___\/ __ \   \_____  \\ \/ \/ /\__  \ \____ \ 
-            /        \  |_> > __ \\  \__\  ___/   /        \\     /  / __ \|  |_> >
-           /_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/ 
-                   \/|__|       \/     \/    \/          \/              \/|__|    
 
-                                     Retail1 110% - v1.4.0       TURBO!
+    Copyright 2022 Team "www.FallenAngelSoftware.com"
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+    and associated documentation files (the "Software"), to deal in the Software without
+    restriction, including without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or
+    substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+    FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+    COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+    AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+---------------------------------------------------------------------------------------------------
+
+                                           JeZxLee's
+                                                                  TM
+                             AppGameKit Studio "NightRider" Engine
+                                        (Version 2.0.0)
+
+  _________                             _________                         ____ ___________  _   /\TM
+ /   _____/__________    ____  ____    /   _____/_  _  _______  ______   /_   /_   \   _  \/ \ / / 
+ \_____  \\____ \__  \ _/ ___\/ __ \   \_____  \\ \/ \/ /\__  \ \____ \   |   ||   /  /_\  \_// /_ 
+ /        \  |_> > __ \\  \__\  ___/   /        \\     /  / __ \|  |_> >  |   ||   \  \_/   \/ // \
+/_______  /   __(____  /\___  >___  > /_______  / \/\_/  (____  /   __/   |___||___|\_____  / / \_/
+        \/|__|       \/     \/    \/          \/              \/|__|                      \/\/     
+
+                                     Retail2 110% - v1.5.0            TURBO!
 
 ---------------------------------------------------------------------------------------------------     
+
+                           Valve's Steam Game Client For Windows(R)
 
            Google Android SmartPhones/Tablets & HTML5 Desktop/Notebook Internet Browsers
 
 ---------------------------------------------------------------------------------------------------                       
 
-                     (C)opyright 2019, By Team "www.FallenAngelSoftware.com"
+                     (C)opyright 2022, By Team "www.FallenAngelSoftware.com"
 
 ---------------------------------------------------------------------------------------------------
 remend
@@ -34,12 +57,14 @@ remend
 #include "screens.agc"
 #include "visuals.agc"
 
+global ValveBuild = TRUE
+
 global GameVersion as string
-GameVersion = "''Retail1 110% - Turbo! - v1.4.0''"
+GameVersion = "''Retail2 110% - Turbo! - v1.5.0af''"
 global DataVersion as string
-DataVersion = "SS110-Retail1-110-Turbo-v1_3_5.cfg"
+DataVersion = "SS110-Retail2-110-Turbo-v1_5_0af.cfg"
 global HTML5DataVersion as String
-HTML5DataVersion = "SS-v1_3_5-"
+HTML5DataVersion = "SS-v1_5_0af-"
 
 global MaximumFrameRate as integer
 MaximumFrameRate = 0
@@ -71,7 +96,6 @@ global DEBUG = FALSE
 #constant Android	1
 #constant iOS		2
 #constant Windows	3
-#constant Linux		4
 global Platform as integer
 
 global OnMobile as integer
@@ -84,28 +108,38 @@ if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 	endif
 
 	SetImmersiveMode(1) 
-
 	SetSyncRate( 30, 0 )
-	SetScissor( 0,0,0,0 )
-	SetVirtualResolution( ScreenWidth, ScreenHeight) //+40 )
+	SetOrientationAllowed( 1, 0, 0, 0 )
+					
 	OnMobile = TRUE
-	ShowCursor = FALSE
+	ShowCursor = FALSE	
 else
 	Platform = Web
+
+	SetWindowTitle( "Space Swap 110%[TM]" )
+	SetWindowSize( ScreenWidth, ScreenHeight, 0 )
+	SetWindowAllowResize( 1 )
+
+	SetScreenResolution( ScreenWidth, ScreenHeight ) 
+	SetVirtualResolution( ScreenWidth, ScreenHeight )
+
+//	SetVSync(1) 
+//	SetSyncRate( 60, 0 )
+
 	if (MaximumFrameRate = 0)
 		SetSyncRate( 30, 1 )
 	else
 		SetSyncRate( 0, 1 )
 	endif
 	SetScissor( 0, 1, ScreenWidth, ScreenHeight )
+
 	OnMobile = FALSE
 	ShowCursor = TRUE
 endif
 
-if (GetDeviceBaseName() = "windows")
+if (GetDeviceBaseName() = "windows" or GetDeviceBaseName() = "linux")
 	Platform = Windows
-elseif (GetDeviceBaseName() = "linux")
-	Platform = Linux
+	SetSyncRate( 30, 0 )
 endif
 
 global GameUnlocked as integer
@@ -199,6 +233,12 @@ SetSpriteTransparency( FadingBlackBG, 1 )
 global FadingToBlackCompleted as integer
 FadingToBlackCompleted = FALSE
 
+LoadImage ( 2, "\media\images\gui\Keys.png" )
+global KeysImage as integer
+global KeysTransparency as float
+
+LoadImage ( 3, "\media\images\backgrounds\FadingBlackBG.png" )
+
 UseNewDefaultFonts( 1 )
 LoadFont( 999, "\media\fonts\StardosStencil-Bold.ttf" )
 global CurrentMinTextIndex = 1
@@ -220,7 +260,7 @@ NewHighScoreNameIndex = 1
 global PauseGame as integer
 PauseGame = FALSE
 
-#constant SteamOverlayScreen						0
+#constant SteamOverlayScreen							0
 #constant AppGameKitScreen							1
 #constant SixteenBitSoftScreen						2
 #constant TitleScreen								3
@@ -232,10 +272,10 @@ PauseGame = FALSE
 #constant PlayingScreen								9
 #constant EndingSceneScreen							10
 #constant NewHighScoreNameInputScreen				11
-#constant NewHighScoreNameInputAndroidScreen		12
+#constant NewHighScoreNameInputAndroidScreen			12
 #constant MusicPlayerScreen							13
-global ScreenToDisplay = 3
-global NextScreenToDisplay = 4
+global ScreenToDisplay = 0
+global NextScreenToDisplay = 1
 global ScreenDisplayTimer as integer
 	
 global MusicPlayerScreenIndex as integer
@@ -356,18 +396,18 @@ LoadAllSoundEffects()
 global MusicSoundtrack	as integer
 MusicSoundtrack = 0
 
-#constant ChildStoryMode				0
+#constant ChildStoryMode					0
 #constant TeenStoryMode					1
-#constant AdultStoryMode				2
+#constant AdultStoryMode					2
 #constant ChildNeverEndMode				3
 #constant TeenNeverEndMode				4
 #constant AdultNeverEndMode				5
 global GameMode = AdultStoryMode
 
 global MusicVolume as integer
-MusicVolume = 100
+MusicVolume = 50
 global EffectsVolume as integer
-EffectsVolume = 100
+EffectsVolume = 50
 
 global SecretCode as integer[4]
 SecretCode[0] = 0
@@ -518,12 +558,12 @@ global ComboTakenCareOf as integer
 
 global LevelAdvancePieceCounter as integer
 global LevelAdvancePieceCount as integer[6]
-LevelAdvancePieceCount[0] = 30
-LevelAdvancePieceCount[1] = 60
-LevelAdvancePieceCount[2] = 45
-LevelAdvancePieceCount[3] = 30
-LevelAdvancePieceCount[4] = 60
-LevelAdvancePieceCount[5] = 45
+LevelAdvancePieceCount[0] = 30+50
+LevelAdvancePieceCount[1] = 60+150
+LevelAdvancePieceCount[2] = 45+100
+LevelAdvancePieceCount[3] = 30+50
+LevelAdvancePieceCount[4] = 60+150
+LevelAdvancePieceCount[5] = 45+100
 
 global StagingScore as integer
 global StagingLevelAdvance as integer
@@ -620,12 +660,15 @@ global LoadPercentText as integer
 
 global GameQuit as integer
 
-PlayNewMusic(0, 1)
+//PlayNewMusic(0, 1)
 
 global CurrentIconBeingPressed as integer
 CurrentIconBeingPressed = -1
 global CurrentKeyboardKeyPressed as integer
 CurrentKeyboardKeyPressed = -1
+
+global renderImage
+global renderSprite
 
 global multiplier as float
 
@@ -776,7 +819,32 @@ do
 	endif
 
 	if (ScreenIsDirty = TRUE)
-		Sync()
+		if OnMobile <> TRUE
+			Sync()
+		elseif OnMobile = TRUE
+			renderImage = CreateRenderImage(ScreenWidth, ScreenHeight, 0, 0)
+			renderSprite = CreateSprite(renderImage)
+			SetSpriteSize(renderSprite, GetMaxDeviceWidth(), GetMaxDeviceHeight())
+			FixSpriteToScreen(renderSprite, 1)
+			SetSpriteDepth(renderSprite, 10000)
+			SetSpriteVisible(renderSprite, 0)
+
+			Update(GetFrameTime())
+			SetRenderToImage(renderImage, -1)
+			SetVirtualResolution(ScreenWidth, ScreenHeight)
+			ClearScreen()
+			Render()
+			SetRenderToScreen()
+			SetVirtualResolution(GetMaxDeviceWidth(), GetMaxDeviceHeight())
+			ClearScreen()
+			SetSpriteVisible(renderSprite,1)
+			DrawSprite(renderSprite)
+			Swap()
+			SetSpriteVisible(renderSprite, 0)
+			DeleteImage(renderImage)
+			DeleteSprite(renderSprite)
+		endif
+		
 		ScreenIsDirty = TRUE
 	endif
 
