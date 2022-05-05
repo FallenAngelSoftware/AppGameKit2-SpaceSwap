@@ -10,4 +10,4 @@ Enjoy!
 
 NOTE: Source code *should* be up to date on GitHub but HTML5/Android games may not be...
 
-![Title](http://fallenangelsoftware.com/stuff/files/SpaceSwap/SS-GooglePlay/Title.png) ![Playing](http://fallenangelsoftware.com/stuff/files/SpaceSwap/SS-GooglePlay/Playing.png)
+![Space Swap Image](SS-Promo_2022-04-30.png)
