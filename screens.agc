@@ -205,8 +205,12 @@ endfunction
 function DisplaySixteenBitSoftScreen( )
 	if ScreenFadeStatus = FadingFromBlack and ScreenFadeTransparency = 255
 		ClearScreenWithColor ( 255, 255, 255 )
-		
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Fallen Angel Software", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 22, 3)
+
+		if (OnMobile = FALSE)
+			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Fallen Angel Software", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 22, 3)
+		elseif (OnMobile = TRUE)
+			CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Fallen Angel Software", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 22+13, 3)
+		endif
 
 		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Presents:", 999, 25, 0, 0, 0, 255, 220, 220, 220, 1, ScreenWidth/2, 22+30+110, 3)
 
@@ -310,7 +314,7 @@ function DisplayTitleScreen( )
 
 		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "©2022 By", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-40-50-5-3+7-10, 3)
 		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "Team", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-20-50-1+7-10, 3)
-		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''www.FallenAngelSoftware.com''", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-50+5+7-10, 3)
+		CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, "''Fallen Angel Software''", 999, 25, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, ScreenHeight-25+13-2-50+5+7-10, 3)
 
 		if (SecretCodeCombined = 5432 or SecretCodeCombined = 5431) then CreateIcon(6, 360-17, 17)
 		
@@ -372,7 +376,7 @@ function DisplayTitleScreen( )
 	elseif ThisButtonWasPressed(5) = TRUE
 		if (OnMobile = FALSE)
 			if Platform = Web
-				OpenBrowser( "https://fallenangelsoftware.com" )
+				OpenBrowser( "https://2dheaven.com" )
 			else
 				ExitGame = 1
 			endif
@@ -867,13 +871,13 @@ function DisplayHowToPlayScreen( )
 		SetSpritePositionByOffset( ScreenLine[2], ScreenWidth/2, 415 )
 		SetSpriteColor(ScreenLine[2], 255, 255, 255, 255)
 
-		if (Platform = Web or Platform = Windows)
+		if (ShowCursor = TRUE)//(Platform = Web or Platform = Windows)
 			LoadImage ( 61, "\media\images\gui\KeyboardControls.png" )
 			KeyboardControls = CreateSprite ( 61 )
 			SetSpriteOffset( KeyboardControls, (GetSpriteWidth(KeyboardControls)/2) , (GetSpriteHeight(KeyboardControls)/2) ) 
 			SetSpritePositionByOffset( KeyboardControls, ScreenWidth/2, 500 )
 			SetSpriteDepth ( KeyboardControls, 3 )
-		elseif (Platform = Android or Platform = iOS)
+		else
 			CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "See You", 999, 65, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 470, 3 )
 			CreateAndInitializeOutlinedText( TRUE, CurrentMinTextIndex, "Again Soon!", 999, 65, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 470+60, 3 )
 		endif
@@ -1241,24 +1245,44 @@ function DisplayPlayingScreen( )
 
 		ClearScreenWithColor ( 0, 0, 0 )
 
-		KeysTransparency = 255
+		KeysTransparency = 0
+		if (OnMobile = FALSE)
+			if (SecretCodeCombined <> 9876)
+				KeysTransparency = 255
+			endif
+		elseif (OnMobile = TRUE)
+			KeysTransparency = 0
+		endif
+
 		KeysImage = CreateSprite ( 2 )
 		SetSpriteTransparency( KeysImage, 1 )
 		SetSpriteColor ( KeysImage, 255, 255, 255, 255 )
 		SetSpriteOffset( KeysImage, (GetSpriteWidth(KeysImage)/2) , (GetSpriteHeight(KeysImage)/2) ) 
 		SetSpritePositionByOffset( KeysImage, (ScreenWidth/2), (ScreenHeight/3)-45 )
 		SetSpriteDepth ( KeysImage, 1 )
+		SetSpriteColor ( KeysImage, 255, 255, 255, KeysTransparency )
 
 		LoadSelectedBackground()
 		SetSpriteTransparency( TitleBG, 0 ) 
 		SetSpritePositionByOffset( TitleBG, ScreenWidth/2, ScreenHeight/2 )
 		SetSpriteDepth ( TitleBG, 5 )
 		
-		LoadImage ( 36, "\media\images\playing\BoardNewerTop.png" )
+		if (ShowCursor = TRUE)
+			LoadImage ( 36, "\media\images\playing\BoardNewerTop.png" )
+		elseif (ShowCursor = FALSE)
+			LoadImage ( 36, "\media\images\playing\BoardNewerTopMobile.png" )
+		endif
+				
 		PlayfieldTopSprite = CreateSprite ( 36 )
 		SetSpriteTransparency( PlayfieldTopSprite, 0 ) 
 		SetSpriteOffset( PlayfieldTopSprite, (GetSpriteWidth(PlayfieldTopSprite)/2) , (GetSpriteHeight(PlayfieldTopSprite)/2) ) 
-		SetSpritePositionByOffset( PlayfieldTopSprite, (ScreenWidth/2), 19 )
+
+		if (ShowCursor = TRUE)
+			SetSpritePositionByOffset( PlayfieldTopSprite, (ScreenWidth/2), 19 )
+		elseif (ShowCursor = FALSE)
+			SetSpritePositionByOffset( PlayfieldTopSprite, (ScreenWidth/2), 19+11 )
+		endif
+
 		SetSpriteDepth ( PlayfieldTopSprite, 3 )
 
 		LoadImage ( 37, "\media\images\playing\BoardNewerRight.png" )
@@ -1393,7 +1417,13 @@ function DisplayPlayingScreen( )
 			GameIsPlaying = TRUE
 		endif
 
-		ScoreText = CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, " ", 999, 22, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 19, 3)
+
+		if (OnMobile = FALSE)
+			ScoreText = CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, " ", 999, 22, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 19, 3)
+		else
+			ScoreText = CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, " ", 999, 22, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 19+25-3, 3)
+		endif
+
 		LevelText = CreateAndInitializeOutlinedText(TRUE, CurrentMinTextIndex, " ", 999, 22, 255, 255, 255, 255, 0, 0, 0, 1, ScreenWidth/2, 626, 3)
 
 		SetTextStringOutlined ( ScoreText, str(Score) )

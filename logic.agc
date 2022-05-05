@@ -768,11 +768,15 @@ function RunGameplayCore()
 	if (PiecesFell = TRUE)
 		if (ComboTakenCareOf = TRUE)
 			if ( ThereWillBeAnotherMatchAfterGravity() = TRUE )
+
+PerformancePercent = 1
+
 				if (PerformancePercent < 1)
 					MatchFlashTimer = 50
 				else
 					MatchFlashTimer = 50 / (PerformancePercent)
 				endif
+
 				ComboTakenCareOf = FALSE
 			endif
 		endif
@@ -901,7 +905,7 @@ function RunGameplayCore()
 			endif
 		endif
 //--[TOUCH Input]-------------------------------------------------------------------------------------------------------------------------------------
-		if (OnMobile = TRUE)
+		if (ShowCursor = FALSE)
 			if (MouseButtonLeft = OFF and PlayerSwapDirection = 0)
 				PlayerSwapPieceOneScreenX = -1
 
@@ -1228,7 +1232,7 @@ function RunGameplayCore()
 					endif
 				endif
 			endif
-		elseif (OnMobile = FALSE)
+		else
 //--[KEYBOARD/MOUSE Input]----------------------------------------------------------------------------------------------------------------------------
 			if (PlayerMovementDelay = 0)
 				moveDelay as integer
@@ -1371,7 +1375,7 @@ function RunGameplayCore()
 						endcase
 					endselect
 
-					if (PlayerSwapMovement > 45)
+					if (PlayerSwapMovement > 44)
 						PlayerSwapMovement = -1
 						Playfield[PlayerSwapOnePlayfieldX, PlayerSwapOnePlayfieldY] = PlayerSwapPieceTwo
 						Playfield[PlayerSwapOnePlayfieldX+1, PlayerSwapOnePlayfieldY] = PlayerSwapPieceOne
@@ -1387,7 +1391,7 @@ function RunGameplayCore()
 					endif
 				endif
 			endif
-			
+
 			if (PlayerMovePlayfieldX <> -1)
 				if (PlayerPlayfieldX < PlayerMovePlayfieldX)
 					inc PlayerPlayfieldX, 1

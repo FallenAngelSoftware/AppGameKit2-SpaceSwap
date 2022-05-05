@@ -63,9 +63,9 @@ function LoadAboutScreenTexts ( )
 	AddAboutScreenText("(www.manjaro.org)", 255)
 	AddAboutScreenText("Real Programmers Use Linux!", 255)
 	
-	AddAboutScreenText("Original Game Idea By:", 0)
-	AddAboutScreenText("''JeZxLee''", 255)
-	AddAboutScreenText("''Merkredy''", 255)
+//	AddAboutScreenText("Original Game Idea By:", 0)
+//	AddAboutScreenText("''JeZxLee''", 255)
+//	AddAboutScreenText("''Merkredy''", 255)
 	
 	AddAboutScreenText("Project Produced By:", 0)
 	AddAboutScreenText("''JeZxLee''", 255)

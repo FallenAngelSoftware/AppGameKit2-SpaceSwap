@@ -39,7 +39,7 @@ function GetAllUserInput ( )
 
 	if GetRawKeyState(16) = 1 then ShiftKeyPressed = TRUE
 
-	if (OnMobile = FALSE)
+	if (RealMobile = FALSE)//OnMobile = FALSE)
 		MouseScreenX = GetRawMouseX()
 		MouseScreenY = GetRawMouseY()
 
@@ -62,9 +62,9 @@ function GetAllUserInput ( )
 		else
 			MouseButtonRightReleased = TRUE
 		endif
-	else
-		MouseScreenX = GetPointerX()
-		MouseScreenY = GetPointerY()
+	elseif (RealMobile =TRUE)//(OnMobile = TRUE)
+		MouseScreenX = GetPointerX() / GetMaxDeviceWidth() * 360.0
+		MouseScreenY = GetPointerY() / GetMaxDeviceHeight() * 640.0
 
 		if ( GetPointerState() = 1 )
 			MouseButtonLeft = ON

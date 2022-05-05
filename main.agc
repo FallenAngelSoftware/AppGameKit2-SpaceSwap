@@ -57,7 +57,7 @@ remend
 #include "screens.agc"
 #include "visuals.agc"
 
-global ValveBuild = TRUE
+global ValveBuild = FALSE
 
 global GameVersion as string
 GameVersion = "''Retail2 110% - Turbo! - v1.5.0af''"
@@ -100,6 +100,8 @@ global Platform as integer
 
 global OnMobile as integer
 global ShowCursor as integer
+global RealMobile as integer
+RealMobile = FALSE
 if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 	if ( GetDeviceBaseName() = "android" )
 		Platform = Android
@@ -107,8 +109,10 @@ if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 		Platform = iOS
 	endif
 
+	RealMobile = TRUE
+
 	SetImmersiveMode(1) 
-	SetSyncRate( 30, 0 )
+	SetSyncRate( 30, 1 )
 	SetOrientationAllowed( 1, 0, 0, 0 )
 					
 	OnMobile = TRUE
@@ -116,21 +120,9 @@ if ( GetDeviceBaseName() = "android" or GetDeviceBaseName() = "ios" )
 else
 	Platform = Web
 
-	SetWindowTitle( "Space Swap 110%[TM]" )
-	SetWindowSize( ScreenWidth, ScreenHeight, 0 )
-	SetWindowAllowResize( 1 )
+	SetVSync(1)
+//	SetSyncRate( 30, 1 )
 
-	SetScreenResolution( ScreenWidth, ScreenHeight ) 
-	SetVirtualResolution( ScreenWidth, ScreenHeight )
-
-//	SetVSync(1) 
-//	SetSyncRate( 60, 0 )
-
-	if (MaximumFrameRate = 0)
-		SetSyncRate( 30, 1 )
-	else
-		SetSyncRate( 0, 1 )
-	endif
 	SetScissor( 0, 1, ScreenWidth, ScreenHeight )
 
 	OnMobile = FALSE
@@ -139,7 +131,8 @@ endif
 
 if (GetDeviceBaseName() = "windows" or GetDeviceBaseName() = "linux")
 	Platform = Windows
-	SetSyncRate( 30, 0 )
+	SetSyncRate( 30, 1 )
+//	SetVSync(1)
 endif
 
 global GameUnlocked as integer
@@ -148,8 +141,7 @@ GameUnlocked = 2
 global LoadPercent as float
 global LoadPercentFixed as integer
 
-// Uncomment below three lines to test Android version on desktop																			
-// Platform = Android
+// Uncomment below two lines to test Android version on desktop																			
 // OnMobile = TRUE
 // ShowCursor = FALSE
 
@@ -811,7 +803,12 @@ do
 		SetPrintColor (PrintColor, PrintColor, PrintColor)
 		Print ( "FPS="+str(roundedFPS) )
 		print (  "Sprite(s): "+str( GetManagedSpriteCount() )  )
-		print ( "Pieces="+str(NumberOfPiecesCleared) )
+//		print ( "Pieces="+str(NumberOfPiecesCleared) )
+
+
+		print ( "PSwapMov="+str(PlayerSwapMovement) )
+
+
 		print ( "Matches="+str(NumberOfMatchesCleared) )
 		print ( "MTimer="+str(MatchFlashTimer) )
 		print ( "#Combos="+str(NumberOfCombos) )
@@ -819,9 +816,9 @@ do
 	endif
 
 	if (ScreenIsDirty = TRUE)
-		if OnMobile <> TRUE
+		if (RealMobile = FALSE)//OnMobile <> TRUE
 			Sync()
-		elseif OnMobile = TRUE
+		elseif (RealMobile = TRUE)//OnMobile = TRUE
 			renderImage = CreateRenderImage(ScreenWidth, ScreenHeight, 0, 0)
 			renderSprite = CreateSprite(renderImage)
 			SetSpriteSize(renderSprite, GetMaxDeviceWidth(), GetMaxDeviceHeight())
