@@ -1,13 +1,15 @@
-# AppGameKit2-SpaceSwap
-(Builds & runs on both AppGameKit Classic and Studio)
-
-100% FREE Cross-Platform Open-Source AppGameKit Video Game!
-
-Official Space Swap 110% Webpage URL:
+# "Space Swap 110%"
+100% FREE Cross-Platform Open-Source AppGameKit Studio Video Game!
+<br />
+<br />
+Official "Space Swap 110%" page on our website:
+<br />
 https://2dheaven.com/?page_id=5
-
-Enjoy!
-
-NOTE: Source code *should* be up to date on GitHub but HTML5/Android games may not be...
-
-![Space Swap Image](SS-Promo_2022-04-30.png)
+<br />
+<br />
+![Space Swap Image](SS_Promo.png)
+<br />
+<br />
+Game uses the non-free "AppGameKit Studio" engine:
+<br />
+https://store.steampowered.com/app/1024640/AppGameKit_Studio/
