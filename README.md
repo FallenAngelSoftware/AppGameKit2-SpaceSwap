@@ -7,7 +7,7 @@ Official "Space Swap 110%" page on our website:
 https://2dheaven.com/?page_id=5
 <br />
 <br />
-![Space Swap Image](SS_Promo.png)
+![Space Swap Image](SS-Promo.png)
 <br />
 <br />
 Game uses the non-free "AppGameKit Studio" engine:
